@@ -1,22 +1,27 @@
 package co.edu.uniquindio.resonance.entidades;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 @Entity
-public class Administrador {
+public class Usuario {
 
     @Id
-    @Column(name="nickname", nullable = false)
+    @Column(name="nickname",nullable = false, length = 25)
     private String nickname;
-    @Column(name="nombre")
+    @Column(name="nombre",nullable = false,length = 70)
     private String nombre;
+    @JoinColumn(name="codigo_ciudad",nullable = false)
+    private int codigo_ciudad;
     @Column(name="email")
-    private String email;
-    @Column(name="contrasena", nullable = false)
+    private  String email;
+    @Column(name="contrasena",nullable = false)
     private String contrasena;
 
+    public Usuario(){
 
-    public Administrador() {
     }
 
     public String getNickname() {
@@ -35,7 +40,13 @@ public class Administrador {
         this.nombre = nombre;
     }
 
+    public int getCodigo_ciudad() {
+        return codigo_ciudad;
+    }
 
+    public void setCodigo_ciudad(int codigo_ciudad) {
+        this.codigo_ciudad = codigo_ciudad;
+    }
 
     public String getEmail() {
         return email;
@@ -58,9 +69,9 @@ public class Administrador {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Administrador that = (Administrador) o;
+        Usuario usuario = (Usuario) o;
 
-        return nickname != null ? nickname.equals(that.nickname) : that.nickname == null;
+        return nickname != null ? nickname.equals(usuario.nickname) : usuario.nickname == null;
     }
 
     @Override
