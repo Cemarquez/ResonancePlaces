@@ -1,0 +1,61 @@
+package co.edu.uniquindio.resonance.entidades;
+
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+public class Ubicacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "codigo", nullable = false)
+    private int codigo;
+
+    @Column(name = "latitud", nullable = false)
+    private double latitud;
+
+    @Column(name = "longitud", nullable = false)
+    private double longitud;
+
+
+    public Ubicacion() {
+        super();
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ubicacion ubicacion = (Ubicacion) o;
+        return codigo == ubicacion.codigo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
+    }
+}
