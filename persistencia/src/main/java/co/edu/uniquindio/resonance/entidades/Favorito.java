@@ -12,9 +12,9 @@ public class Favorito {
     @Column(name = "codigo", nullable = false)
     private int codigo;
     @JoinColumn(name ="nickname_usuario", nullable = false)
-    private String nickname_usuario;
+    private String nicknameUsuario;
     @JoinColumn(name = "codigo_lugar",nullable = false)
-    private int codigo_lugar;
+    private int codigoLugar;
 
     public Favorito(int codigo) {
         this.codigo = codigo;
@@ -28,20 +28,20 @@ public class Favorito {
         this.codigo = codigo;
     }
 
-    public String getNickname_usuario() {
-        return nickname_usuario;
+    public String getNicknameUsuario() {
+        return nicknameUsuario;
     }
 
-    public void setNickname_usuario(String nickname_usuario) {
-        this.nickname_usuario = nickname_usuario;
+    public void setNicknameUsuario(String nicknameUsuario) {
+        this.nicknameUsuario = nicknameUsuario;
     }
 
-    public int getCodigo_lugar() {
-        return codigo_lugar;
+    public int getCodigoLugar() {
+        return codigoLugar;
     }
 
-    public void setCodigo_lugar(int codigo_lugar) {
-        this.codigo_lugar = codigo_lugar;
+    public void setCodigoLugar(int codigoLugar) {
+        this.codigoLugar = codigoLugar;
     }
 
     @Override

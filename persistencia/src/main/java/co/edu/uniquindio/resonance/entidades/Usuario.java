@@ -14,7 +14,7 @@ public class Usuario {
     @Column(name="nombre",nullable = false,length = 70)
     private String nombre;
     @JoinColumn(name="codigo_ciudad",nullable = false)
-    private int codigo_ciudad;
+    private int codigoCiudad;
     @Column(name="email")
     private  String email;
     @Column(name="contrasena",nullable = false)
@@ -40,12 +40,12 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public int getCodigo_ciudad() {
-        return codigo_ciudad;
+    public int getCodigoCiudad() {
+        return codigoCiudad;
     }
 
-    public void setCodigo_ciudad(int codigo_ciudad) {
-        this.codigo_ciudad = codigo_ciudad;
+    public void setCodigoCiudad(int codigoCiudad) {
+        this.codigoCiudad = codigoCiudad;
     }
 
     public String getEmail() {

@@ -1,21 +1,22 @@
 package co.edu.uniquindio.resonance.entidades;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-public class Foto {
+public class Telefono {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="codigo",nullable = false)
     private int codigo;
-    @Column(name="urlFoto")
-    private String urlFoto;
+    @Column(name="numero", length = 14)
+    private String numero;
     @JoinColumn(name="codigo_lugar")
     private int codigoLugar;
 
 
-    public Foto(){
+    public Telefono(){
 
     }
 
@@ -27,12 +28,12 @@ public class Foto {
         this.codigo = codigo;
     }
 
-    public String getUrlFoto() {
-        return urlFoto;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setUrlFoto(String urlFoto) {
-        this.urlFoto = urlFoto;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public int getCodigoLugar() {
@@ -47,14 +48,12 @@ public class Foto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Foto foto = (Foto) o;
-
-        return codigo == foto.codigo;
+        Telefono telefono = (Telefono) o;
+        return codigo == telefono.codigo;
     }
 
     @Override
     public int hashCode() {
-        return codigo;
+        return Objects.hash(codigo);
     }
 }

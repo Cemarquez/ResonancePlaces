@@ -1,9 +1,12 @@
 package co.edu.uniquindio.resonance.entidades;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
-public class Administrador {
+public class Moderador {
 
     @Id
     @Column(name="nickname", nullable = false)
@@ -15,8 +18,8 @@ public class Administrador {
     @Column(name="contrasena", nullable = false)
     private String contrasena;
 
+    public Moderador() {
 
-    public Administrador() {
     }
 
     public String getNickname() {
@@ -34,8 +37,6 @@ public class Administrador {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-
 
     public String getEmail() {
         return email;
@@ -57,14 +58,12 @@ public class Administrador {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Administrador that = (Administrador) o;
-
-        return nickname != null ? nickname.equals(that.nickname) : that.nickname == null;
+        Moderador moderador = (Moderador) o;
+        return Objects.equals(nickname, moderador.nickname);
     }
 
     @Override
     public int hashCode() {
-        return nickname != null ? nickname.hashCode() : 0;
+        return Objects.hash(nickname);
     }
 }
