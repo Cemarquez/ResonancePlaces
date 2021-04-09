@@ -15,7 +15,7 @@ public class Usuario {
     private String nombre;
     @JoinColumn(name="codigo_ciudad",nullable = false)
     private int codigoCiudad;
-    @Column(name="email")
+    @Column(name="email", nullable = false)
     private  String email;
     @Column(name="contrasena",nullable = false)
     private String contrasena;

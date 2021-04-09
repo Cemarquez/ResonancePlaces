@@ -27,12 +27,17 @@ public class Lugar {
     @JoinColumn(name = "nickname_moderador", nullable = false)
     private String nicknameModerador;
 
-    @JoinColumn(name = "nickname_moderador", nullable = false)
+    @JoinColumn(name = "nickname_usuario", nullable = false)
     private String nicknameUsuario;
 
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
+
+    @Column(name = "nombre", nullable = false)
     private String nombre;
-    private String estado;
+
+    @Column(name = "estado", nullable = false)
+    private boolean estado;
 
     public Lugar(){
 
@@ -110,11 +115,11 @@ public class Lugar {
         this.nombre = nombre;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
