@@ -1,6 +1,9 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import org.dom4j.rule.Mode;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Administrador {
@@ -8,15 +11,29 @@ public class Administrador {
     @Id
     @Column(name="nickname", nullable = false)
     private String nickname;
+
     @Column(name="nombre", length = 70)
     private String nombre;
+
     @Column(name="email")
     private String email;
+
     @Column(name="contrasena", nullable = false)
     private String contrasena;
 
+    @OneToMany (mappedBy = "administrador")
+    private List<Moderador> moderadores;
 
     public Administrador() {
+
+    }
+
+    public List<Moderador> getModeradores() {
+        return moderadores;
+    }
+
+    public void setModeradores(List<Moderador> moderadores) {
+        this.moderadores = moderadores;
     }
 
     public String getNickname() {

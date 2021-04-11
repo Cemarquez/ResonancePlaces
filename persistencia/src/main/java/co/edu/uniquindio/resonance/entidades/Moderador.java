@@ -1,8 +1,6 @@
 package co.edu.uniquindio.resonance.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -11,12 +9,21 @@ public class Moderador {
     @Id
     @Column(name="nickname", nullable = false)
     private String nickname;
+
     @Column(name="nombre", length = 70)
     private String nombre;
+
     @Column(name="email")
     private String email;
+
     @Column(name="contrasena", nullable = false)
     private String contrasena;
+
+
+    @ManyToOne
+    @JoinColumn(name = "nickname_administrador", nullable = false)
+    private Administrador administrador;
+
 
     public Moderador() {
 

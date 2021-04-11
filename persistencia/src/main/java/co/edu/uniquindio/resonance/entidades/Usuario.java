@@ -1,9 +1,7 @@
 package co.edu.uniquindio.resonance.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -11,17 +9,52 @@ public class Usuario {
     @Id
     @Column(name="nickname",nullable = false, length = 25)
     private String nickname;
+
     @Column(name="nombre",nullable = false,length = 70)
     private String nombre;
-    @JoinColumn(name="codigo_ciudad",nullable = false)
-    private int codigoCiudad;
+
     @Column(name="email", nullable = false)
     private  String email;
+
     @Column(name="contrasena",nullable = false)
     private String contrasena;
 
-    public Usuario(){
+    @OneToMany(mappedBy = "usuario")
+    private List<Usuario> favoritos;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Calificacion> calificaciones;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_ciudad", nullable = false)
+    private Ciudad ciudad;
+
+    public Usuario() {
+
+    }
+
+    public List<Usuario> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(List<Usuario> favoritos) {
+        this.favoritos = favoritos;
+    }
+
+    public List<Calificacion> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<Calificacion> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
 
     public String getNickname() {
@@ -38,14 +71,6 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public int getCodigoCiudad() {
-        return codigoCiudad;
-    }
-
-    public void setCodigoCiudad(int codigoCiudad) {
-        this.codigoCiudad = codigoCiudad;
     }
 
     public String getEmail() {

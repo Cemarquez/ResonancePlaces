@@ -1,9 +1,6 @@
 package co.edu.uniquindio.resonance.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
 public class Favorito {
@@ -11,10 +8,18 @@ public class Favorito {
     @Id
     @Column(name = "codigo", nullable = false)
     private int codigo;
-    @JoinColumn(name ="nickname_usuario", nullable = false)
-    private String nicknameUsuario;
-    @JoinColumn(name = "codigo_lugar",nullable = false)
-    private int codigoLugar;
+
+    @ManyToOne
+    @JoinColumn(name = "nickname_usuario", nullable = false)
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public Favorito(int codigo) {
         this.codigo = codigo;
@@ -26,22 +31,6 @@ public class Favorito {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
-    }
-
-    public String getNicknameUsuario() {
-        return nicknameUsuario;
-    }
-
-    public void setNicknameUsuario(String nicknameUsuario) {
-        this.nicknameUsuario = nicknameUsuario;
-    }
-
-    public int getCodigoLugar() {
-        return codigoLugar;
-    }
-
-    public void setCodigoLugar(int codigoLugar) {
-        this.codigoLugar = codigoLugar;
     }
 
     @Override
