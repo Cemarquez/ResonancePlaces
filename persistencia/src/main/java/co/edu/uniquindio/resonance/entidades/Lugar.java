@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import org.dom4j.rule.Mode;
 import org.hibernate.type.descriptor.java.StringTypeDescriptor;
 
 import javax.persistence.*;
@@ -36,6 +37,21 @@ public class Lugar {
     @Column(name = "estado", nullable = false)
     private boolean estado;
 
+    @OneToMany(mappedBy = "lugar")
+    private List<Horario> horarios;
+
+    @OneToMany(mappedBy = "lugar")
+    private List<Calificacion> calificaciones;
+
+    @ManyToOne
+    @JoinColumn(name = "nickname_moderador", nullable = false)
+    private Moderador moderador;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_ciudad")
+    private Ciudad ciudad;
+
+
 
     public Lugar(){
 
@@ -65,6 +81,82 @@ public class Lugar {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public List<Telefono> getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(List<Telefono> telefono) {
+        this.telefono = telefono;
+    }
+
+    public List<Foto> getFoto() {
+        return foto;
+    }
+
+    public void setFoto(List<Foto> foto) {
+        this.foto = foto;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    public List<Calificacion> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<Calificacion> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    public Moderador getModerador() {
+        return moderador;
+    }
+
+    public void setModerador(Moderador moderador) {
+        this.moderador = moderador;
+    }
+
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
 
     @Override

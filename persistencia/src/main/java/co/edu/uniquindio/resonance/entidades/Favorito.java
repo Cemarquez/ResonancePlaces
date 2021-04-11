@@ -13,6 +13,10 @@ public class Favorito {
     @JoinColumn(name = "nickname_usuario", nullable = false)
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "codigo_lugar", nullable = false)
+    private Lugar lugar;
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -31,6 +35,14 @@ public class Favorito {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
     }
 
     @Override

@@ -24,6 +24,10 @@ public class Horario {
     @Column(name = "continuidad", nullable = false)
     private boolean continuidad;
 
+    @ManyToOne
+    @JoinColumn(name = "codigo_lugar", nullable = false)
+    private Lugar lugar;
+
 
     public Horario() {
         super();
@@ -67,6 +71,14 @@ public class Horario {
 
     public void setContinuidad(boolean continuidad) {
         this.continuidad = continuidad;
+    }
+
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.entidades;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +24,9 @@ public class Moderador {
     @ManyToOne
     @JoinColumn(name = "nickname_administrador", nullable = false)
     private Administrador administrador;
+
+    @OneToMany( mappedBy = "moderador")
+    private List<Lugar> lugares;
 
 
     public Moderador() {
@@ -59,6 +63,22 @@ public class Moderador {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public Administrador getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
+    }
+
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
     }
 
     @Override

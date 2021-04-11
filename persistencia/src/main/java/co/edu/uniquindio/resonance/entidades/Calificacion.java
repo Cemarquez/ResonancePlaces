@@ -21,6 +21,10 @@ public class Calificacion {
     @JoinColumn(name = "nickname_usuario", nullable = false)
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "codigo_lugar", nullable = false)
+    private Lugar lugar;
+
     public Calificacion() {
     }
 
@@ -63,6 +67,14 @@ public class Calificacion {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
     }
 
     @Override

@@ -24,6 +24,9 @@ public class Administrador {
     @OneToMany (mappedBy = "administrador")
     private List<Moderador> moderadores;
 
+    @OneToMany
+    private  List<Reporte> reportes;
+
     public Administrador() {
 
     }
@@ -52,7 +55,13 @@ public class Administrador {
         this.nombre = nombre;
     }
 
+    public List<Reporte> getReportes() {
+        return reportes;
+    }
 
+    public void setReportes(List<Reporte> reportes) {
+        this.reportes = reportes;
+    }
 
     public String getEmail() {
         return email;

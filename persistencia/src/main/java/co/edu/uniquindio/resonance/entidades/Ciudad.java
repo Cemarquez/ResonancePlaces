@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.entidades;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,9 @@ public class Ciudad {
 
     @Column(name = "nombre_ciudad", length = 50 , nullable = false)
     private String nombre;
+
+    @OneToMany(mappedBy = "ciudad")
+    private List<Lugar> lugares;
 
 
     public Ciudad() {
