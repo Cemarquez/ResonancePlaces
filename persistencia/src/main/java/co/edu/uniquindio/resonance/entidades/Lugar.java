@@ -3,6 +3,7 @@ package co.edu.uniquindio.resonance.entidades;
 import org.hibernate.type.descriptor.java.StringTypeDescriptor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,23 +13,19 @@ public class Lugar {
     @Column(name = "codigo", nullable = false)
     private int codigo;
 
-    @JoinColumn(name = "codigo_horario", nullable = false)
-    private int codigoHorario;
+    @ManyToOne
+    @JoinColumn(name="codigo_categoria", nullable = false)
+    private Categoria categoria;
 
-    @JoinColumn(name = "codigo_categoria", nullable = false)
-    private int codigoCategoria;
+    @ManyToOne
+    @JoinColumn(name="codigo_ubicacion", nullable = false)
+    private Ubicacion ubicacion;
 
-    @JoinColumn(name = "codigo_ubicacion", nullable = false)
-    private int codigoUbicacion;
+    @OneToMany(mappedBy = "lugar")
+    private List<Telefono> telefono;
 
-    @JoinColumn(name = "codigo_ciudad", nullable = false)
-    private int codigoCiudad;
-
-    @JoinColumn(name = "nickname_moderador", nullable = false)
-    private String nicknameModerador;
-
-    @JoinColumn(name = "nickname_usuario", nullable = false)
-    private String nicknameUsuario;
+    @OneToMany(mappedBy = "lugar")
+    private List<Foto> foto;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
@@ -39,65 +36,12 @@ public class Lugar {
     @Column(name = "estado", nullable = false)
     private boolean estado;
 
+
     public Lugar(){
 
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public int getCodigoHorario() {
-        return codigoHorario;
-    }
-
-    public void setCodigoHorario(int codigoHorario) {
-        this.codigoHorario = codigoHorario;
-    }
-
-    public int getCodigoCategoria() {
-        return codigoCategoria;
-    }
-
-    public void setCodigoCategoria(int codigoCategoria) {
-        this.codigoCategoria = codigoCategoria;
-    }
-
-    public int getCodigoUbicacion() {
-        return codigoUbicacion;
-    }
-
-    public void setCodigoUbicacion(int codigoUbicacion) {
-        this.codigoUbicacion = codigoUbicacion;
-    }
-
-    public int getCodigoCiudad() {
-        return codigoCiudad;
-    }
-
-    public void setCodigoCiudad(int codigoCiudad) {
-        this.codigoCiudad = codigoCiudad;
-    }
-
-    public String getNicknameModerador() {
-        return nicknameModerador;
-    }
-
-    public void setNicknameModerador(String nicknameModerador) {
-        this.nicknameModerador = nicknameModerador;
-    }
-
-    public String getNicknameUsuario() {
-        return nicknameUsuario;
-    }
-
-    public void setNicknameUsuario(String nicknameUsuario) {
-        this.nicknameUsuario = nicknameUsuario;
-    }
 
     public String getDescripcion() {
         return descripcion;

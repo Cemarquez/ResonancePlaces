@@ -12,8 +12,10 @@ public class Telefono {
     private int codigo;
     @Column(name="numero", length = 14)
     private String numero;
-    @JoinColumn(name="codigo_lugar")
-    private int codigoLugar;
+
+    @ManyToOne
+    @JoinColumn(name="codigo_lugar",nullable = false)
+    private Lugar lugar;
 
 
     public Telefono(){
@@ -36,12 +38,12 @@ public class Telefono {
         this.numero = numero;
     }
 
-    public int getCodigoLugar() {
-        return codigoLugar;
+    public Lugar getLugar() {
+        return lugar;
     }
 
-    public void setCodigoLugar(int codigoLugar) {
-        this.codigoLugar = codigoLugar;
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
     }
 
     @Override

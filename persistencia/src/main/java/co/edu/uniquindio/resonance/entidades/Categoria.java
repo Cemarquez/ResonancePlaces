@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.entidades;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +17,11 @@ public class Categoria {
 
     @Column(name = "descripcion_categoria", length = 50 , nullable = false)
     private String descripcion;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Lugar> lugar;
+
+
 
     public Categoria() {
         super();
@@ -43,6 +49,14 @@ public class Categoria {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Lugar> getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(List<Lugar> lugar) {
+        this.lugar = lugar;
     }
 
     @Override

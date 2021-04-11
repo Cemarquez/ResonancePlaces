@@ -11,8 +11,9 @@ public class Foto {
     private int codigo;
     @Column(name="urlFoto")
     private String urlFoto;
+    @ManyToOne
     @JoinColumn(name="codigo_lugar")
-    private int codigoLugar;
+    private Lugar lugar;
 
 
     public Foto(){
@@ -35,12 +36,12 @@ public class Foto {
         this.urlFoto = urlFoto;
     }
 
-    public int getCodigoLugar() {
-        return codigoLugar;
+    public Lugar getLugar() {
+        return lugar;
     }
 
-    public void setCodigoLugar(int codigoLugar) {
-        this.codigoLugar = codigoLugar;
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
     }
 
     @Override
