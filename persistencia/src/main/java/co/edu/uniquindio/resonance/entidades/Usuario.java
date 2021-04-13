@@ -20,7 +20,7 @@ public class Usuario {
     private String contrasena;
 
     @OneToMany(mappedBy = "usuario")
-    private List<Usuario> favoritos;
+    private List<Favorito> favoritos;
 
     @OneToMany(mappedBy = "usuario")
     private List<Calificacion> calificaciones;
@@ -33,11 +33,11 @@ public class Usuario {
 
     }
 
-    public List<Usuario> getFavoritos() {
+    public List<Favorito> getFavoritos() {
         return favoritos;
     }
 
-    public void setFavoritos(List<Usuario> favoritos) {
+    public void setFavoritos(List<Favorito> favoritos) {
         this.favoritos = favoritos;
     }
 
