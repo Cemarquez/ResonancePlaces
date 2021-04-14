@@ -8,13 +8,13 @@ public class Calificacion {
     @Column(name="codigo",nullable = false)
     private int codigo;
 
-    @Column(name="valor")
+    @Column(name="valor", nullable = false)
     private double valor;
 
-    @Column(name="titulo")
+    @Column(name="titulo", nullable = false)
     private String titulo;
 
-    @Column(name="mensaje")
+    @Column(name="mensaje", nullable = false)
     private String mensaje;
 
     @ManyToOne
@@ -28,6 +28,11 @@ public class Calificacion {
     public Calificacion() {
     }
 
+    public Calificacion(double valor, String titulo, String mensaje) {
+        this.valor = valor;
+        this.titulo = titulo;
+        this.mensaje = mensaje;
+    }
 
     public Usuario getUsuario() {
         return usuario;

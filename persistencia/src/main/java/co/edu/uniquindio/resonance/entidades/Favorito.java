@@ -25,8 +25,9 @@ public class Favorito {
         this.usuario = usuario;
     }
 
-    public Favorito(int codigo) {
-        this.codigo = codigo;
+
+    public Favorito(){
+
     }
 
     public int getCodigo() {
