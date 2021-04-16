@@ -24,7 +24,7 @@ public class LugarTest {
         lugar.setCodigo(1);
         lugar.setDescripcion("Mejor lugar de comidas rapidas");
         lugar.setNombre("Chorimburger");
-        lugar.setEstado(false)
+        lugar.setEstado(false);
 
         Lugar guardado = lugarRepo.save(lugar);
         Assertions.assertNotNull(guardado);
@@ -36,7 +36,7 @@ public class LugarTest {
         lugar.setCodigo(1);
         lugar.setDescripcion("Mejor lugar de comidas rapidas");
         lugar.setNombre("Chorimburger");
-        lugar.setEstado(false)
+        lugar.setEstado(false);
 
         Lugar guardado = lugarRepo.save(lugar);
 
@@ -60,7 +60,7 @@ public class LugarTest {
         lugar.setCodigo(1);
         lugar.setDescripcion("Mejor lugar de comidas rapidas");
         lugar.setNombre("Chorimburger");
-        lugar.setEstado(false)
+        lugar.setEstado(false);
 
         Lugar guardado = lugarRepo.save(lugar);
 

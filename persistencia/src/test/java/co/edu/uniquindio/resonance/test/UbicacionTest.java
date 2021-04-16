@@ -21,9 +21,9 @@ public class UbicacionTest {
     @Test
     public void registrarUbicacionTest(){
         Ubicacion ubi = new Ubicacion();
-        ubi.setCodigo(1)
-        ubi.serLatitud(3.5);
-        ubi.setLongitud(3.5)
+        ubi.setCodigo(1);
+        ubi.setLatitud(3.5);
+        ubi.setLongitud(3.5);
 
         Ubicacion guardado = ubicacionRepo.save(ubi);
         Assertions.assertNotNull(guardado);
@@ -32,9 +32,9 @@ public class UbicacionTest {
     @Test
     public void eliminarUbicacionTest(){
         Ubicacion ubi = new Ubicacion();
-        ubi.setCodigo(1)
-        ubi.serLatitud(3.5);
-        ubi.setLongitud(3.5)
+        ubi.setCodigo(1);
+        ubi.setLatitud(3.5);
+        ubi.setLongitud(3.5);
 
         Ubicacion guardado = ubicacionRepo.save(ubi);
 
@@ -55,9 +55,9 @@ public class UbicacionTest {
     @Test
     public void actualizarTelefonoTest(){
         Ubicacion ubi = new Ubicacion();
-        ubi.setCodigo(1)
-        ubi.serLatitud(3.5);
-        ubi.setLongitud(3.5)
+        ubi.setCodigo(1);
+        ubi.setLatitud(3.5);
+        ubi.setLongitud(3.5);
 
         Ubicacion guardado = ubicacionRepo.save(ubi);
 

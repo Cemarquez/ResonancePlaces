@@ -21,7 +21,7 @@ public class TelefonoTest {
     @Test
     public void registrarTelefonoTest(){
         Telefono tele = new Telefono();
-        tele.setCodigo(1)
+        tele.setCodigo(1);
         tele.setNumero("3106947999");
 
         Telefono guardado = telefonoRepo.save(tele);
@@ -31,7 +31,7 @@ public class TelefonoTest {
     @Test
     public void eliminarTelefonoTest(){
         Telefono tele = new Telefono();
-        tele.setCodigo(1)
+        tele.setCodigo(1);
         tele.setNumero("3106947999");
 
         Telefono guardado = telefonoRepo.save(tele);
@@ -53,7 +53,7 @@ public class TelefonoTest {
     @Test
     public void actualizarTelefonoTest(){
         Telefono tele = new Telefono();
-        tele.setCodigo(1)
+        tele.setCodigo(1);
         tele.setNumero("3106947999");
 
         Telefono guardado = telefonoRepo.save(tele);

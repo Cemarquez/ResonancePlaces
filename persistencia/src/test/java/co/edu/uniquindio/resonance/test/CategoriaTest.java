@@ -21,7 +21,7 @@ public class CategoriaTest {
     @Test
     public void registrarCategoriaTest(){
         Categoria cate = new Categoria();
-        cate.setCodigo(1)
+        cate.setCodigo(1);
         cate.setNombre("Restaurante");
         cate.setDescripcion("Mejor lugar de comidas rapidas");
 
@@ -32,7 +32,7 @@ public class CategoriaTest {
     @Test
     public void eliminarCategoriaTest(){
         Categoria cate = new Categoria();
-        cate.setCodigo(1)
+        cate.setCodigo(1);
         cate.setNombre("Restaurante");
         cate.setDescripcion("Mejor lugar de comidas rapidas");
 
@@ -55,14 +55,14 @@ public class CategoriaTest {
     @Test
     public void actualizarCategoriaTest(){
         Categoria cate = new Categoria();
-        cate.setCodigo(1)
+        cate.setCodigo(1);
         cate.setNombre("Restaurante");
         cate.setDescripcion("Lugar donde las personas comen");
 
-        Categoria guardada = categoriaRepo.save(cate);;
+        Categoria guardada = categoriaRepo.save(cate);
 
-        guardado.setNombre("Parqueadero");
-        categoriaRepo.save(guardado);
+        guardada.setNombre("Parqueadero");
+        categoriaRepo.save(guardada);
 
         Categoria buscado = categoriaRepo.findById(1).orElse(null);
         Assertions.assertEquals("Parqueadero", buscado.getNombre());
