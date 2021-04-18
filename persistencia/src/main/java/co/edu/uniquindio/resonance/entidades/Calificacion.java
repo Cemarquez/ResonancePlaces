@@ -28,10 +28,14 @@ public class Calificacion {
     public Calificacion() {
     }
 
-    public Calificacion(double valor, String titulo, String mensaje) {
+
+    public Calificacion( double valor, String titulo, String mensaje, Usuario usuario, Lugar lugar) {
+
         this.valor = valor;
         this.titulo = titulo;
         this.mensaje = mensaje;
+        this.usuario = usuario;
+        this.lugar = lugar;
     }
 
     public Usuario getUsuario() {

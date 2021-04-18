@@ -22,6 +22,10 @@ public class Lugar {
     @JoinColumn(name="codigo_ubicacion", nullable = false)
     private Ubicacion ubicacion;
 
+    @ManyToOne
+    @JoinColumn(name="nickname_usuario", nullable = false)
+    private Usuario usuario;
+
     @OneToMany(mappedBy = "lugar")
     private List<Telefono> telefono;
 
@@ -157,6 +161,14 @@ public class Lugar {
 
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

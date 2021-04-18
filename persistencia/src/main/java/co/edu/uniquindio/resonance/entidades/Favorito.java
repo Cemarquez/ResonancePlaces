@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Favorito {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "codigo", nullable = false)
     private int codigo;
 
@@ -28,6 +29,12 @@ public class Favorito {
 
     public Favorito(){
 
+    }
+
+    public Favorito(Usuario usuario, Lugar lugar) {
+
+        this.usuario = usuario;
+        this.lugar = lugar;
     }
 
     public int getCodigo() {

@@ -33,11 +33,13 @@ public class Horario {
         super();
     }
 
-    public Horario(String descripcion, Date horaInicio, Date horaCierre, boolean continuidad) {
+    public Horario(String descripcion, Date horaInicio, Date horaCierre, boolean continuidad, Lugar lugar) {
+
         this.descripcion = descripcion;
         this.horaInicio = horaInicio;
         this.horaCierre = horaCierre;
         this.continuidad = continuidad;
+        this.lugar = lugar;
     }
 
     public int getCodigo() {

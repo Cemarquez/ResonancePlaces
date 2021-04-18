@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.entidades;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,13 +21,16 @@ public class Usuario {
     private String contrasena;
 
     @OneToMany(mappedBy = "usuario")
-    private List<Favorito> favoritos;
+    private List<Favorito> favoritos = new ArrayList<>() ;;
 
     @OneToMany(mappedBy = "usuario")
-    private List<Calificacion> calificaciones;
+    private List<Calificacion> calificaciones = new ArrayList<>() ;
+
+    @OneToMany(mappedBy = "usuario")
+    private  List<Lugar> lugares = new ArrayList<>() ;;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_ciudad", nullable = false)
+    @JoinColumn(name = "codigo_ciudad")
     private Ciudad ciudad;
 
     public Usuario() {
@@ -94,6 +98,14 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
     }
 
     @Override
