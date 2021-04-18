@@ -15,9 +15,12 @@ public class Foto {
     @JoinColumn(name="codigo_lugar")
     private Lugar lugar;
 
+    public Foto(int codigo, Lugar lugar) {
+        this.codigo = codigo;
+        this.lugar = lugar;
+    }
 
-    public Foto(){
-
+    public Foto() {
     }
 
     public int getCodigo() {

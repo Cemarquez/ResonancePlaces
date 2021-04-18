@@ -1,0 +1,3 @@
+insert horario (descripcion_horario,hora_inicio,hora_final,continuidad,codigo_lugar) values ("Horario normal","07:00","21:00",false,1);
+insert horario (descripcion_horario,hora_inicio,hora_final,continuidad,codigo_lugar) values ("Horario normal","08:00","21:00",false,2);
+insert horario (descripcion_horario,hora_inicio,hora_final,continuidad,codigo_lugar) values ("Horario normal","09:00","21:00",false,3);

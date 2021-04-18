@@ -30,7 +30,6 @@ public class Reporte implements Serializable {
 
 
     public Reporte() {
-
     }
 
     public Reporte(int codigo, Date fecha, String descripcion, String nombre) {
