@@ -1,0 +1,3 @@
+insert into moderador(nickname, contrasena, email, nombre, nickname_administrador) values ("mateCaste", "mateito1234","mateo@gmail.com","Mateo Gonzales","adminMaster");
+insert into moderador(nickname, contrasena, email, nombre, nickname_administrador) values ("cesarM", "cesar1234","cesar@gmail.com","Cesar Rodriguez","adminMaster");
+insert into moderador(nickname, contrasena, email, nombre, nickname_administrador) values ("brianD", "brianD892","brian@gmail.com","Brian David","adminMaster");

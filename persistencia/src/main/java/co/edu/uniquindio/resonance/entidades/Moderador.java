@@ -28,9 +28,14 @@ public class Moderador {
     @OneToMany( mappedBy = "moderador")
     private List<Lugar> lugares;
 
-
     public Moderador() {
+    }
 
+    public Moderador(String nickname, String nombre, String email, String contrasena) {
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasena = contrasena;
     }
 
     public String getNickname() {

@@ -18,9 +18,12 @@ public class Ciudad {
     @OneToMany(mappedBy = "ciudad")
     private List<Lugar> lugares;
 
-
     public Ciudad() {
-        super();
+    }
+
+    public Ciudad(int codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
     }
 
     public int getCodigo() {
