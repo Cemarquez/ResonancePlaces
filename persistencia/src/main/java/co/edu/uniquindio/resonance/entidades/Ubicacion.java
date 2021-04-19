@@ -3,6 +3,10 @@ package co.edu.uniquindio.resonance.entidades;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Clase que corresponde a la entidad Ubicacion
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @Entity
 public class Ubicacion {
 
