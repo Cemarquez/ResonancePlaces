@@ -3,8 +3,14 @@ package co.edu.uniquindio.resonance.entidades;
 import javax.persistence.*;
 import java.util.Objects;
 
+
+/**
+ * Clase que corresponde a la entidad Telefono
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @Entity
 public class Telefono {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,6 +19,9 @@ public class Telefono {
     @Column(name="numero", length = 14)
     private String numero;
 
+    /**
+     * Relación que corresponde al lugar al cual pertenece el telefono
+     */
     @ManyToOne
     @JoinColumn(name="codigo_lugar",nullable = false)
     private Lugar lugar;

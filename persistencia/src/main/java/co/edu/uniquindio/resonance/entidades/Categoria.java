@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase que corresponde a la entidad Categoria
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @Entity
 public class Categoria {
 
@@ -18,6 +22,9 @@ public class Categoria {
     @Column(name = "descripcion_categoria", nullable = false)
     private String descripcion;
 
+    /**
+     * Entidad que corresponde a la lista de lugares que están ligados a la misma categoria
+     */
     @OneToMany(mappedBy = "categoria")
     private List<Lugar> lugar;
 
