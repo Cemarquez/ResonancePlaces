@@ -5,6 +5,11 @@ import org.dom4j.rule.Mode;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Clase que corresponde a la entidad Administrador
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
+
 @Entity
 public class Administrador {
 
@@ -21,9 +26,15 @@ public class Administrador {
     @Column(name="contrasena", nullable = false)
     private String contrasena;
 
+    /**
+     * Relación que corresponde a la lista de moderadores asignados por el administrador
+     */
     @OneToMany (mappedBy = "administrador")
     private List<Moderador> moderadores;
 
+    /**
+     * Relación que corresponde a la lista de reportes generados por el administrador
+     */
     @OneToMany
     private  List<Reporte> reportes;
 

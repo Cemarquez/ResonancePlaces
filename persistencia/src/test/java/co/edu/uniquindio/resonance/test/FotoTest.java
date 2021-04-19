@@ -13,16 +13,29 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Clase Test para la entidad foto
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class FotoTest {
 
+    /**
+     * Repositorio de la entidad foto
+     */
     @Autowired
     private FotoRepo repo;
 
+    /**
+     * Repositorio de la entidad lugar
+     */
     @Autowired
     private LugarRepo lugarRepo;
 
+    /**
+     * Método que permite registrar una foto en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarFoto(){
         Lugar lugar = new Lugar();
@@ -40,6 +53,9 @@ public class FotoTest {
 
     }
 
+    /**
+     * Método que permite actualizar los datos correspondientes de una foto de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarFoto(){
         Foto f = new Foto();
@@ -52,6 +68,9 @@ public class FotoTest {
         Assertions.assertEquals("2", buscado.getCodigo());
     }
 
+    /**
+     * Método que permite eliminar una foto de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarFoto(){
         Foto f = new Foto();
@@ -62,6 +81,9 @@ public class FotoTest {
         Assertions.assertNotNull(buscado);
     }
 
+    /**
+     * Método que permite listar todos los registros de las fotos de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql("classpath:fotos.sql")
     public void listarFotos(){

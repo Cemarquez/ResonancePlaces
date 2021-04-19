@@ -2,6 +2,10 @@ package co.edu.uniquindio.resonance.entidades;
 
 import javax.persistence.*;
 
+/**
+ * Clase que corresponde a la entidad Foto
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @Entity
 public class Foto {
 
@@ -9,8 +13,13 @@ public class Foto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="codigo",nullable = false)
     private int codigo;
+
     @Column(name="urlFoto")
     private String urlFoto;
+
+    /**
+     * Relación correspondiente al lugar al cual pertenece la foto n ---> 1
+     */
     @ManyToOne
     @JoinColumn(name="codigo_lugar")
     private Lugar lugar;
