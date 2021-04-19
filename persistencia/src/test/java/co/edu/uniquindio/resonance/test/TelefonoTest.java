@@ -13,16 +13,29 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Clase Test para la entidad telefono
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TelefonoTest {
 
+    /**
+     * Repositorio de la entidad telefono
+     */
     @Autowired
     public TelefonoRepo telefonoRepo;
+
+    /**
+     * Repositorio de la entidad lugar
+     */
     @Autowired
     private LugarRepo lugarRepo;
 
-
+    /**
+     * Método que permite registrar un telefono en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarTelefonoTest(){
         Lugar lugar = new Lugar();
@@ -43,6 +56,9 @@ public class TelefonoTest {
         Assertions.assertNotNull(guardado);
     }
 
+    /**
+     * Método que permite eliminar un telefono de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarTelefonoTest(){
         Lugar lugar = new Lugar();
@@ -67,13 +83,9 @@ public class TelefonoTest {
         Assertions.assertNull(buscado);
     }
 
-    @Test
-    public void listarTelefonoTest(){
-        List<Telefono> lista = telefonoRepo.findAll();
-
-        System.out.println(lista);
-    }
-
+    /**
+     * Método que permite listar todos los registros de telefonos de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql({"classpath:categorias.sql", "classpath:usuarios.sql", "classpath:ubicaciones.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:telefonos.sql"})
     public void listarTelefonoSQL(){
@@ -84,7 +96,9 @@ public class TelefonoTest {
 
     }
 
-
+    /**
+     * Método que permite actualizar los datos correspondientes de un telefono de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarTelefonoTest(){
         Lugar lugar = new Lugar();
@@ -107,6 +121,7 @@ public class TelefonoTest {
         telefonoRepo.save(guardado);
 
         Telefono buscado = telefonoRepo.findById(1).orElse(null);
+        System.out.println(buscado.getCodigo());
         Assertions.assertEquals("3148934012", buscado.getNumero());
 
     }
