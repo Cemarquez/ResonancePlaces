@@ -64,7 +64,7 @@ public class FotoTest {
         f.setCodigo(2);
         repo.save(f);
 
-        Foto buscado = repo.findById("2").orElse(null);
+        Foto buscado = repo.findById(guardada.getCodigo()).orElse(null);
         Assertions.assertEquals("2", buscado.getCodigo());
     }
 
@@ -77,7 +77,7 @@ public class FotoTest {
         f.setCodigo(1);
         Foto guardada = repo.save(f);
         repo.delete(f);
-        Foto buscado = repo.findById("1").orElse(null);
+        Foto buscado = repo.findById(guardada.getCodigo()).orElse(null);
         Assertions.assertNotNull(buscado);
     }
 

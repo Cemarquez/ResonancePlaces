@@ -53,7 +53,7 @@ public class UbicacionTest {
 
         ubicacionRepo.delete(guardado);
 
-        Ubicacion buscado = ubicacionRepo.findById(1).orElse(null);
+        Ubicacion buscado = ubicacionRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertNull(buscado);
     }
 
@@ -83,7 +83,7 @@ public class UbicacionTest {
         guardado.setLongitud(6.5);
         ubicacionRepo.save(guardado);
 
-        Ubicacion buscado = ubicacionRepo.findById(1).orElse(null);
+        Ubicacion buscado = ubicacionRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertEquals(6.5, buscado.getLongitud());
     }
 

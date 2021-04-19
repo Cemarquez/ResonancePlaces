@@ -111,17 +111,13 @@ public class TelefonoTest {
         Assertions.assertNotNull(lugarGuardado);
 
         Telefono tele = new Telefono();
-        tele.setCodigo(1);
         tele.setNumero("3106947999");
         tele.setLugar(lugarGuardado);
 
         Telefono guardado = telefonoRepo.save(tele);
-
         guardado.setNumero("3148934012");
-        telefonoRepo.save(guardado);
 
-        Telefono buscado = telefonoRepo.findById(1).orElse(null);
-        System.out.println(buscado.getCodigo());
+        Telefono buscado = telefonoRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertEquals("3148934012", buscado.getNumero());
 
     }

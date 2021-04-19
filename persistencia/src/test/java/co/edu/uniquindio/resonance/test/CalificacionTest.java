@@ -87,7 +87,7 @@ public class CalificacionTest {
         Calificacion calificacionGuardada = calificacionRepo.save(calificacion);
         calificacionRepo.delete(calificacionGuardada);
 
-        Calificacion buscado = calificacionRepo.findById(1).orElse(null);
+        Calificacion buscado = calificacionRepo.findById(calificacionGuardada.getCodigo()).orElse(null);
         Assertions.assertNull(buscado);
 
 
@@ -117,7 +117,7 @@ public class CalificacionTest {
         calificacionGuardada.setTitulo("Paisaje espectacular");
 
         calificacionRepo.save(calificacionGuardada);
-        Calificacion buscado = calificacionRepo.findById(1).orElse(null);
+        Calificacion buscado = calificacionRepo.findById(calificacionGuardada.getCodigo()).orElse(null);
 
         Assertions.assertEquals("Paisaje espectacular",calificacionGuardada.getTitulo());
 

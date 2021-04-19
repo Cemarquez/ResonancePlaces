@@ -49,7 +49,7 @@ public class ReporteTest {
         Reporte guardado = rRepo.save(r);
 
         rRepo.delete(r);
-        Reporte buscado = rRepo.findById("1").orElse(null);
+        Reporte buscado = rRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertNotNull(buscado);
     }
 
@@ -64,7 +64,7 @@ public class ReporteTest {
 
         r.setNombre("R 1");
         rRepo.save(r);
-        Reporte buscado = rRepo.findById("1").orElse(null);
+        Reporte buscado = rRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertEquals("R 1", buscado.getNombre());
     }
 

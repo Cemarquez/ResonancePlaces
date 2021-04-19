@@ -83,7 +83,7 @@ public class CategoriaTest {
         guardada.setNombre("Parqueadero");
         categoriaRepo.save(guardada);
 
-        Categoria buscado = categoriaRepo.findById(1).orElse(null);
+        Categoria buscado = categoriaRepo.findById(guardada.getCodigo()).orElse(null);
         Assertions.assertEquals("Parqueadero", buscado.getNombre());
 
     }

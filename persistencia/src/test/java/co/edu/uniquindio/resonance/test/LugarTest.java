@@ -99,7 +99,7 @@ public class LugarTest {
 
         lugarRepo.delete(guardado);
 
-        Lugar buscado = lugarRepo.findById(1).orElse(null);
+        Lugar buscado = lugarRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertNull(buscado);
     }
 
@@ -139,7 +139,7 @@ public class LugarTest {
         guardado.setNombre("Fulanoburger");
         lugarRepo.save(guardado);
 
-        Lugar buscado = lugarRepo.findById(1).orElse(null);
+        Lugar buscado = lugarRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertEquals("Fulanoburger", buscado.getNombre());
     }
 

@@ -50,7 +50,7 @@ public class CiudadTest {
         Ciudad cGuardada = cRepo.save(c);
 
         cRepo.delete(c);
-        Ciudad buscada = cRepo.findById("1").orElse(null);
+        Ciudad buscada = cRepo.findById(cGuardada.getCodigo()).orElse(null);
         Assertions.assertNotNull(buscada);
     }
 
@@ -63,11 +63,10 @@ public class CiudadTest {
         c.setCodigo(1);
         c.setNombre("Armenia");
 
-        Ciudad cGuardada = cRepo.save(c);
-
-        c.setNombre("Calarca");
-        cRepo.save(c);
-        Ciudad buscada = cRepo.findById("1").orElse(null);
+        Ciudad guardada = cRepo.save(c);
+        guardada.setNombre("Calarca");
+        cRepo.save(guardada);
+        Ciudad buscada = cRepo.findById(guardada.getCodigo()).orElse(null);
         Assertions.assertEquals("Calarca", buscada.getNombre());
 
     }

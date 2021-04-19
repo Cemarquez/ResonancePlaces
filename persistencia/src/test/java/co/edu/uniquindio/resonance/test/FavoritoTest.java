@@ -83,7 +83,7 @@ public class FavoritoTest {
         Favorito favorito = new Favorito(usuarioGuardado,lugarGuardado);
         Favorito favoritoRegistrado = favoritoRepo.save(favorito);
         favoritoRepo.delete(favoritoRegistrado);
-        Favorito buscado = favoritoRepo.findById(1).orElse(null);
+        Favorito buscado = favoritoRepo.findById(favoritoRegistrado.getCodigo()).orElse(null);
         Assertions.assertNull(buscado);
     }
 
@@ -121,7 +121,7 @@ public class FavoritoTest {
 
         favoritoRepo.save(favoritoRegistrado);
 
-      Favorito buscado = favoritoRepo.findById(2).orElse(null);
+      Favorito buscado = favoritoRepo.findById(favoritoRegistrado.getCodigo()).orElse(null);
        Assertions.assertEquals("Juanito", buscado.getUsuario().getNickname());
 
     }
