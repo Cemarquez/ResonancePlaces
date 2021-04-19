@@ -15,19 +15,32 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-
+/**
+ * Clase Test para la entidad favorito
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class FavoritoTest {
-
+    /**
+     * Repositorio de la entidad favorito
+     */
     @Autowired
     private FavoritoRepo favoritoRepo;
+    /**
+     * Repositorio de la entidad lugar
+     */
     @Autowired
     private LugarRepo lugarRepo;
+    /**
+     * Repositorio de la entidad usuario
+     */
     @Autowired
     private UsuarioRepo usuarioRepo;
 
-
+    /**
+     * Método que permite registrar un favorito en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarFavoritoTest(){
 
@@ -50,7 +63,9 @@ public class FavoritoTest {
         Favorito favoritoRegistrado = favoritoRepo.save(favorito);
         Assertions.assertNotNull(favoritoRegistrado);
     }
-
+    /**
+     * Método que permite eliminar un favorito en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarFavoritoTest(){
         Lugar lugar = new Lugar();
@@ -72,6 +87,9 @@ public class FavoritoTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * Método que permite actualizar un favorito en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarFavoritoTest(){
 
@@ -107,14 +125,18 @@ public class FavoritoTest {
        Assertions.assertEquals("Juanito", buscado.getUsuario().getNickname());
 
     }
-
+    /**
+     * Método que permite listar  favorito en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void listarFavoritos(){
         List<Favorito> lista = favoritoRepo.findAll();
 
         System.out.println(lista);
     }
-
+    /**
+     * Método que permite listar  favorito en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql({"classpath:favoritos.sql","classpath:usuarios.sql","classpath:lugares.sql"})
     public void listarFavsTest(){

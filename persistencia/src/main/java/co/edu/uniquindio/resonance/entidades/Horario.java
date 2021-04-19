@@ -3,6 +3,10 @@ package co.edu.uniquindio.resonance.entidades;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+/**
+ * Clase Horario para la entidad Horario
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 
 @Entity
 public class Horario {
@@ -24,6 +28,9 @@ public class Horario {
     @Column(name = "continuidad", nullable = false)
     private boolean continuidad;
 
+    /**
+     * Relacion entre horario y lugar, muchos horarios tienen un lugar
+     */
     @ManyToOne
     @JoinColumn(name = "codigo_lugar", nullable = false)
     private Lugar lugar;
@@ -33,6 +40,14 @@ public class Horario {
         super();
     }
 
+    /**
+     * Constructor para la clase Horario
+     * @param descripcion descripcion del horario
+     * @param horaInicio hora inicio del horario
+     * @param horaCierre hora cierre del horario
+     * @param continuidad continuidad del horario
+     * @param lugar lugar del horario
+     */
     public Horario(String descripcion, Date horaInicio, Date horaCierre, boolean continuidad, Lugar lugar) {
 
         this.descripcion = descripcion;
@@ -97,6 +112,11 @@ public class Horario {
         Fin de getters and setters
      */
 
+    /**
+     * Método equals sobreescrito para la clase Horario
+     * @param o Objeto a comparar
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
