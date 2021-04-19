@@ -23,15 +23,14 @@ public class LugarTest {
     public CategoriaRepo categoriaRepo;
     @Autowired
     public UsuarioRepo usuarioRepo;
-    /*
+
     @Autowired
     public ModeradorRepo moderadorRepo;
     @Autowired
     public CiudadRepo ciudadRepo;
-    */
 
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql"})
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:moderadores.sql", "classpath:ciudades.sql"})
     public void registrarLugarTest(){
         Lugar lugar = new Lugar();
         lugar.setCodigo(1);
@@ -42,17 +41,15 @@ public class LugarTest {
         lugar.setUbicacion(ubicacionRepo.findAll().get(0));
         lugar.setUsuario(usuarioRepo.findAll().get(0));
 
-        /*
-        lugar.setCiudad(ciudadRepo.finAll().get(0));
+        lugar.setCiudad(ciudadRepo.findAll().get(0));
         lugar.setModerador(moderadorRepo.findAll().get(0));
-        */
 
         Lugar guardado = lugarRepo.save(lugar);
         Assertions.assertNotNull(guardado);
     }
 
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql"})
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:moderadores.sql", "classpath:ciudades.sql"})
     public void eliminarLugarTest(){
         Lugar lugar = new Lugar();
         lugar.setCodigo(1);
@@ -63,10 +60,8 @@ public class LugarTest {
         lugar.setUbicacion(ubicacionRepo.findAll().get(0));
         lugar.setUsuario(usuarioRepo.findAll().get(0));
 
-        /*
-        lugar.setCiudad(ciudadRepo.finAll().get(0));
+        lugar.setCiudad(ciudadRepo.findAll().get(0));
         lugar.setModerador(moderadorRepo.findAll().get(0));
-        */
 
         Lugar guardado = lugarRepo.save(lugar);
 
@@ -77,16 +72,18 @@ public class LugarTest {
     }
 
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:lugares.sql"})
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql"})
     public void listarLugarTest(){
         List<Lugar> lista = lugarRepo.findAll();
 
-        System.out.println(lista);
+        for(Lugar l : lista){
+            System.out.println(l.getNombre());
+        }
     }
 
 
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql"})
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:moderadores.sql", "classpath:ciudades.sql"})
     public void actualizarLugarTest(){
         Lugar lugar = new Lugar();
         lugar.setCodigo(1);
@@ -97,10 +94,8 @@ public class LugarTest {
         lugar.setUbicacion(ubicacionRepo.findAll().get(0));
         lugar.setUsuario(usuarioRepo.findAll().get(0));
 
-        /*
-        lugar.setCiudad(ciudadRepo.finAll().get(0));
+        lugar.setCiudad(ciudadRepo.findAll().get(0));
         lugar.setModerador(moderadorRepo.findAll().get(0));
-        */
 
         Lugar guardado = lugarRepo.save(lugar);
 

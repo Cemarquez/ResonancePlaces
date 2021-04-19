@@ -75,11 +75,13 @@ public class TelefonoTest {
     }
 
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:usuarios.sql", "classpath:ubicaciones.sql", "classpath:lugares.sql", "classpath:telefonos.sql"})
+    @Sql({"classpath:categorias.sql", "classpath:usuarios.sql", "classpath:ubicaciones.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:telefonos.sql"})
     public void listarTelefonoSQL(){
         List<Telefono> lista = telefonoRepo.findAll();
+        for(Telefono t : lista){
+            System.out.println(t.getNumero());
+        }
 
-        System.out.println(lista);
     }
 
 

@@ -61,7 +61,7 @@ public class ModeradorTest {
     }
 
     @Test
-    @Sql({"classpath:moderadores.sql","administradores.sql"})
+    @Sql({"classpath:administradores.sql","classpath:moderadores.sql"})
     public void listarModeradores(){
         List<Moderador> list = moderadorRepo.findAll();
         for(Moderador m : list){
