@@ -11,14 +11,23 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Clase Test para la entidad ubicacion
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UbicacionTest {
 
+    /**
+     * Repositorio de la entidad ubicacion
+     */
     @Autowired
     public UbicacionRepo ubicacionRepo;
 
-
+    /**
+     * Método que permite registrar una ubicacion en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarUbicacionTest(){
         Ubicacion ubi = new Ubicacion();
@@ -30,6 +39,9 @@ public class UbicacionTest {
         Assertions.assertNotNull(guardado);
     }
 
+    /**
+     * Método que permite eliminar una ubicacion de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarUbicacionTest(){
         Ubicacion ubi = new Ubicacion();
@@ -45,13 +57,9 @@ public class UbicacionTest {
         Assertions.assertNull(buscado);
     }
 
-    @Test
-    public void listarUbicacionTest(){
-        List<Ubicacion> lista = ubicacionRepo.findAll();
-
-        System.out.println(lista);
-    }
-
+    /**
+     * Método que permite listar todos los registros de ubicaciones de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql({"classpath:ubicaciones.sql"})
     public void listarUbicacionTestSQL(){
@@ -60,9 +68,11 @@ public class UbicacionTest {
         System.out.println(lista);
     }
 
-
+    /**
+     * Método que permite actualizar los datos correspondientes de una ubicacion de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
-    public void actualizarTelefonoTest(){
+    public void actualizarUbicacionTest(){
         Ubicacion ubi = new Ubicacion();
         ubi.setCodigo(1);
         ubi.setLatitud(3.5);
