@@ -137,8 +137,8 @@ public class HorarioTest {
         System.out.println(lista);
     }
 
-    @Sql
-    @Sql({"classpath:horarios.sql,","classpath:lugares.sql"})
+    @Test
+    @Sql({"classpath:horarios.sql","classpath:lugares.sql"})
     public void listarHorariosSQL(){
         List<Horario> lista = horarioRepo.findAll();
 
