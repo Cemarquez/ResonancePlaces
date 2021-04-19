@@ -13,16 +13,29 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Clase Test para la entidad moderador
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ModeradorTest {
 
+    /**
+     * Repositorio de la entidad moderador
+     */
     @Autowired
     private ModeradorRepo moderadorRepo;
 
+    /**
+     * Repositorio de la entidad administrador
+     */
     @Autowired
     private AdministradorRepo adminitradorRepo;
 
+    /**
+     * Método que permite registrar un moderador en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarModerador(){
         Administrador admin = new Administrador();
@@ -39,6 +52,9 @@ public class ModeradorTest {
         Assertions.assertNotNull(modGuardado);
     }
 
+    /**
+     * Método que permite eliminar un moderador de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarModerador(){
         Moderador mod = new Moderador("gonzalesM", "Mateo Gonzales", "mateo@gmail.com", "mateito1234");
@@ -50,6 +66,9 @@ public class ModeradorTest {
         Assertions.assertNotNull(buscado);
     }
 
+    /**
+     * Método que permite actualizar los datos correspondientes de un moderador de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarModerador(){
         Moderador mod = new Moderador("gonzalesM", "Mateo Gonzales", "mateo@gmail.com", "mateito1234");
@@ -60,6 +79,9 @@ public class ModeradorTest {
         Assertions.assertEquals("Mateo Castañeda", buscado.getNombre());
     }
 
+    /**
+     * Método que permite listar todos los registros de moderadores de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql({"classpath:administradores.sql","classpath:moderadores.sql"})
     public void listarModeradores(){

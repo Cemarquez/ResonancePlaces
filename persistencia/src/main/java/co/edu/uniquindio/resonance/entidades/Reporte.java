@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Clase que corresponde a la entidad Reporte
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @Entity
 public class Reporte implements Serializable {
 

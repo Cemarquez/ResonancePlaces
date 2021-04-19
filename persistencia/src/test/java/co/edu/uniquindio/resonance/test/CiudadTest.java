@@ -11,13 +11,23 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Clase Test para la entidad ciudad
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CiudadTest {
 
+    /**
+     * Repositorio de la entidad ciudad
+     */
     @Autowired
     private CiudadRepo cRepo;
 
+    /**
+     * Método que permite registrar una ciudad en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarCiudad(){
         Ciudad c = new Ciudad();
@@ -28,6 +38,9 @@ public class CiudadTest {
         Assertions.assertNotNull(cGuardada);
     }
 
+    /**
+     * Método que permite eliminar una ciudad de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarCiudad(){
         Ciudad c = new Ciudad();
@@ -41,6 +54,9 @@ public class CiudadTest {
         Assertions.assertNotNull(buscada);
     }
 
+    /**
+     * Método que permite actualizar los datos correspondientes de una ciudad de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarCiudad(){
         Ciudad c = new Ciudad();
@@ -56,6 +72,9 @@ public class CiudadTest {
 
     }
 
+    /**
+     * Método que permite listar todos los registros de las ciudades de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql("classpath:ciudades.sql")
     public void listarCiudades(){
