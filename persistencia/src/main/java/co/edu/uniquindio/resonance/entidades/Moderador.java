@@ -38,6 +38,9 @@ public class Moderador {
         this.contrasena = contrasena;
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public String getNickname() {
         return nickname;
     }
@@ -85,6 +88,10 @@ public class Moderador {
     public void setLugares(List<Lugar> lugares) {
         this.lugares = lugares;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

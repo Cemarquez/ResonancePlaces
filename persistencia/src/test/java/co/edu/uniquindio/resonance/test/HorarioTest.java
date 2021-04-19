@@ -142,7 +142,7 @@ public class HorarioTest {
     public void listarHorariosSQL(){
         List<Horario> lista = horarioRepo.findAll();
 
-        System.out.println(lista.get(0).getDescripcion());
+        System.out.println(lista.get(0).getHoraInicio());
 
     }
 }

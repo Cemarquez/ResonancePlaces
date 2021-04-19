@@ -38,6 +38,9 @@ public class Calificacion {
         this.lugar = lugar;
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public Usuario getUsuario() {
         return usuario;
     }
@@ -85,6 +88,10 @@ public class Calificacion {
     public void setLugar(Lugar lugar) {
         this.lugar = lugar;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

@@ -44,6 +44,9 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public List<Favorito> getFavoritos() {
         return favoritos;
     }
@@ -107,6 +110,10 @@ public class Usuario {
     public void setLugares(List<Lugar> lugares) {
         this.lugares = lugares;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

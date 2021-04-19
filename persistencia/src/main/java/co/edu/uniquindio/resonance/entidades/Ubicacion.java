@@ -22,6 +22,9 @@ public class Ubicacion {
         super();
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -45,6 +48,10 @@ public class Ubicacion {
     public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

@@ -27,6 +27,9 @@ public class Categoria {
         super();
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -58,6 +61,10 @@ public class Categoria {
     public void setLugar(List<Lugar> lugar) {
         this.lugar = lugar;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

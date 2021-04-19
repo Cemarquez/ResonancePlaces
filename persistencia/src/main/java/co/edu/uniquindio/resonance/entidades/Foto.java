@@ -23,6 +23,9 @@ public class Foto {
     public Foto() {
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -46,6 +49,10 @@ public class Foto {
     public void setLugar(Lugar lugar) {
         this.lugar = lugar;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

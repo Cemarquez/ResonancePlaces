@@ -22,6 +22,9 @@ public class Telefono {
 
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -46,6 +49,15 @@ public class Telefono {
         this.lugar = lugar;
     }
 
+    /*
+        Fin de getters and setters
+     */
+
+    /**
+     * Método equals sobreescrito para la clase Telefono
+     * @param o Objeto a comparar
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

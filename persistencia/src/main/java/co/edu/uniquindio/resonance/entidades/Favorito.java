@@ -37,6 +37,9 @@ public class Favorito {
         this.lugar = lugar;
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -52,6 +55,10 @@ public class Favorito {
     public void setLugar(Lugar lugar) {
         this.lugar = lugar;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

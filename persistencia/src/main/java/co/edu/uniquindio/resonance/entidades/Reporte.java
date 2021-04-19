@@ -40,6 +40,9 @@ public class Reporte implements Serializable {
     }
 
 
+    /*
+        Inicio de getters and setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -79,6 +82,10 @@ public class Reporte implements Serializable {
     public void setPdfURL(String pdfURL) {
         this.pdfURL = pdfURL;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
 
     @Override

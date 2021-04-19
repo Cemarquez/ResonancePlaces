@@ -11,14 +11,24 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+
+/**
+ * Clase Test para la entidad administrador
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AdministradorTest {
 
+    /**
+     * Repositorio de la entidad administrador
+     */
     @Autowired
     public AdministradorRepo adminRepo;
 
-
+    /**
+     * Método que permite registrar un administrador en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarAdministradorTest(){
         Administrador admin = new Administrador();
@@ -31,6 +41,9 @@ public class AdministradorTest {
         Assertions.assertNotNull(guardado);
     }
 
+    /**
+     * Método que permite eliminar un administrador de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarAdminTest(){
         Administrador admin = new Administrador();
@@ -47,6 +60,9 @@ public class AdministradorTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * Método que permite listar todos los registros de administradores de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql("classpath:administradores.sql")
     public void listarAdminsTest(){
@@ -56,6 +72,9 @@ public class AdministradorTest {
     }
 
 
+    /**
+     * Método que permite actualizar los datos correspondientes de un administrador de la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarAdminTest(){
         Administrador admin = new Administrador();

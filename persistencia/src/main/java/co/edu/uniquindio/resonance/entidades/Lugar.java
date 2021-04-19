@@ -63,6 +63,9 @@ public class Lugar {
 
 
 
+    /*
+        Inicio de getters and setters
+     */
     public String getDescripcion() {
         return descripcion;
     }
@@ -170,6 +173,10 @@ public class Lugar {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {

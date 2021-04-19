@@ -31,6 +31,9 @@ public class Administrador {
 
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public List<Moderador> getModeradores() {
         return moderadores;
     }
@@ -79,6 +82,9 @@ public class Administrador {
         this.contrasena = contrasena;
     }
 
+    /*
+        Fin de getters and setters
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

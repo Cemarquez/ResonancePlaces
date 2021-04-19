@@ -26,6 +26,9 @@ public class Ciudad {
         this.nombre = nombre;
     }
 
+    /*
+        Inicio de getters and setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -41,6 +44,9 @@ public class Ciudad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    /*
+        Fin de getters and setters
+     */
 
     @Override
     public boolean equals(Object o) {
