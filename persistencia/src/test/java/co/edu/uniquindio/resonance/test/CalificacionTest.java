@@ -14,19 +14,33 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-
+/**
+ * Clase Test para la entidad calificacion
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CalificacionTest {
 
+    /**
+     * Repositorio de la entidad calificacion
+     */
     @Autowired
     private CalificacionRepo calificacionRepo;
+    /**
+     * Repositorio de la entidad lugar
+     */
     @Autowired
     private LugarRepo lugarRepo;
+    /**
+     * Repositorio de la entidad usuario
+     */
     @Autowired
     private UsuarioRepo usuarioRepo;
 
-
+    /**
+     * Método que permite registrar una calificacion en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarCalificacion(){
 
@@ -51,7 +65,9 @@ public class CalificacionTest {
 
 
     }
-
+    /**
+     * Método que permite eliminar una calificacion en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarCalificacion(){
         Lugar lugar = new Lugar();
@@ -76,7 +92,9 @@ public class CalificacionTest {
 
 
     }
-
+    /**
+     * Método que permite actualizar una calificacion en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarCalificacion(){
 
@@ -105,7 +123,9 @@ public class CalificacionTest {
 
 
     }
-
+    /**
+     * Método que permite listar calificacion en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void listarCalificaciones(){
         List<Calificacion> lista = calificacionRepo.findAll();
@@ -113,6 +133,9 @@ public class CalificacionTest {
 
     }
 
+    /**
+     * Método que listar  calificacion en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql
     @Sql({"classpath:calificaciones.sql","classpath:usuarios.sql","classpath:lugares.sql"})

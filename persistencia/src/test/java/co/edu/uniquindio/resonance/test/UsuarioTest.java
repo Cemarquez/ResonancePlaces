@@ -13,23 +13,38 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-
+/**
+ * Clase Test para la entidad usuario
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UsuarioTest {
 
-
+    /**
+     * Repositorio de la entidad usuario
+     */
     @Autowired
     private UsuarioRepo usuarioRepo;
-
+    /**
+     * Repositorio de la entidad calificacion
+     */
     @Autowired
     private CalificacionRepo calificacionRepo;
+    /**
+     * Repositorio de la entidad lugar
+     */
     @Autowired
     private LugarRepo lugarRepo;
+    /**
+     * Repositorio de la entidad favorito
+     */
     @Autowired
     private FavoritoRepo favoritoRepo;
 
-
+    /**
+     * Método que permite registrar un usuario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarUsuarioTest() {
 
@@ -45,7 +60,9 @@ public class UsuarioTest {
 
 
     }
-
+    /**
+     * Método que permite eliminar un usuario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarUsuarioTest() {
 
@@ -57,6 +74,9 @@ public class UsuarioTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * Método que permite actualizar un usuario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarUsuarioTest(){
         Usuario usuario = new Usuario("PedroNavaja", "Pedro", "pedronavaja@gmail.com", "pedro12345");
@@ -70,7 +90,9 @@ public class UsuarioTest {
         Assertions.assertEquals("Juanita Lopez", buscado.getNombre());
 
     }
-
+    /**
+     * Método que permite listar  usuario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void listarUsuariosTest(){
 
@@ -78,7 +100,9 @@ public class UsuarioTest {
 
         System.out.println(lista);
     }
-
+    /**
+     * Método que permite listar  usuario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql("classpath:usuarios.sql")
     public void listarUsuariosSQLTest(){

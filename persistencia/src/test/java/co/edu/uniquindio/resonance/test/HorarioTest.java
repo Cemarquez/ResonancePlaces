@@ -17,16 +17,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Clase Test para la entidad horario
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class HorarioTest {
 
+    /**
+     * Repositorio de la entidad horario
+     */
     @Autowired
     private HorarioRepo horarioRepo;
+    /**
+     * Repositorio de la entidad lugar
+     */
     @Autowired
     private LugarRepo lugarRepo;
 
 
+    /**
+     * Método que permite registrar un horario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void registrarHorario(){
 
@@ -61,7 +74,9 @@ public class HorarioTest {
 
 
     }
-
+    /**
+     * Método que permite eliminar un horario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void eliminarHorario(){
 
@@ -93,7 +108,9 @@ public class HorarioTest {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Método que permite actualizar un horario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void actualizarHorario(){
 
@@ -129,7 +146,9 @@ public class HorarioTest {
         }
 
     }
-
+    /**
+     * Método que permite listar horario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     public void listarHorarios(){
         List<Horario> lista = horarioRepo.findAll();
@@ -137,6 +156,9 @@ public class HorarioTest {
         System.out.println(lista);
     }
 
+    /**
+     * Método que permite listar  horario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
     @Test
     @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql","classpath:lugares.sql", "classpath:horarios.sql"})
     public void listarHorariosSQL(){

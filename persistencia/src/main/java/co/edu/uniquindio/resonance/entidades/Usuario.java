@@ -3,7 +3,10 @@ package co.edu.uniquindio.resonance.entidades;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase Usuario para la entidad Usuario
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @Entity
 public class Usuario {
 
@@ -20,15 +23,27 @@ public class Usuario {
     @Column(name="contrasena",nullable = false)
     private String contrasena;
 
+    /**
+     * Relacion entre usuario y favoritos, un usuario tiene muchos favoritos
+     */
     @OneToMany(mappedBy = "usuario")
-    private List<Favorito> favoritos = new ArrayList<>() ;;
+    private List<Favorito> favoritos ;
 
+    /**
+     * Relacion entre usuario y calificaciones, un usuario tiene muchas calificaciones
+     */
     @OneToMany(mappedBy = "usuario")
-    private List<Calificacion> calificaciones = new ArrayList<>() ;
+    private List<Calificacion> calificaciones  ;
 
+    /**
+     * Relacion entre usuario y lugares, un usuario tiene muchos lugares
+     */
     @OneToMany(mappedBy = "usuario")
-    private  List<Lugar> lugares = new ArrayList<>() ;;
+    private  List<Lugar> lugares ;
 
+    /**
+     * Relacion entre usuario y ciudad, muchas ciudades tienen un lugar
+     */
     @ManyToOne
     @JoinColumn(name = "codigo_ciudad")
     private Ciudad ciudad;
@@ -37,7 +52,17 @@ public class Usuario {
 
     }
 
+    /**
+     * Constructor para Usuario
+     * @param nickname nickname del usuario
+     * @param nombre nombre del usuario
+     * @param email email del usuario
+     * @param contrasena contrasena del usuario
+     */
     public Usuario(String nickname, String nombre, String email, String contrasena) {
+        favoritos = new ArrayList<>();
+        calificaciones = new ArrayList<>();
+        lugares = new ArrayList<>();
         this.nickname = nickname;
         this.nombre = nombre;
         this.email = email;
@@ -114,7 +139,11 @@ public class Usuario {
     /*
         Fin de getters and setters
      */
-
+    /**
+     * Método equals sobreescrito para la clase Usuario
+     * @param o Objeto a comparar
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
