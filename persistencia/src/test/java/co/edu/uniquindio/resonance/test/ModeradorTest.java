@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.test;
 
 import co.edu.uniquindio.resonance.entidades.Administrador;
+import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.repositorios.AdministradorRepo;
 import co.edu.uniquindio.resonance.repositorios.ModeradorRepo;
@@ -88,6 +89,15 @@ public class ModeradorTest {
         List<Moderador> list = moderadorRepo.findAll();
         for(Moderador m : list){
             System.out.println(m.getNickname());
+        }
+    }
+
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql"})
+    public void listar(){
+        List<Lugar> lugares = moderadorRepo.obtenerLugaresAutorizados("mateCaste");
+        for(Lugar l : lugares){
+            System.out.println(l.getNombre());
         }
     }
 }
