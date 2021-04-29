@@ -41,7 +41,7 @@ public class HorarioTest {
      * Método que permite registrar un horario en la base de datos en forma de test para verificar su correcto funcionamiento
      */
     @Test
-    public void registrarHorario(){
+    public void registrarHorario() {
 
         Lugar lugar = new Lugar();
         lugar.setCodigo(1);
@@ -58,27 +58,24 @@ public class HorarioTest {
             Date horaInicio = sdf.parse("07:00");
             Date horaFin = sdf.parse("22:00");
 
-            Horario horario = new Horario("Horario entre semana",horaInicio,horaFin,false,lugarGuardado);
+            Horario horario = new Horario("Horario entre semana", horaInicio, horaFin, false, lugarGuardado);
 
             Horario horarioGuardado = horarioRepo.save(horario);
             Assertions.assertNotNull(horarioGuardado);
 
 
-
-        }
-
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
     }
+
     /**
      * Método que permite eliminar un horario en la base de datos en forma de test para verificar su correcto funcionamiento
      */
     @Test
-    public void eliminarHorario(){
+    public void eliminarHorario() {
 
         Lugar lugar = new Lugar();
         lugar.setCodigo(1);
@@ -94,25 +91,23 @@ public class HorarioTest {
             Date horaInicio = sdf.parse("07:00");
             Date horaFin = sdf.parse("22:00");
 
-            Horario horario = new Horario("Horario entre semana",horaInicio,horaFin,false,lugarGuardado);
+            Horario horario = new Horario("Horario entre semana", horaInicio, horaFin, false, lugarGuardado);
             Horario horarioGuardado = horarioRepo.save(horario);
             horarioRepo.delete(horarioGuardado);
             Horario buscado = horarioRepo.findById(1).orElse(null);
             Assertions.assertNull(buscado);
 
 
-
-        }
-
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Método que permite actualizar un horario en la base de datos en forma de test para verificar su correcto funcionamiento
      */
     @Test
-    public void actualizarHorario(){
+    public void actualizarHorario() {
 
         Lugar lugar = new Lugar();
         lugar.setCodigo(1);
@@ -128,43 +123,46 @@ public class HorarioTest {
             Date horaInicio = sdf.parse("07:00");
             Date horaFin = sdf.parse("22:00");
 
-            Horario horario = new Horario("Horario entre semana",horaInicio,horaFin,false,lugarGuardado);
+            Horario horario = new Horario("Horario entre semana", horaInicio, horaFin, false, lugarGuardado);
             Horario horarioGuardado = horarioRepo.save(horario);
 
             horarioGuardado.setDescripcion("Horario festivo");
 
             horarioRepo.save(horarioGuardado);
             Horario buscado = horarioRepo.findById(horarioGuardado.getCodigo()).orElse(null);
-            Assertions.assertEquals("Horario festivo",buscado.getDescripcion());
+            Assertions.assertEquals("Horario festivo", buscado.getDescripcion());
 
 
-
-        }
-
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     /**
      * Método que permite listar horario en la base de datos en forma de test para verificar su correcto funcionamiento
      */
     @Test
-    public void listarHorarios(){
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql", "classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:horarios.sql"})
+    public void listarHorarios() {
         List<Horario> lista = horarioRepo.findAll();
 
-        System.out.println(lista);
+        for(Horario h : lista){
+            System.out.println(h.getHoraInicio());
+        }
+
     }
 
     /**
      * Método que permite listar  horario en la base de datos en forma de test para verificar su correcto funcionamiento
      */
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql","classpath:lugares.sql", "classpath:horarios.sql"})
-    public void listarHorariosSQL(){
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql", "classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:horarios.sql"})
+    public void listarHorariosSQL() {
         List<Horario> lista = horarioRepo.findAll();
 
         System.out.println(lista.get(0).getDescripcion());
+
 
     }
 }

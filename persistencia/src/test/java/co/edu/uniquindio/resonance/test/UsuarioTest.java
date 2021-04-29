@@ -111,4 +111,27 @@ public class UsuarioTest {
         System.out.println(lista.get(0).getNombre());
     }
 
+
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql","classpath:usuarios.sql"})
+    public void listar(){
+    List<Lugar> lugares = usuarioRepo.obtenerLugares("PedroNavaja");
+
+    for(Lugar l : lugares){
+        System.out.println(l.getNombre());
+    }
+    }
+
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql","classpath:lugares.sql" ,"classpath:telefonos.sql","classpath:favoritos.sql"})
+    public void  obtenerLugaresFavoritosTest(){
+
+        List <Lugar> favoritos = usuarioRepo.obtenerLugaresFavoritos("Miyagi");
+
+        String t =  favoritos.get(0).getNombre();
+
+        System.out.println("Favorito encontrado: " + t );
+
+
+    }
 }
