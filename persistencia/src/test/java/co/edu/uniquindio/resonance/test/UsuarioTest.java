@@ -50,11 +50,6 @@ public class UsuarioTest {
 
         Usuario usuario = new Usuario("PedroNavaja", "Pedro", "pedronavaja@gmail.com", "pedro12345");
 
-
-
-
-
-
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
         Assertions.assertNotNull(usuarioGuardado);
 

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Clase Repositorio para la entidad Usuario
@@ -25,6 +26,8 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
     @Query("select l.lugar from Usuario u JOIN u.favoritos l where u.nickname = ?1")
     List<Lugar> obtenerLugaresFavoritos(String nickname);
 
+
+    Optional<Usuario> findByEmail(String email);
 
 
 
