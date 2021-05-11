@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-
+/**
+ * Clase Test para UsuarioServicio
+ * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
+ */
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
 public class UsuarioServicioTest {
@@ -68,11 +71,30 @@ public class UsuarioServicioTest {
         try {
             registrado = usuarioServicio.registrarUsuario(usuario);
             registrado.setNombre("Juanita Lopez");
-            usuarioRepo.save(registrado);
+
+            usuarioServicio.actualizarUsuario(registrado);
             Usuario buscado = usuarioRepo.findById("PedroNavaja").orElse(null);
             Assertions.assertEquals("Juanita Lopez", buscado.getNombre());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método que permite iniciar sesion en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    public void iniciarSesionTest() {
+
+        try {
+            Usuario user = usuarioServicio.iniciarSesion("Miyagi", "miyagi1234");
+
+            Assertions.assertNotNull(user);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+
         }
     }
 
