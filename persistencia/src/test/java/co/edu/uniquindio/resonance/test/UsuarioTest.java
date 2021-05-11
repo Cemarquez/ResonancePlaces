@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.awt.print.Pageable;
 import java.util.List;
 /**
  * Clase Test para la entidad usuario
@@ -107,8 +109,12 @@ public class UsuarioTest {
     }
 
 
+    /**
+     * Método que permite listar los lugares de un usuario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
+
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql","classpath:usuarios.sql"})
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql"})
     public void listar(){
     List<Lugar> lugares = usuarioRepo.obtenerLugares("PedroNavaja");
 
@@ -116,6 +122,10 @@ public class UsuarioTest {
         System.out.println(l.getNombre());
     }
     }
+
+    /**
+     * Método que permite listar los lugares favoritos de un usuario en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
 
     @Test
     @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql","classpath:lugares.sql" ,"classpath:telefonos.sql","classpath:favoritos.sql"})
@@ -129,4 +139,124 @@ public class UsuarioTest {
 
 
     }
+
+    /**
+     * Método que permite obtener un usuario en la base de datos segun un nickname y contrasena dadas en forma de test para verificar su correcto funcionamiento
+     */
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void obtenerUsuarioNicknameContrasenaTest(){
+
+        Usuario u = usuarioRepo.findByNicknameAndContrasena("Miyagi","miyagi1234");
+
+        Assertions.assertNotNull(u);
+
+        System.out.println(u.getNickname());
+
+    }
+    /**
+     * Método que permite obtener un usuario en la base de datos segun un email y contrasena dadas en forma de test para verificar su correcto funcionamiento
+     */
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void obtenerUsuarioEmailContrasenaTest(){
+
+        Usuario u = usuarioRepo.findByEmailAndContrasena("miyagi@gmail.com","miyagi1234");
+
+        Assertions.assertNotNull(u);
+
+        System.out.println(u.getNickname());
+
+    }
+
+    /**
+     * Método que permite obtener todos los usuarios en la base de datos con paginado en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosPaginadosTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuarios(PageRequest.of(0,2));
+
+
+        for(Usuario u: lista) {
+            System.out.println(u.getNickname());
+        }
+
+    }
+
+    /**
+     * Método que permiete obtener email y lugares favoritos de todos los usuarios en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:calificaciones.sql"})
+    public void listarEmailLugaresTest(){
+
+
+        List<Object[]> lista = usuarioRepo.obtenerEmailLugaresPublicados();
+
+        for (Object [] o: lista){
+
+            for (int i=0; i<o.length;i++){
+
+                        if (i==0) {
+                            System.out.println("Email: " + o[i] + "\n");
+                        }else{
+                            System.out.println("Lugar: " + o[i] + "\n");
+                        }
+
+
+
+
+
+            }
+
+
+        }
+
+    }
+
+    /**
+     * Método que permite obtener usuarios que usan correo gmail en forma de test para verificar su funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:calificaciones.sql"})
+    public void obtenerUsuariosGmailTest(){
+
+        List <Usuario> lista = usuarioRepo.obtenerUsuariosDeGmail();
+
+        for (Usuario u: lista){
+            System.out.println("Usuario :" + u.getNickname() + " Correo: " + u.getEmail());
+        }
+
+
+    }
+
+    /**
+     * Método que permite obtener usuarios segun un dominio de correo indicado ej: @hotmail. , @uniquindio. , @yahoo. , @gmail. en forma de test para verificar su funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:calificaciones.sql"})
+    public void obtenerUsuariosDominiolTest(){
+
+        List <Usuario> lista = usuarioRepo.obtenerUsuariosDeDominio("@gmail.");
+
+        for (Usuario u: lista){
+            System.out.println("Usuario :" + u.getNickname() + " Correo: " + u.getEmail());
+        }
+
+
+    }
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:calificaciones.sql"})
+    public void obtenerUsuarioNicknameTest(){
+
+        Usuario user = usuarioRepo.findByNickname("Miyagi");
+
+        System.out.println(user.getNickname());
+    }
+
+
 }

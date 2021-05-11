@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 public class Calificacion {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="codigo",nullable = false)
     private int codigo;
 
