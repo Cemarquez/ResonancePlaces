@@ -16,8 +16,19 @@ import java.util.List;
 @Repository
 public interface LugarRepo extends JpaRepository<Lugar, Integer>{
 
+    /**
+     * Query que permite obtener el lugar de una ubicacion determinada
+     * @param codigo
+     * @return
+     */
+    @Query("select l from Lugar l where l.ubicacion.codigo = ?1")
+    Lugar obtenerLugar(int codigo);
 
-
+    /**
+     * Query que permite obtener el lugar de un telefono determinado
+     * @param numTelefono
+     * @return
+     */
     @Query("select l from  Lugar l  join  l.telefono t where t.numero = :numTelefono")
     Lugar obtenerLugarSegunTelefono(String numTelefono );
 

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.test;
 
+import co.edu.uniquindio.resonance.entidades.Categoria;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Telefono;
 import co.edu.uniquindio.resonance.repositorios.LugarRepo;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -122,4 +124,46 @@ public class TelefonoTest {
 
     }
 
+    /**
+     * Método que permite obtener un telefono con el codigo en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:telefonos.sql"})
+    public void obtenerTelefonoCodigo(){
+        Telefono telefono = telefonoRepo.findByCodigo(2);
+
+        System.out.println(telefono.getNumero());
+    }
+
+    /**
+     * Método que permite obtener todos los telefonos de un lugar en la base de datos con paginado en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:telefonos.sql"})
+    public void listarTelefonosLugar(){
+
+        List<Telefono> lista = telefonoRepo.telefonosLugar(1);
+
+
+        for(Telefono t: lista) {
+            System.out.println(t.getNumero());
+        }
+
+    }
+
+    /**
+     * Método que permite obtener todos los telefonos en la base de datos con paginado en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:telefonos.sql"})
+    public void listarTelefonosPaginadosTest(){
+
+        List<Telefono> lista = telefonoRepo.obtenerTelefonos(PageRequest.of(0,3));
+
+
+        for(Telefono t: lista) {
+            System.out.println(t.getNumero());
+        }
+
+    }
 }

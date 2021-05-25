@@ -21,6 +21,8 @@ public class Ubicacion {
     @Column(name = "longitud", nullable = false)
     private double longitud;
 
+    @OneToOne
+    private Lugar lugar;
 
     public Ubicacion() {
         super();
