@@ -1,12 +1,15 @@
 package co.edu.uniquindio.resonance.test;
 
 import co.edu.uniquindio.resonance.entidades.Categoria;
+import co.edu.uniquindio.resonance.entidades.Lugar;
+import co.edu.uniquindio.resonance.entidades.Ubicacion;
 import co.edu.uniquindio.resonance.repositorios.CategoriaRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -88,4 +91,70 @@ public class CategoriaTest {
 
     }
 
+    /**
+     * Método que permite listar los lugares con una categoria determinada en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql"})
+    public void listarLugares(){
+        List<Lugar> lugares = categoriaRepo.obtenerLugares(1);
+
+        for(Lugar l : lugares){
+            System.out.println(l.getNombre());
+        }
+    }
+
+    /**
+     * Método que permite obtener una categoria con el nombre en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql"})
+    public void obtenerCategoriaNombre(){
+        Categoria categoria = categoriaRepo.findByNombre("Restaurante");
+
+        System.out.println(categoria.getDescripcion());
+    }
+
+    /**
+     * Método que permite obtener una categoria con el codigo en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:categorias.sql"})
+    public void obtenerCategoriaCodigo(){
+        Categoria categoria = categoriaRepo.findByCodigo(1);
+
+        System.out.println(categoria.getDescripcion());
+    }
+
+    /**
+     * Método que permite obtener todas las categorias en la base de datos con paginado en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql("classpath:categorias.sql")
+    public void listarCategoriasPaginadosTest(){
+
+        List<Categoria> lista = categoriaRepo.obtenerCategorias(PageRequest.of(0,3));
+
+
+        for(Categoria c: lista) {
+            System.out.println(c.getNombre());
+        }
+
+    }
+
+    /**
+     * Método que permite obtener todas las categorias ordenadas alfabeticamente en la base de datos con paginado en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql("classpath:categorias.sql")
+    public void listarCategoriasOrdenadasTest(){
+
+        List<Categoria> lista = categoriaRepo.obtenerListaCategoriasAlfabeticamente();
+
+
+        for(Categoria c: lista) {
+            System.out.println(c.getNombre());
+        }
+
+    }
 }

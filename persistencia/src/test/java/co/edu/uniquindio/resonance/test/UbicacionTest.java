@@ -1,12 +1,15 @@
 package co.edu.uniquindio.resonance.test;
 
+import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Ubicacion;
+import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.UbicacionRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -85,6 +88,33 @@ public class UbicacionTest {
 
         Ubicacion buscado = ubicacionRepo.findById(guardado.getCodigo()).orElse(null);
         Assertions.assertEquals(6.5, buscado.getLongitud());
+    }
+
+    /**
+     * Método que permite obtener una ubicacion en la base de datos en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql({"classpath:ubicaciones.sql"})
+    public void obtenerUbicacion(){
+        Ubicacion ubicacion = ubicacionRepo.findByCodigo(1);
+
+        System.out.println(ubicacion.getLongitud());
+    }
+
+    /**
+     * Método que permite obtener todas las ubicaciones en la base de datos con paginado en forma de test para verificar su correcto funcionamiento
+     */
+    @Test
+    @Sql("classpath:ubicaciones.sql")
+    public void listarUbicacionesPaginadosTest(){
+
+        List<Ubicacion> lista = ubicacionRepo.obtenerUbicaciones(PageRequest.of(0,3));
+
+
+        for(Ubicacion u: lista) {
+            System.out.println(u.getCodigo());
+        }
+
     }
 
 }
