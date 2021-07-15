@@ -2,6 +2,7 @@ package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.UsuarioRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,8 @@ import java.util.Optional;
  * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
  */
 @Service
-public class UsuarioServicioImpl implements UsuarioServicio{
+public class UsuarioServicioImpl implements UsuarioServicio {
+
     private final UsuarioRepo usuarioRepo;
     public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
         this.usuarioRepo = usuarioRepo;
@@ -105,6 +107,11 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 
     }
 
+    @Override
+    public Usuario obtenerUsuario(String nickname) throws Exception {
+        return null;
+    }
+
     /**
      * Método que inicia sesion en la aplicacion
      * @param usuario
@@ -112,7 +119,7 @@ public class UsuarioServicioImpl implements UsuarioServicio{
      * @return
      * @throws Exception
      */
-    @Override
+
     public Usuario iniciarSesion(String usuario, String contrasena) throws Exception {
 
         Usuario user = usuarioRepo.findByNicknameAndContrasena(usuario, contrasena);

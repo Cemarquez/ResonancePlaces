@@ -13,6 +13,7 @@ public interface UsuarioServicio {
     Usuario registrarUsuario(Usuario u) throws Exception;
     Usuario actualizarUsuario(Usuario u) throws Exception;
     void eliminarUsuario(String nickname) throws Exception;
-    Usuario iniciarSesion(String usuario, String contrasena) throws  Exception;
+    Usuario obtenerUsuario(String nickname) throws Exception;
     List<Usuario> listarUsuarios();
+
 }

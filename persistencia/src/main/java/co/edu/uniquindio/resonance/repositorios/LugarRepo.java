@@ -16,19 +16,10 @@ import java.util.List;
 @Repository
 public interface LugarRepo extends JpaRepository<Lugar, Integer>{
 
-    /**
-     * Query que permite obtener el lugar de una ubicacion determinada
-     * @param codigo
-     * @return
-     */
-    @Query("select l from Lugar l where l.ubicacion.codigo = ?1")
-    Lugar obtenerLugar(int codigo);
 
-    /**
-     * Query que permite obtener el lugar de un telefono determinado
-     * @param numTelefono
-     * @return
-     */
+
+
+
     @Query("select l from  Lugar l  join  l.telefono t where t.numero = :numTelefono")
     Lugar obtenerLugarSegunTelefono(String numTelefono );
 
@@ -44,4 +35,9 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
 
     @Query("select c.nombre, avg(ca.valor) as prom from Categoria c INNER JOIN c.lugar l INNER JOIN l.calificaciones ca where l.ciudad.nombre = ?1  group by l.categoria order by(prom) DESC " )
     List<Object[]> devolverCategoriaPromMayor(String ciudad);
+
+    @Query("select l from Lugar  l where l.nombre like concat('%', :parametro, '%')")
+    List<Lugar> buscarLugares(String parametro);
+
+
 }

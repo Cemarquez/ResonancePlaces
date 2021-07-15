@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.bean;
+package co.edu.uniquindio.resonance.bean;
 import org.springframework.stereotype.Component;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;

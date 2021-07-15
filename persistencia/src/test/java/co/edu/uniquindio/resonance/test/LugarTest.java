@@ -206,15 +206,14 @@ public class LugarTest {
         }
     }
 
-    /**
-     * Método que permite obtener el lugar de una ubicacion en la base de datos en forma de test para verificar su correcto funcionamiento
-     */
     @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql"})
-    public void obtenerLugar(){
-        Lugar lugar = lugarRepo.obtenerLugar(1);
+    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:calificaciones.sql"})
+    public void testBuscar(){
+        List<Lugar> lista = lugarRepo.buscarLugares("%de%");
+        for (Lugar l : lista){
+            System.out.println(l.getNombre());
+        }
 
-        System.out.println(lugar.getNombre());
     }
 
 }

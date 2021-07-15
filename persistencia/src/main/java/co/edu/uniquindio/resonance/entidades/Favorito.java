@@ -1,6 +1,9 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import lombok.*;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * Clase Favorito para la entidad favorito
@@ -8,11 +11,18 @@ import javax.persistence.*;
  */
 
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
+@ToString
 public class Favorito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotBlank
     @Column(name = "codigo", nullable = false)
+    @EqualsAndHashCode.Include
     private int codigo;
 
 
@@ -27,26 +37,9 @@ public class Favorito {
      * Relacion entre favorito y lugar, muchos favoritos tienen un lugar
      */
     @ManyToOne
+    @NotBlank
     @JoinColumn(name = "codigo_lugar", nullable = false)
     private Lugar lugar;
-
-
-    /*
-        Inicio de getters and setters
-     */
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-
-    public Favorito(){
-
-    }
 
     /**
      * Constructor para Favorito
@@ -59,47 +52,4 @@ public class Favorito {
         this.lugar = lugar;
     }
 
-    /*
-        Inicio de getters and setters
-     */
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public Lugar getLugar() {
-        return lugar;
-    }
-
-    public void setLugar(Lugar lugar) {
-        this.lugar = lugar;
-    }
-
-    /*
-        Fin de getters and setters
-     */
-
-
-    /**
-     * Método equals sobreescrito para la clase Favorito
-     * @param o Objeto a comparar
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Favorito favorito = (Favorito) o;
-
-        return codigo == favorito.codigo;
-    }
-
-    @Override
-    public int hashCode() {
-        return codigo;
-    }
 }
