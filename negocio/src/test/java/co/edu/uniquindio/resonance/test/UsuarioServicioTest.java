@@ -80,22 +80,6 @@ public class UsuarioServicioTest {
         }
     }
 
-    /**
-     * Método que permite iniciar sesion en forma de test para verificar su correcto funcionamiento
-     */
-    @Test
-    public void iniciarSesionTest() {
 
-        try {
-            Usuario user = usuarioServicio.iniciarSesion("Miyagi", "miyagi1234");
-
-            Assertions.assertNotNull(user);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-
-        }
-    }
 
 }

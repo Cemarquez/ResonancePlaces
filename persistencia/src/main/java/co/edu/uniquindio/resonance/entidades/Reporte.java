@@ -1,8 +1,10 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import lombok.*;
 import org.hibernate.validator.constraints.CodePointLength;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -12,96 +14,41 @@ import java.util.Objects;
  * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
  */
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
+@ToString
 public class Reporte implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="codigo" ,nullable = false )
+    @EqualsAndHashCode.Include
+    @NotBlank
     private int codigo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha", nullable = false)
+    @NotBlank
     private Date fecha;
 
     @Column(name = "descripcion", nullable = false )
+    @NotBlank
     private String descripcion;
 
     @Column(name = "nombre", nullable = false, length = 50)
+    @NotBlank
     private String nombre;
 
     @Column(name = "pdfURL", nullable = false, unique = true)
+    @NotBlank
     private String pdfURL;
-
-
-    public Reporte() {
-    }
 
     public Reporte(int codigo, Date fecha, String descripcion, String nombre) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.nombre = nombre;
-    }
-
-
-    /*
-        Inicio de getters and setters
-     */
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPdfURL() {
-        return pdfURL;
-    }
-
-    public void setPdfURL(String pdfURL) {
-        this.pdfURL = pdfURL;
-    }
-
-    /*
-        Fin de getters and setters
-     */
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reporte reporte = (Reporte) o;
-        return codigo == reporte.codigo;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(codigo);
     }
 }

@@ -10,5 +10,6 @@ public interface LugarServicio {
     void eliminarLugar(Lugar lugar) throws Exception;
     Lugar actualizarLugar(Lugar lugar) throws Exception;
     List<Lugar> listarLugares();
+    List<Lugar> buscarLugares(String parametro);
 
 }

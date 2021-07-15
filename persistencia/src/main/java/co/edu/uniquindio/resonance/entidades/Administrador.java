@@ -1,8 +1,11 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import lombok.*;
 import org.dom4j.rule.Mode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -11,103 +14,50 @@ import java.util.List;
  */
 
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
+@ToString
 public class Administrador {
 
     @Id
+    @NotBlank
     @Column(name="nickname", nullable = false)
+    @EqualsAndHashCode.Include
     private String nickname;
 
     @Column(name="nombre", length = 70)
+    @NotBlank
     private String nombre;
 
     @Column(name="email")
+    @NotBlank
+    @Email
     private String email;
 
     @Column(name="contrasena", nullable = false)
+    @NotBlank
     private String contrasena;
 
     /**
      * Relación que corresponde a la lista de moderadores asignados por el administrador
      */
     @OneToMany (mappedBy = "administrador")
+    @ToString.Exclude
     private List<Moderador> moderadores;
 
     /**
      * Relación que corresponde a la lista de reportes generados por el administrador
      */
     @OneToMany
+    @ToString.Exclude
     private  List<Reporte> reportes;
 
-    public Administrador() {
-
-    }
-
-    /*
-        Inicio de getters and setters
-     */
-    public List<Moderador> getModeradores() {
-        return moderadores;
-    }
-
-    public void setModeradores(List<Moderador> moderadores) {
-        this.moderadores = moderadores;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
+    public Administrador(String nickname, String nombre, String email, String contrasena) {
         this.nickname = nickname;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public List<Reporte> getReportes() {
-        return reportes;
-    }
-
-    public void setReportes(List<Reporte> reportes) {
-        this.reportes = reportes;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    /*
-        Fin de getters and setters
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Administrador that = (Administrador) o;
-
-        return nickname != null ? nickname.equals(that.nickname) : that.nickname == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return nickname != null ? nickname.hashCode() : 0;
     }
 }
