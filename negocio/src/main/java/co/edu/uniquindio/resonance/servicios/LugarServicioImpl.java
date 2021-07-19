@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LugarServicioImpl implements LugarServicio{
@@ -15,22 +16,40 @@ public class LugarServicioImpl implements LugarServicio{
 
     @Override
     public Lugar registrarLugar(Lugar lugar) throws Exception {
-        return null;
+        Optional<Lugar> buscado = lugarRepo.findById(lugar.getCodigo());
+
+        if(buscado.isPresent()){
+            throw new Exception("Ya existe un lugar con ese codigo!");
+        }
+
+        return lugarRepo.save(lugar);
     }
 
     @Override
     public void eliminarLugar(Lugar lugar) throws Exception {
+        Optional<Lugar> buscado = lugarRepo.findById(lugar.getCodigo());
 
+        if(!buscado.isPresent()){
+            throw new Exception("No existe un lugar con ese codigo!");
+        }
+
+        lugarRepo.delete(lugar);
     }
 
     @Override
     public Lugar actualizarLugar(Lugar lugar) throws Exception {
-        return null;
+        Optional<Lugar> buscado = lugarRepo.findById(lugar.getCodigo());
+
+        if(!buscado.isPresent()){
+            throw new Exception("No existe un lugar con ese codigo!");
+        }
+
+        return lugarRepo.save(lugar);
     }
 
     @Override
     public List<Lugar> listarLugares() {
-        return null;
+         return lugarRepo.findAll();
     }
 
     @Override

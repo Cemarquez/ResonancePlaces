@@ -31,12 +31,24 @@ public class CiudadServicioImpl implements CiudadServicio{
 
     @Override
     public void eliminarCiudad(Ciudad ciudad) throws Exception {
+        Optional<Ciudad> buscado = ciudadRepo.findById(ciudad.getCodigo());
 
+        if(!buscado.isPresent()){
+            throw new Exception("No existe una ciudad con ese codigo!");
+        }
+
+        ciudadRepo.delete(ciudad);
     }
 
     @Override
     public Ciudad actualizarCiudad(Ciudad ciudad) throws Exception {
-        return null;
+        Optional<Ciudad> buscado = ciudadRepo.findById(ciudad.getCodigo());
+
+        if(!buscado.isPresent()){
+            throw new Exception("No existe una ciudad con ese codigo!");
+        }
+
+        return ciudadRepo.save(ciudad);
     }
 
     @Override
