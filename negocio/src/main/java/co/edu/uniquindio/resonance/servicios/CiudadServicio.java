@@ -10,5 +10,7 @@ public interface CiudadServicio {
     void eliminarCiudad(Ciudad ciudad) throws Exception;
     Ciudad actualizarCiudad(Ciudad ciudad) throws Exception;
     List<Ciudad> listarCiudades();
+    boolean existenCiudades();
+    Ciudad obtenerCiudad(int codigo);
 
 }

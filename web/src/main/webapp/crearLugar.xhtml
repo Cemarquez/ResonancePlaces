@@ -18,70 +18,40 @@
 
     <title>Página de Inicio</title>
 </h:head>
+<h:form>
+    <h:panelGrid columns="3" cellpadding="5">
+        <p:outputLabel for="nombre_lugar" value="Nombre:" />
+        <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true" placeholder="Ingrese el nombre del lugar" requiredMessage="Debe introducir el nombre." validatorMessage="Verifique el nombre ingresado.">
+            <f:validateLength minimum="3" maximum="70" />
+        </p:inputText> <p:message for="nombre_lugar"/>
 
+        <p:outputLabel for="descripcion_lugar" value="Descripción:" />
+        <p:inputTextarea rows="6" cols="33" id="descripcion_lugar" value="#{usuarioBean.usuario.email}" required="true" placeholder="Ingrese la descripción" requiredMessage="Debe introducir un email valido." validatorMessage="Verifique el email ingresado."/>
+        <p:message for="descripcion_lugar"/>
+
+        <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
+        <h:selectOneMenu id= "ciudad_lugar" value="#{lugarBean.lugar.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
+            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+            <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{lugarBean.ciudades}"/>
+        </h:selectOneMenu>
+        <p:message for="ciudad_lugar"/>
+
+        <p:outputLabel for="categoria_lugar" value="Categoria:"/>
+        <h:selectOneMenu id= "categoria_lugar" value="#{lugarBean.lugar.categoria}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una categoria." converter="#{categoriaConverter}">
+            <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
+            <f:selectItems var="categoria"  itemLabel="#{categoria.nombre}"  value="#{lugarBean.categorias}"/>
+        </h:selectOneMenu>
+        <p:message for="categoria_lugar"/>
+
+
+    </h:panelGrid>
+    <p:commandButton action="#{lugarBean.registrarLugar}" value="Registrar"
+                     update="@form" />
+
+</h:form>
 
 <h:body>
-    <div id="header">
-        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="registrarUsuario.xhtml">Registrarse</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <h:form class="d-flex me-2">
-                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
-                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar" action="#{busquedaBean.buscar}"  />
-                        </h:form>
-                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login" action="#{busquedaBean.buscar}"  />
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <section class="home">
-    </section>
-    <div style="height: 1000px">
-        <!-- just to make scrolling effect possible -->
-        <h2 class="myH2">What is this ?</h2>
-        <p class="myP">This is a responsive fixed navbar animated on scroll</p>
-        <p class="myP">I took inspiration from  ABDO STEIF (<a href="https://codepen.io/abdosteif/pen/bRoyMb?editors=1100">https://codepen.io/abdosteif/pen/bRoyMb?editors=1100</a>)
-            and Dicson <a href="https://codepen.io/dicson/pen/waKPgQ">(https://codepen.io/dicson/pen/waKPgQ)</a></p>
-        <p class="myP">I HOPE YOU FIND THIS USEFULL</p>
-        <p class="myP">Albi</p>
-        <p class="myP">
 
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam
-        </p>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>
-
-        $(window).scroll(function() {
-            if ($(document).scrollTop() > 50) {
-                $('.nav').addClass('affix');
-            } else {
-                $('.nav').removeClass('affix');
-            }
-        });
-    </script>
 </h:body>
 
 

@@ -10,27 +10,35 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet library="css" name="style.css" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
 
     <title>Resonance Places</title>
 </h:head>
 <h:body>
-    <h1>#{inicioBean.mensaje}</h1>
     <h:form>
         <h:panelGrid columns="3" cellpadding="5">
             <p:outputLabel for="nombre_usuario" value="Nombre:" />
-            <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" required="true" placeholder="Ingrese su nombre" requiredMessage="Debe introducir su nombre." validatorMessage="Verifique el nombre ingresado.">
+            <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" required="true" placeholder="Ingrese su nombre" requiredMessage="Debe introducir su nombre." validatorMessage="Verifique el nombre ingresado." styleClass="formularioUsuario" >
                 <f:validateLength minimum="3" maximum="70" />
             </p:inputText> <p:message for="nombre_usuario"/>
 
             <p:outputLabel for="email_usuario" value="Email:" />
-            <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" required="true" placeholder="Ingrese su email" requiredMessage="Debe introducir un email valido." validatorMessage="Verifique el email ingresado."/>
+            <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" required="true" placeholder="Ingrese su email" requiredMessage="Debe introducir un email valido." validatorMessage="Verifique el email ingresado." styleClass="formularioUsuario"/>
             <p:message for="email_usuario"/>
 
             <p:outputLabel for="nickname_usuario" value="Nickname:" />
-            <p:inputText id="nickname_usuario" value="#{usuarioBean.usuario.nickname}" placeholder="Ingrese su nickname" required="true" requiredMessage="Debe introducir un nickname de usuario." validatorMessage="Verifique el nickname ingresado.">
-                <f:validateLength minimum="5" maximum="70" />
+            <p:inputText id="nickname_usuario" value="#{usuarioBean.usuario.nickname}" placeholder="Ingrese su nickname" required="true" requiredMessage="Debe introducir un nickname de usuario." validatorMessage="Verifique el nickname ingresado." styleClass="formularioUsuario">
+                <f:validateLength minimum="5" maximum="70"  styleClass="formularioUsuario"/>
             </p:inputText>
             <p:message for="nickname_usuario"/>
+
+
+            <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
+            <h:selectOneMenu id= "ciudad_usuario" value="#{usuarioBean.usuario.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
+                <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{usuarioBean.ciudades}"/>
+            </h:selectOneMenu>
+            <p:message for="ciudad_usuario"/>
 
 
             <p:outputLabel for="password_usuario" value="Contraseña:"/>
@@ -40,9 +48,14 @@
             <p:message for="password_usuario"/>
 
 
+
+
+
         </h:panelGrid>
         <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar"
                          update="@form" />
+
+
 
     </h:form>
 </h:body>

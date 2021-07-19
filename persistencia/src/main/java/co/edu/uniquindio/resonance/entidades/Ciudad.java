@@ -21,7 +21,6 @@ public class Ciudad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank
     @Column(name = "codigo", nullable = false)
     @EqualsAndHashCode.Include
     private int codigo;
@@ -37,8 +36,7 @@ public class Ciudad {
     @ToString.Exclude
     private List<Lugar> lugares;
 
-    public Ciudad(int codigo, String nombre) {
-        this.codigo = codigo;
+    public Ciudad(String nombre) {
         this.nombre = nombre;
     }
 }

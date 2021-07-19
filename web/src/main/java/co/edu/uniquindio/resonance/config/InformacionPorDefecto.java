@@ -28,5 +28,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
             Ciudad ciudad4 = new Ciudad("Sevilla");
             ciudadServicio.registrarCiudad(ciudad4);
         }
+
+
     }
 }
