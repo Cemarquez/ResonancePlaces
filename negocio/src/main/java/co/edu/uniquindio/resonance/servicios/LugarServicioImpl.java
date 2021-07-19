@@ -22,6 +22,8 @@ public class LugarServicioImpl implements LugarServicio{
             throw new Exception("Ya existe un lugar con ese codigo!");
         }
 
+        lugar.setEstado(false);
+
         return lugarRepo.save(lugar);
     }
 

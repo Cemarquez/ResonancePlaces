@@ -30,7 +30,6 @@ public class Lugar {
      * Relacion que corresponde a la categoria en la que pertenece el lugar
      */
     @ManyToOne
-    @NotBlank
     @JoinColumn(name="codigo_categoria", nullable = false)
     private Categoria categoria;
 
@@ -100,7 +99,7 @@ public class Lugar {
     @JoinColumn(name = "codigo_ciudad")
     private Ciudad ciudad;
 
-    public Lugar(@NotBlank Categoria categoria ,String descripcion, String nombre) {
+    public Lugar(Categoria categoria ,String descripcion, String nombre) {
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.nombre = nombre;

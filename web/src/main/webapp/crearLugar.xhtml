@@ -26,7 +26,7 @@
         </p:inputText> <p:message for="nombre_lugar"/>
 
         <p:outputLabel for="descripcion_lugar" value="Descripción:" />
-        <p:inputTextarea rows="6" cols="33" id="descripcion_lugar" value="#{usuarioBean.usuario.email}" required="true" placeholder="Ingrese la descripción" requiredMessage="Debe introducir un email valido." validatorMessage="Verifique el email ingresado."/>
+        <p:inputTextarea rows="6" cols="33" id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" required="true" placeholder="Ingrese la descripción" requiredMessage="Debe introducir una descripción valida." validatorMessage="Verifique el mensaje ingresado."/>
         <p:message for="descripcion_lugar"/>
 
         <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
@@ -47,6 +47,7 @@
     </h:panelGrid>
     <p:commandButton action="#{lugarBean.registrarLugar}" value="Registrar"
                      update="@form" />
+    <p:growl showDetail="true" />
 
 </h:form>
 

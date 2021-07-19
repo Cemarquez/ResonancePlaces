@@ -16,10 +16,13 @@ public class CategoriaServicioImpl implements  CategoriaServicio{
 
     @Override
     public Categoria registrarCategoria(Categoria categoria) throws Exception {
+        /*
         Categoria buscado = categoriaRepo.findByNombre(categoria.getNombre());
         if(categoria!=null){
             throw new Exception("Ya existe una categoria con este nombre!");
         }
+
+         */
 
         Categoria guardado = categoriaRepo.save(categoria);
         return guardado;
