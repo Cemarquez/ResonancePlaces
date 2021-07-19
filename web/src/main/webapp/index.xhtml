@@ -81,7 +81,56 @@
                     <h2>Lugares más populares</h2>
                 </div>
                 <div>
-                    <p>Lista de lugares</p>
+
+                    <h:form id="form">
+                    <p:dataView var="lugar" value="#{lugarBean.lugares}"
+                                rows="12"
+                                paginator="true"
+                                rowsPerPageTemplate="6,12,16"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                gridIcon="pi pi-th-large" >
+
+
+
+                        <p:dataViewGridItem>
+                            <div class="product-grid-item card border-1">
+                                <div class="product-grid-item-top">
+                                    <div>
+                                        <i class="pi pi-tag product-category-icon"/>
+                                        <span class="product-category">#{product.category}</span>
+                                    </div>
+                                    <span class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>
+                                </div>
+                                <div class="product-grid-item-content">
+                                    <p:graphicImage name="images/product/#{product.image}" library="demo"/>
+                                    <div class="product-name">#{product.name}</div>
+                                    <div class="product-description">#{product.description}</div>
+                                    <p:rating readonly="true" value="#{product.rating}"/>
+                                </div>
+                                <div class="product-grid-item-bottom">
+                                    <h:outputText value="#{product.price}" styleClass="product-price">
+                                        <f:convertNumber currencySymbol="$" type="currency"/>
+                                    </h:outputText>
+                                    <p:commandButton type="button"
+                                                     value="Add To Cart"
+                                                     icon="pi pi-shopping-cart"
+                                                     disabled="#{product.inventoryStatus == 'OUTOFSTOCK'}">
+                                    </p:commandButton>
+                                </div>
+                            </div>
+
+
+                        </p:dataViewGridItem>
+
+                    </p:dataView>
+
+
+                    </h:form>
+
+
+
+
+
                 </div>
             </div>
         </div>

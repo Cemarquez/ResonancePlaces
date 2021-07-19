@@ -22,7 +22,6 @@ import java.util.Objects;
 public class Lugar {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank
     @Column(name = "codigo", nullable = false)
     @EqualsAndHashCode.Include
     private int codigo;
@@ -38,17 +37,16 @@ public class Lugar {
     /**
      * Relacion que corresponde a la ubicacion geografica del lugar
      */
+
     @ManyToOne
-    @NotBlank
-    @JoinColumn(name="codigo_ubicacion", nullable = false)
+    @JoinColumn(name="codigo_ubicacion")
     private Ubicacion ubicacion;
 
     /**
      * Relación que corresponde al usuario que registró el lugar
      */
     @ManyToOne
-    @NotBlank
-    @JoinColumn(name="nickname_usuario", nullable = false)
+    @JoinColumn(name="nickname_usuario")
     private Usuario usuario;
 
     /**
@@ -71,7 +69,7 @@ public class Lugar {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "estado", nullable = false)
+    @Column(name = "estado")
     private boolean estado;
 
     /**
@@ -92,7 +90,7 @@ public class Lugar {
      * Relacion que corresponde al moderador que autorizó el lugar
      */
     @ManyToOne
-    @JoinColumn(name = "nickname_moderador", nullable = false)
+    @JoinColumn(name = "nickname_moderador")
     private Moderador moderador;
 
     /**
@@ -101,4 +99,10 @@ public class Lugar {
     @ManyToOne
     @JoinColumn(name = "codigo_ciudad")
     private Ciudad ciudad;
+
+    public Lugar(@NotBlank Categoria categoria ,String descripcion, String nombre) {
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.nombre = nombre;
+    }
 }

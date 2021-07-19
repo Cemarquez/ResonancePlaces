@@ -47,6 +47,8 @@ public class LugarBean {
 
     @Getter @Setter
     private List<Ciudad> ciudades;
+    @Getter @Setter
+    private List <Lugar> lugares;
 
     @PostConstruct
     public void inicializar(){
@@ -56,6 +58,7 @@ public class LugarBean {
         this.ciudad = new Ciudad();
         this.categorias = categoriaServicio.listarCategorias();
         this.ciudades = ciudadServicio.listarCiudades();
+        this.lugares = lugarServicio.listarLugares();
 
     }
 

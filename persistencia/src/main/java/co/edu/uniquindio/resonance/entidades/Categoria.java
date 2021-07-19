@@ -21,8 +21,7 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank
-    @Column(name = "codigo", nullable = false)
+    @Column(name = "codigo")
     @EqualsAndHashCode.Include
     private int codigo;
 
@@ -40,4 +39,9 @@ public class Categoria {
     @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
     private List<Lugar> lugar;
+
+    public Categoria(@NotBlank String nombre, @NotBlank String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 }
