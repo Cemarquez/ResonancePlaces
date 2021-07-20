@@ -58,6 +58,14 @@
                                 </h:selectOneMenu>
                                 <p:message for="categoria_lugar"/>
 
+                                <p:outputLabel for="imagen_lugar" value = "Imagenes: " />
+                                <p:fileUpload id = "imagen_lugar" listener="#{lugarBean.subirImagenes}" requiredMessage="Debe subir al menos una imagen del lugar."  mode="advanced" dragDropSupport="true"
+                                              multiple="true" update="messages" sizeLimit="1000000" fileLimit="5"
+                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
+                                <p:message for="imagen_lugar"/>
+
+                                <p:growl id="messages" showDetail="true" keepAlive="true"/>
+
 
                             </h:panelGrid>
                             <br/>

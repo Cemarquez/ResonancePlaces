@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.Calificacion;
+import co.edu.uniquindio.resonance.entidades.Foto;
 import co.edu.uniquindio.resonance.entidades.Horario;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 
@@ -17,6 +18,7 @@ public interface LugarServicio {
     List<Horario>listarHorarios(Integer codigo);
     List<Calificacion>listarCalificaciones(Integer codigo);
     Calificacion crearCalificacion(Calificacion c);
+    Foto registrarFoto(Foto foto);
 
 
 }

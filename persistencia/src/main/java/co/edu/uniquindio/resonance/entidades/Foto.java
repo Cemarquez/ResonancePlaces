@@ -38,4 +38,9 @@ public class Foto {
         this.codigo = codigo;
         this.lugar = lugar;
     }
+
+    public Foto(String urlFoto, Lugar lugar) {
+        this.urlFoto = urlFoto;
+        this.lugar = lugar;
+    }
 }

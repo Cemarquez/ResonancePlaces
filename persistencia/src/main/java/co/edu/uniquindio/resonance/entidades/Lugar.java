@@ -3,9 +3,12 @@ package co.edu.uniquindio.resonance.entidades;
 import lombok.*;
 import org.dom4j.rule.Mode;
 import org.hibernate.type.descriptor.java.StringTypeDescriptor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,6 +56,7 @@ public class Lugar {
     /**
      * Relación que corresponde a la lista de telefonos registrados en un lugar
      */
+
     @OneToMany(mappedBy = "lugar")
     @ToString.Exclude
     private List<Telefono> telefono;
@@ -60,9 +64,10 @@ public class Lugar {
     /**
      * Relacion que corresponde a la lista de fotos que fueron asignadas a un lugar
      */
-    @OneToMany(mappedBy = "lugar")
-    @ToString.Exclude
-    private List<Foto> foto;
+    @ElementCollection
+    @JoinColumn(nullable = false)
+    @Column(name="url_foto")
+        private List<String> foto = new ArrayList<>();
 
     @Column(name ="latitud")
     private double latitud;
@@ -109,9 +114,19 @@ public class Lugar {
 
 
 
+
     public Lugar(Categoria categoria ,String descripcion, String nombre) {
+        foto = new ArrayList<>();
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.nombre = nombre;
+    }
+    @Transactional
+    public String getLugarFoto(){
+        if(getFoto().size()>0){
+            return foto.get(0);
+        }else{
+            return "vacio.png";
+        }
     }
 }
