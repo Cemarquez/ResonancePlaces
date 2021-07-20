@@ -16,12 +16,12 @@
     <h:outputStylesheet library="css" name="style.css" />
     <h:outputScript library="js" name="bootstrap.bundle.min.js" />
     <h:outputScript library="js" name="mapbox-gl.js" />
+    <h:outputScript library="js" name="script-home.js" />
 
 
     <title>Resonance Places</title>
 </h:head>
 <h:body>
-
     <div id="header">
         <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
             <div class="container">
@@ -56,13 +56,6 @@
     <div id="content"  >
         <div id ="mapa">
             <div id='map' ></div>
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiY2VtYXJxdWV6MjkiLCJhIjoiY2tuNHpkYzRpMDB3YjJ1bXlla3R4aDk1dSJ9.hD4UgfbMsz3ezhv9fDPO6Q';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11'
-                });
-            </script>
 
         </div>
 

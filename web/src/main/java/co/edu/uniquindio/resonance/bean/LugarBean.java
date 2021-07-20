@@ -1,9 +1,6 @@
 package co.edu.uniquindio.resonance.bean;
 
-import co.edu.uniquindio.resonance.entidades.Categoria;
-import co.edu.uniquindio.resonance.entidades.Ciudad;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
 import co.edu.uniquindio.resonance.servicios.CategoriaServicio;
 import co.edu.uniquindio.resonance.servicios.CiudadServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
@@ -62,18 +59,27 @@ public class LugarBean {
 
     }
 
-    public void registrarLugar(){
+    public String registrarLugar(){
         try {
-            lugarServicio.registrarLugar(lugar);
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                    "Registro exitoso");
-            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+            if(lugar.getLatitud() != 0 || lugar.getLongitud() != 0 ){
+                lugarServicio.registrarLugar(lugar);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                        "Registro exitoso");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                return "/lugarCreado?faces-redirect=true&amp;lugar="+lugar.getCodigo();
+            }else{
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                        "Es necesario ubicar el lugar dentro del mapa");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+            }
+
         } catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
                     e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         }
 
+        return null;
     }
 
 }

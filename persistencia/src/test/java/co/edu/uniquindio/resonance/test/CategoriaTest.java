@@ -2,7 +2,6 @@ package co.edu.uniquindio.resonance.test;
 
 import co.edu.uniquindio.resonance.entidades.Categoria;
 import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Ubicacion;
 import co.edu.uniquindio.resonance.repositorios.CategoriaRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -37,10 +37,12 @@ public class Lugar {
      * Relacion que corresponde a la ubicacion geografica del lugar
      */
 
+    /*
     @ManyToOne
     @JoinColumn(name="codigo_ubicacion")
     private Ubicacion ubicacion;
 
+     */
     /**
      * Relación que corresponde al usuario que registró el lugar
      */
@@ -61,6 +63,12 @@ public class Lugar {
     @OneToMany(mappedBy = "lugar")
     @ToString.Exclude
     private List<Foto> foto;
+
+    @Column(name ="latitud")
+    private double latitud;
+
+    @Column(name ="longitud")
+    private double longitud;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
@@ -98,6 +106,8 @@ public class Lugar {
     @ManyToOne
     @JoinColumn(name = "codigo_ciudad")
     private Ciudad ciudad;
+
+
 
     public Lugar(Categoria categoria ,String descripcion, String nombre) {
         this.categoria = categoria;

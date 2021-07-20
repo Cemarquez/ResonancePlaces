@@ -10,48 +10,71 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <h:outputStylesheet library="css" name="style.css" />
-    <h:outputStylesheet library="js" name="archivo.js" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="mapbox-gl.css" />
+    <h:outputStylesheet library="css" name="style.css" />
     <h:outputScript library="js" name="bootstrap.bundle.min.js" />
-
+    <h:outputScript library="js" name="mapbox-gl.js" />
+    <h:outputScript library="js" name="script-lugar.js" />
 
     <title>Página de Inicio</title>
 </h:head>
-<h:form>
-    <h:panelGrid columns="3" cellpadding="5">
-        <p:outputLabel for="nombre_lugar" value="Nombre:" />
-        <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true" placeholder="Ingrese el nombre del lugar" requiredMessage="Debe introducir el nombre." validatorMessage="Verifique el nombre ingresado.">
-            <f:validateLength minimum="3" maximum="70" />
-        </p:inputText> <p:message for="nombre_lugar"/>
 
-        <p:outputLabel for="descripcion_lugar" value="Descripción:" />
-        <p:inputTextarea rows="6" cols="33" id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" required="true" placeholder="Ingrese la descripción" requiredMessage="Debe introducir una descripción valida." validatorMessage="Verifique el mensaje ingresado."/>
-        <p:message for="descripcion_lugar"/>
-
-        <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
-        <h:selectOneMenu id= "ciudad_lugar" value="#{lugarBean.lugar.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
-            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
-            <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{lugarBean.ciudades}"/>
-        </h:selectOneMenu>
-        <p:message for="ciudad_lugar"/>
-
-        <p:outputLabel for="categoria_lugar" value="Categoria:"/>
-        <h:selectOneMenu id= "categoria_lugar" value="#{lugarBean.lugar.categoria}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una categoria." converter="#{categoriaConverter}">
-            <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
-            <f:selectItems var="categoria"  itemLabel="#{categoria.nombre}"  value="#{lugarBean.categorias}"/>
-        </h:selectOneMenu>
-        <p:message for="categoria_lugar"/>
-
-
-    </h:panelGrid>
-    <p:commandButton action="#{lugarBean.registrarLugar}" value="Registrar"
-                     update="@form" />
-    <p:growl showDetail="true" />
-
-</h:form>
 
 <h:body>
+    <div class="container">
+    <p:panel header="Registrar usuario">
+        <div class="row">
+            <div class="col">
+                <div id="mapa" style=" width: 100%; height: 400px">
+                    <h:inputHidden id="lat-lugar" value="#{lugarBean.lugar.latitud}"/>
+                    <h:inputHidden id="lng-lugar" value="#{lugarBean.lugar.longitud}"/>
+                </div>
+            </div>
+
+            <div class="col">
+                <h:form id="crear-lugar">
+
+
+                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:outputLabel for="nombre_lugar" value="Nombre:" />
+                        <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true" placeholder="Ingrese el nombre del lugar" requiredMessage="Debe introducir el nombre." validatorMessage="Verifique el nombre ingresado.">
+                            <f:validateLength minimum="3" maximum="70" />
+                        </p:inputText> <p:message for="nombre_lugar"/>
+
+                        <p:outputLabel for="descripcion_lugar" value="Descripción:" />
+                        <p:inputTextarea rows="6" cols="33" id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" required="true" placeholder="Ingrese la descripción" requiredMessage="Debe introducir una descripción valida." validatorMessage="Verifique el mensaje ingresado."/>
+                        <p:message for="descripcion_lugar"/>
+
+                        <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
+                        <h:selectOneMenu id= "ciudad_lugar" value="#{lugarBean.lugar.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
+                            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                            <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{lugarBean.ciudades}"/>
+                        </h:selectOneMenu>
+                        <p:message for="ciudad_lugar"/>
+
+                        <p:outputLabel for="categoria_lugar" value="Categoria:"/>
+                        <h:selectOneMenu id= "categoria_lugar" value="#{lugarBean.lugar.categoria}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una categoria." converter="#{categoriaConverter}">
+                            <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
+                            <f:selectItems var="categoria"  itemLabel="#{categoria.nombre}"  value="#{lugarBean.categorias}"/>
+                        </h:selectOneMenu>
+                        <p:message for="categoria_lugar"/>
+
+
+                    </h:panelGrid>
+                    <br/>
+                    <p:commandButton action="#{lugarBean.registrarLugar}" value="Registrar"
+                                     update="@form" />
+                    <p:growl showDetail="true" />
+
+                </h:form>
+            </div>
+
+
+        </div>
+    </p:panel>
+
+    </div>
 
 </h:body>
 

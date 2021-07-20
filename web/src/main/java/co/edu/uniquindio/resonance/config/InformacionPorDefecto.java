@@ -51,7 +51,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             if (lugarServicio.listarLugares().size()==0){
 
                 Lugar lugar = new Lugar(categoria,"Un genocidio que da gusto", "Mussolinis pizza");
+                lugar.setLatitud(4.553806232733308);
+                lugar.setLongitud(-75.65548385940279);
                 Lugar lugar2 = new Lugar(categoria1,"Un hostal  pequeño para los tacaños", "Pobretel");
+                lugar2.setLatitud(4.553806232733308);
+                lugar2.setLongitud(-75.65548385940279);
                 lugarServicio.registrarLugar(lugar);
                 lugarServicio.registrarLugar(lugar2);
 

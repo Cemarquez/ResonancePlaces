@@ -31,8 +31,6 @@ public class LugarTest {
     /**
      * Repositorio de la entidad ubicacion
      */
-    @Autowired
-    public UbicacionRepo ubicacionRepo;
 
     /**
      * Repositorio de la entidad categoria
@@ -70,7 +68,6 @@ public class LugarTest {
         lugar.setNombre("Chorimburger");
         lugar.setEstado(false);
         lugar.setCategoria(categoriaRepo.findAll().get(0));
-        lugar.setUbicacion(ubicacionRepo.findAll().get(0));
         lugar.setUsuario(usuarioRepo.findAll().get(0));
 
         lugar.setCiudad(ciudadRepo.findAll().get(0));
@@ -92,7 +89,6 @@ public class LugarTest {
         lugar.setNombre("Chorimburger");
         lugar.setEstado(false);
         lugar.setCategoria(categoriaRepo.findAll().get(0));
-        lugar.setUbicacion(ubicacionRepo.findAll().get(0));
         lugar.setUsuario(usuarioRepo.findAll().get(0));
 
         lugar.setCiudad(ciudadRepo.findAll().get(0));
@@ -132,7 +128,6 @@ public class LugarTest {
         lugar.setNombre("Chorimburger");
         lugar.setEstado(false);
         lugar.setCategoria(categoriaRepo.findAll().get(0));
-        lugar.setUbicacion(ubicacionRepo.findAll().get(0));
         lugar.setUsuario(usuarioRepo.findAll().get(0));
 
         lugar.setCiudad(ciudadRepo.findAll().get(0));

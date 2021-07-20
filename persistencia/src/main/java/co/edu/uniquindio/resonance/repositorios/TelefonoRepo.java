@@ -1,8 +1,6 @@
 package co.edu.uniquindio.resonance.repositorios;
 
-import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Telefono;
-import co.edu.uniquindio.resonance.entidades.Ubicacion;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
