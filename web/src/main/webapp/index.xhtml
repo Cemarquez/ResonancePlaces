@@ -76,30 +76,37 @@
                 <div>
 
                     <h:form id="form">
-                    <p:dataView var="lugar" value="#{lugarBean.lugares}"
-                                rows="12"
-                                paginator="true"
-                                rowsPerPageTemplate="6,12,16"
-                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                gridIcon="pi pi-th-large" >
+                        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
 
-
-
-                        <p:dataViewGridItem>
-                            <div class="card" style="width: 18rem;">
-                                <img src="..." class="card-img-top" alt="..."> </img>
-                                <div class="card-body">
-                                    <h5 class="card-title">#{lugar.nombre}</h5>
-                                    <p class="card-text">#{lugar.descripcion}</p>
-                                    <p:commandButton value="Ver Detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}">
-
-                                    </p:commandButton>
+                            <p:dataViewGridItem>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="" class="card-img-top" alt="..." />
+                                    <div class="card-body">
+                                        <h5 class="card-title">#{lugar.nombre}</h5>
+                                        <p class="card-text">#{lugar.descripcion}</p>
+                                        <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                    </div>
                                 </div>
-                            </div>
+                            </p:dataViewGridItem>
 
-                        </p:dataViewGridItem>
+                            <p:dataViewListItem>
+                                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                                    <p:graphicImage  styleClass="imagen-lugar" />
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:outputText value="Nombre:" />
+                                            <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                            <h:outputText value="Tipo:" />
+                                            <h:outputText value="#{lugar.categoria.nombre}" />
+                                            <h:outputText value="Descripción:" />
+                                            <h:outputText value="#{lugar.descripcion}" />
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                    <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                </h:panelGrid>
+                            </p:dataViewListItem>
 
-                    </p:dataView>
+                        </p:dataView>
 
 
                     </h:form>

@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class MarketDTO {
 
+    private int id;
     private double latitud;
     private double longitud;
     private String nombre;

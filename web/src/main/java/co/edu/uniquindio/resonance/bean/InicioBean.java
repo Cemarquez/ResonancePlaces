@@ -28,8 +28,10 @@ public class InicioBean implements Serializable {
     public void inicializar()
     {
         this.lugares = lugarServicio.listarLugares();
-        List<MarketDTO> markers = this.lugares.stream().map(l -> new MarketDTO(l.getLatitud(), l.getLongitud(), l.getNombre())).collect(Collectors.toList());
+
+        List<MarketDTO> markers = this.lugares.stream().map(l -> new MarketDTO(l.getCodigo(), l.getLatitud(), l.getLongitud(), l.getNombre())).collect(Collectors.toList());
         PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(markers)  + ");");
+
     }
 
 
