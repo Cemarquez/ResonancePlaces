@@ -8,21 +8,24 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css" />
-    <h:outputStylesheet library="css" name="mapbox-gl.css" />
-    <h:outputStylesheet library="css" name="style.css" />
-    <h:outputScript library="js" name="bootstrap.bundle.min.js" />
-    <h:outputScript library="js" name="mapbox-gl.js" />
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+    <ui:define name="head">
+        <ui:define name="head">
+            <h:outputScript library="js" name="script-lugar.js" />
+            <h:outputScript library="js" name="mapbox-gl.js" />
+            <h:outputStylesheet library="css" name="mapbox-gl.css" />
+        </ui:define>
+    </ui:define>
+    <ui:define name="title">Resonance Places | Detalle lugar</ui:define>
+    <ui:define name="content">
 
 
-    <title>Resonance | Detalle lugar</title>
-</h:head>
-<h:body>
-<p>#{detalleLugarBean.lugar}</p>
-    <p>#{detalleLugarBean.horarios}</p>
-    <p>#{detalleLugarBean.calificaciones}</p>
-</h:body>
+
+        <p>#{detalleLugarBean.lugar}</p>
+        <p>#{detalleLugarBean.horarios}</p>
+        <p>#{detalleLugarBean.calificaciones}</p>
+    </ui:define>
+
+</ui:composition>
 </html>

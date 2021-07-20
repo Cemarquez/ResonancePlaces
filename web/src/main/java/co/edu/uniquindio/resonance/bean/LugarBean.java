@@ -67,7 +67,7 @@ public class LugarBean {
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                         "Registro exitoso");
                 FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-                return "/lugarCreado?faces-redirect=true&amp;lugar="+lugar.getCodigo();
+
             }else{
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                         "Es necesario ubicar el lugar dentro del mapa");
