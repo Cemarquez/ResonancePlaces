@@ -34,16 +34,19 @@ public class LugarBean {
 
     @Autowired
     private LugarServicio lugarServicio;
+
     @Getter @Setter
     private Lugar lugar;
 
     @Autowired
     private CategoriaServicio categoriaServicio;
+
     @Getter @Setter
     private Categoria categoria;
 
     @Autowired
     private CiudadServicio ciudadServicio;
+
     @Getter @Setter
     private Ciudad ciudad;
 
@@ -52,11 +55,13 @@ public class LugarBean {
 
     @Getter @Setter
     private List<Ciudad> ciudades;
+
     @Getter @Setter
     private List <Lugar> lugares;
 
     @Value("${upload.url}")
     private String urlImagenes;
+
     private ArrayList<String> imagenes;
 
     @PostConstruct
@@ -74,16 +79,24 @@ public class LugarBean {
 
     public String registrarLugar(){
         try {
-            if(lugar.getLatitud() != 0 || lugar.getLongitud() != 0 && !imagenes.isEmpty()){
-                lugarServicio.registrarLugar(lugar);
-                lugar.setFoto(imagenes);
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                        "Registro exitoso");
-                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+            if(lugar.getLatitud() != 0 || lugar.getLongitud() != 0 ){
+                if(!imagenes.isEmpty()){
+
+                    lugar.setFoto(imagenes);
+                    lugarServicio.registrarLugar(lugar);
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                            "Registro exitoso");
+                    FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                }else{
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                            "Es necesario subir imagenes del sitio");
+                    FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                }
+
 
             }else{
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                        "Es necesario ubicar el lugar dentro del mapa y subir imagenes del sitio");
+                        "Es necesario ubicar el lugar dentro del mapa");
                 FacesContext.getCurrentInstance().addMessage(null, facesMsg);
             }
 
@@ -103,7 +116,9 @@ public class LugarBean {
         String nombreImagen = subirImagen(imagen);
         if(nombreImagen!= null)
         {
+
             imagenes.add(nombreImagen);
+
         }
     }
 

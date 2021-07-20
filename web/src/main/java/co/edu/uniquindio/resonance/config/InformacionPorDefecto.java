@@ -56,6 +56,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 Lugar lugar2 = new Lugar(categoria1,"Un hostal  pequeño para los tacaños", "Pobretel");
                 lugar2.setLatitud(4.553806232733308);
                 lugar2.setLongitud(-75.65548385940279);
+                lugar.getFoto().add("vacio.png");
+                lugar2.getFoto().add("vacio.png");
                 lugarServicio.registrarLugar(lugar);
                 lugarServicio.registrarLugar(lugar2);
 

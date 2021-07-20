@@ -50,8 +50,8 @@ window.onload = function (){
 }
 
 function setLngLat(lng, lat){
-    document.getElementById("lat-lugar").value = lat
-    document.getElementById("lng-lugar").value = lng
+    document.getElementById("crear-lugar:lat-lugar").value = lat
+    document.getElementById("crear-lugar:lng-lugar").value = lng
 }
 
 

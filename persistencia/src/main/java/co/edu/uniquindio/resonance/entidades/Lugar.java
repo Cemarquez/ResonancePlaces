@@ -67,7 +67,7 @@ public class Lugar {
     @ElementCollection
     @JoinColumn(nullable = false)
     @Column(name="url_foto")
-        private List<String> foto = new ArrayList<>();
+        private List<String> foto;
 
     @Column(name ="latitud")
     private double latitud;
@@ -121,8 +121,9 @@ public class Lugar {
         this.descripcion = descripcion;
         this.nombre = nombre;
     }
-    @Transactional
-    public String getLugarFoto(){
+
+
+    public String getImagenPrincipal(){
         if(getFoto().size()>0){
             return foto.get(0);
         }else{

@@ -21,6 +21,7 @@
     <ui:define name="content">
 
         <div class="container mt-4 mb-4" >
+            <h:form id="crear-lugar">
             <p:panel header="Registrar usuario">
                 <div class="row">
                     <div class="col">
@@ -31,8 +32,6 @@
                     </div>
 
                     <div class="col">
-                        <h:form id="crear-lugar">
-
 
                             <h:panelGrid columns="3" cellpadding="5">
                                 <p:outputLabel for="nombre_lugar" value="Nombre:" />
@@ -73,7 +72,7 @@
                                              update="@form" />
                             <p:growl showDetail="true" />
 
-                        </h:form>
+
                     </div>
 
 
@@ -81,6 +80,7 @@
 
 
             </p:panel>
+            </h:form>
         </div>
 
     </ui:define>
