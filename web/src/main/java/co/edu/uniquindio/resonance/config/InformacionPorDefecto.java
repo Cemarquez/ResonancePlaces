@@ -1,11 +1,7 @@
 package co.edu.uniquindio.resonance.config;
 
-import co.edu.uniquindio.resonance.entidades.Categoria;
-import co.edu.uniquindio.resonance.entidades.Ciudad;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.servicios.CategoriaServicio;
-import co.edu.uniquindio.resonance.servicios.CiudadServicio;
-import co.edu.uniquindio.resonance.servicios.LugarServicio;
+import co.edu.uniquindio.resonance.entidades.*;
+import co.edu.uniquindio.resonance.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,6 +15,10 @@ public class InformacionPorDefecto implements CommandLineRunner {
     private CategoriaServicio categoriaServicio;
     @Autowired
     private LugarServicio lugarServicio;
+    @Autowired
+    private CalificacionServicio calificacionServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
 
 
@@ -55,6 +55,14 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 lugarServicio.registrarLugar(lugar);
                 lugarServicio.registrarLugar(lugar2);
 
+                Usuario usuario = new Usuario("elFrentes", "Carlos", "caflores@gmail.com", "popololo352");
+                usuarioServicio.registrarUsuario(usuario);
+
+                Calificacion calificacion = new Calificacion(1,"Brutal","Soy bipolar", usuario,lugar);
+                Calificacion calificacion2 = new Calificacion(4,"Nada mal","Buenos precios", usuario,lugar2);
+
+                lugarServicio.crearCalificacion(calificacion);
+                lugarServicio.crearCalificacion(calificacion2);
 
             }
 

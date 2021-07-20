@@ -1,10 +1,14 @@
 package co.edu.uniquindio.resonance.servicios;
 
+import co.edu.uniquindio.resonance.entidades.Calificacion;
+import co.edu.uniquindio.resonance.entidades.Horario;
 import co.edu.uniquindio.resonance.entidades.Lugar;
+import co.edu.uniquindio.resonance.repositorios.CalificacionRepo;
 import co.edu.uniquindio.resonance.repositorios.LugarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +17,9 @@ public class LugarServicioImpl implements LugarServicio{
 
     @Autowired
     private LugarRepo lugarRepo;
+
+    @Autowired
+    private CalificacionRepo calificacionRepo;
 
     @Override
     public Lugar registrarLugar(Lugar lugar) throws Exception {
@@ -58,5 +65,30 @@ public class LugarServicioImpl implements LugarServicio{
     public List<Lugar> buscarLugares(String parametro) {
 
         return lugarRepo.buscarLugares(parametro);
+    }
+
+    @Override
+    public Lugar obtenerLugar(Integer codigo){
+
+        return lugarRepo.findById(codigo).get();
+
+
+    }
+
+    @Override
+    public List<Horario> listarHorarios(Integer codigo) {
+        return lugarRepo.listarHorarios(codigo);
+    }
+
+    @Override
+    public List<Calificacion> listarCalificaciones(Integer codigo) {
+        return lugarRepo.listarCalificaciones(codigo);
+    }
+
+    @Override
+    public Calificacion crearCalificacion(Calificacion c)
+    {
+        c.setFecha(new Date());
+        return calificacionRepo.save(c);
     }
 }

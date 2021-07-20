@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 /**
  * Clase Calificacion para la entidad calificacion
@@ -19,14 +20,14 @@ public class Calificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="codigo",nullable = false)
-    @NotBlank
     @EqualsAndHashCode.Include
     private int codigo;
 
     @Column(name="valor", nullable = false)
-    @NotBlank
     private double valor;
-
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fecha", nullable = false)
+    private Date fecha;
     @Column(name="titulo", nullable = false)
     @NotBlank
     private String titulo;
@@ -39,6 +40,7 @@ public class Calificacion {
      * Relacion entre calificacion y usuario, muchas calificaciones tienen un usuario
      */
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "nickname_usuario", nullable = false)
     private Usuario usuario;
 

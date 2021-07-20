@@ -1,6 +1,8 @@
 package co.edu.uniquindio.resonance.repositorios;
 
+import co.edu.uniquindio.resonance.entidades.Calificacion;
 import co.edu.uniquindio.resonance.entidades.Categoria;
+import co.edu.uniquindio.resonance.entidades.Horario;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,6 +40,12 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
 
     @Query("select l from Lugar  l where l.nombre like concat('%', :parametro, '%')")
     List<Lugar> buscarLugares(String parametro);
+
+    @Query("select c from Calificacion c  where c.lugar.codigo =?1 ")
+    List<Calificacion> listarCalificaciones(Integer parametro);
+
+    @Query("select h from Horario h  where h.lugar.codigo =?1 ")
+    List<Horario> listarHorarios(Integer parametro);
 
 
 }

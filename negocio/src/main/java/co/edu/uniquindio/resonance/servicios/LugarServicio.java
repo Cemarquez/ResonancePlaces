@@ -1,5 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
+import co.edu.uniquindio.resonance.entidades.Calificacion;
+import co.edu.uniquindio.resonance.entidades.Horario;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 
 import java.util.List;
@@ -11,5 +13,10 @@ public interface LugarServicio {
     Lugar actualizarLugar(Lugar lugar) throws Exception;
     List<Lugar> listarLugares();
     List<Lugar> buscarLugares(String parametro);
+    Lugar obtenerLugar(Integer codigo);
+    List<Horario>listarHorarios(Integer codigo);
+    List<Calificacion>listarCalificaciones(Integer codigo);
+    Calificacion crearCalificacion(Calificacion c);
+
 
 }

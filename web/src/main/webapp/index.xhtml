@@ -93,32 +93,16 @@
 
 
                         <p:dataViewGridItem>
-                            <div class="product-grid-item card border-1">
-                                <div class="product-grid-item-top">
-                                    <div>
-                                        <i class="pi pi-tag product-category-icon"/>
-                                        <span class="product-category">#{product.category}</span>
-                                    </div>
-                                    <span class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>
-                                </div>
-                                <div class="product-grid-item-content">
-                                    <p:graphicImage name="images/product/#{product.image}" library="demo"/>
-                                    <div class="product-name">#{product.name}</div>
-                                    <div class="product-description">#{product.description}</div>
-                                    <p:rating readonly="true" value="#{product.rating}"/>
-                                </div>
-                                <div class="product-grid-item-bottom">
-                                    <h:outputText value="#{product.price}" styleClass="product-price">
-                                        <f:convertNumber currencySymbol="$" type="currency"/>
-                                    </h:outputText>
-                                    <p:commandButton type="button"
-                                                     value="Add To Cart"
-                                                     icon="pi pi-shopping-cart"
-                                                     disabled="#{product.inventoryStatus == 'OUTOFSTOCK'}">
+                            <div class="card" style="width: 18rem;">
+                                <img src="..." class="card-img-top" alt="..."> </img>
+                                <div class="card-body">
+                                    <h5 class="card-title">#{lugar.nombre}</h5>
+                                    <p class="card-text">#{lugar.descripcion}</p>
+                                    <p:commandButton value="Ver Detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}">
+
                                     </p:commandButton>
                                 </div>
                             </div>
-
 
                         </p:dataViewGridItem>
 

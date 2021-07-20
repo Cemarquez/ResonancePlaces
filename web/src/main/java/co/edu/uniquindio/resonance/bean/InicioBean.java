@@ -25,4 +25,9 @@ public class InicioBean implements Serializable {
     {
         this.lugares = lugarServicio.listarLugares();
     }
+
+
+    public String irAlDetalle(Integer id){
+        return "/detalleLugar?faces-redirect=true&amp;lugar="+id;
+    }
 }

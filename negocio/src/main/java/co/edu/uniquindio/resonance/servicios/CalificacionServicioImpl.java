@@ -7,6 +7,7 @@ import co.edu.uniquindio.resonance.repositorios.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,6 +65,8 @@ public class CalificacionServicioImpl implements CalificacionServicio {
             throw new Exception("El titulo no puede exceder los 255 caracteres");
         }
 
+
+        calificacion.setFecha(new Date());
         Calificacion calificacionRegistrada = calificacionRepo.save(calificacion);
 
 
