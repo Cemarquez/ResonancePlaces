@@ -10,6 +10,20 @@
 
 }
 
+.box {
+
+    background-color: #ececec;
+    border: 2px solid #c9c9c9;
+    border-radius: 3px;
+
+}
+
+.box-stretched {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
 .imagen-lugar{
     width: 100%;
     height: 150px;
