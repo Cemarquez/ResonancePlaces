@@ -18,6 +18,12 @@ public interface AdministradorRepo extends JpaRepository<Administrador, String> 
     @Query("select ad from Administrador ad")
     List<Administrador> listarAdministradores();
 
+    Administrador findByNicknameAndContrasena(String nicknmame,String contrasena);
+
+    Administrador findAdministradorByEmailAndContrasena(String usuario,String contrasena);
+
+
+
 
 
 

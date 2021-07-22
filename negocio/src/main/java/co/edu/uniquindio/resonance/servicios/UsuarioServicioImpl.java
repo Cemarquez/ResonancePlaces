@@ -4,6 +4,8 @@ import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import java.util.Optional;
  * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
  */
 @Service
+@Transactional
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
@@ -120,6 +123,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
      * @throws Exception
      */
 
+    @Override
     public Usuario iniciarSesion(String usuario, String contrasena) throws Exception {
 
         Usuario user = usuarioRepo.findByNicknameAndContrasena(usuario, contrasena);
@@ -129,13 +133,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         } else {
 
             user = usuarioRepo.findByEmailAndContrasena(usuario,contrasena);
-            if (user!=null){
-                return user;
-            } else {
-                throw new Exception("Usuario no encontrado");
-            }
+
+
 
         }
+        return  user;
     }
 
     /**

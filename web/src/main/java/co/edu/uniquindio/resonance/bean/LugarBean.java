@@ -31,6 +31,8 @@ public class LugarBean {
     private UsuarioServicio usuarioServicio;
     @Getter @Setter
     private Usuario usuario;
+    @Value(value ="#{seguridadBean.usuario}")
+    private Usuario usuarioLogin;
 
     @Autowired
     private LugarServicio lugarServicio;
@@ -64,6 +66,8 @@ public class LugarBean {
 
     private ArrayList<String> imagenes;
 
+
+
     @PostConstruct
     public void inicializar(){
         this.lugar = new Lugar();
@@ -78,34 +82,41 @@ public class LugarBean {
     }
 
     public String registrarLugar(){
-        try {
-            if(lugar.getLatitud() != 0 || lugar.getLongitud() != 0 ){
-                if(!imagenes.isEmpty()){
 
-                    lugar.setFoto(imagenes);
-                    lugarServicio.registrarLugar(lugar);
+        if(usuarioLogin!=null) {
+
+
+            try {
+
+
+                if (lugar.getLatitud() != 0 || lugar.getLongitud() != 0) {
+                    if (!imagenes.isEmpty()) {
+                        lugar.setUsuario(usuarioLogin);
+                        lugar.setFoto(imagenes);
+                        lugarServicio.registrarLugar(lugar);
+                        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                                "Registro exitoso");
+                        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                    } else {
+                        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                                "Es necesario subir imagenes del sitio");
+                        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                    }
+
+
+                } else {
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                            "Registro exitoso");
-                    FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-                }else{
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                            "Es necesario subir imagenes del sitio");
+                            "Es necesario ubicar el lugar dentro del mapa");
                     FacesContext.getCurrentInstance().addMessage(null, facesMsg);
                 }
 
-
-            }else{
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                        "Es necesario ubicar el lugar dentro del mapa");
+            } catch (Exception e) {
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
+                        e.getMessage());
                 FacesContext.getCurrentInstance().addMessage(null, facesMsg);
             }
 
-        } catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
-                    e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         }
-
         return null;
     }
 

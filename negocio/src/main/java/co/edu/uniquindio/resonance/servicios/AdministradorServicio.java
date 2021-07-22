@@ -10,5 +10,6 @@ public interface AdministradorServicio  {
     void eliminarAdministrador(Administrador admin) throws Exception;
     Administrador actualizarAdministrador(Administrador admin) throws Exception;
     List<Administrador> listarAdministradores();
+    Administrador iniciarSesion(String usuario, String contrasena) throws Exception;
 
 }

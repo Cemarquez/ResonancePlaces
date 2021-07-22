@@ -1,9 +1,11 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.Administrador;
+import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.AdministradorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.Optional;
  * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
  */
 @Service
+@Transactional
 public class AdministradorServicioImpl implements  AdministradorServicio, Serializable {
 
     @Autowired
@@ -52,5 +55,21 @@ public class AdministradorServicioImpl implements  AdministradorServicio, Serial
     @Override
     public List<Administrador> listarAdministradores() {
         return administradorRepo.findAll();
+    }
+
+    @Override
+    public Administrador iniciarSesion(String usuario, String contrasena) throws Exception {
+
+        Administrador user = administradorRepo.findByNicknameAndContrasena(usuario, contrasena);
+
+        if (user!=null){
+            return user;
+        } else {
+
+            user = administradorRepo.findAdministradorByEmailAndContrasena(usuario,contrasena);
+
+
+        }
+        return user;
     }
 }

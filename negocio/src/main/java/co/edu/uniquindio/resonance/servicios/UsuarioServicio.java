@@ -15,5 +15,6 @@ public interface UsuarioServicio {
     void eliminarUsuario(String nickname) throws Exception;
     Usuario obtenerUsuario(String nickname) throws Exception;
     List<Usuario> listarUsuarios();
+    Usuario iniciarSesion(String usuario, String contrasena) throws Exception;
 
 }

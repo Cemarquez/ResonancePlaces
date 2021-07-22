@@ -45,19 +45,37 @@
                         <div class="d-flex">
                             <h:form class="d-flex me-2">
                                 <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
-                                <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar" action="#{busquedaBean.buscar}"  />
+                                <p:commandButton styleClass="btn btn-outline-light btn-buscar" icon="pi pi-search" value="Buscar" action="#{busquedaBean.buscar}"  />
                             </h:form>
-                            <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login" action="#{busquedaBean.buscar}"  />
+                            <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-user" value="Login" onclick="PF('login').show()" rendered="#{!seguridadBean.autenticado}"  />
+                            <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-sign-out" value="Logout" action="#{seguridadBean.cerrarSesion}" rendered="#{seguridadBean.autenticado}"  />
                         </div>
                     </div>
                 </div>
             </nav>
+            <p:dialog header="Iniciar sesion" widgetVar="login" modal="true" rendered="#{!seguridadBean.autenticado}">
+                <h:form rendered="#{!seguridadBean.autenticado}">
+                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:outputLabel for="email_login" value="Email:" />
+                        <p:inputText id="email_login" value="#{seguridadBean.email}"
 
+                                     required="true" />
+                        <p:message for="email_login" />
+                        <p:outputLabel for="password_login" value="Password:" />
+                        <p:password id="password_login"
 
+                                    value="#{seguridadBean.password}" required="true" />
 
+                        <p:message for="password_login" />
+                    </h:panelGrid>
+                    <p:commandButton value="Iniciar Sesión"
 
+                                     action="#{seguridadBean.iniciarSesion}" update="@form" styleClass="mt-4"  icon = "pi pi-sign-in" iconPos="left"/>
 
+                    <p:growl for="login-bean" showDetail="true"  />
+                </h:form>
 
+            </p:dialog>
 
 
         </ui:insert>

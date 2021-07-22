@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.repositorios;
 
+import co.edu.uniquindio.resonance.entidades.Administrador;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Moderador;
 import org.dom4j.rule.Mode;
@@ -31,6 +32,10 @@ public interface ModeradorRepo extends JpaRepository<Moderador,String> {
 
     @Query("select m from Moderador m where ?1 MEMBER OF m.lugares")
     boolean esLugarModerador(int idLugar);
+
+    Moderador findByNicknameAndContrasena(String nicknmame, String contrasena);
+
+    Moderador findAdministradorByEmailAndContrasena(String usuario,String contrasena);
 
 
 
