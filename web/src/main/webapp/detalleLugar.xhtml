@@ -23,8 +23,9 @@
             <div class="row">
                 <div class="col-7">
                     <div class="box box-stretched">
-                        <p:galleria panelHeight="425" value="#{lugarBean.lugar.foto}" var="foto">
-                            <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" alt="Image description for " title=""/>
+                        <p:galleria value="#{detalleLugarBean.fotos}" var="foto" panelWidth="500" panelHeight="313" showCaption="true">
+                            <p:graphicImage url="/uploads/#{foto}" alt="Image Description for #{foto}"
+                                            title="#{foto}"/>
                         </p:galleria>
 
                     </div>

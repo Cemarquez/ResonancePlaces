@@ -14,6 +14,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -42,17 +43,19 @@ public class DetalleLugarBean  implements Serializable {
     @Value(value ="#{seguridadBean.usuario}")
     private Usuario usuarioLogin;
 
+    @Getter @Setter
+    private List<String> fotos;
+
     @PostConstruct
     public void inicializar() {
         if(lugarParam!=null && !lugarParam.isEmpty()) {
             try {
-
                 int id = Integer.parseInt(lugarParam);
-
-
                this.lugar = lugarServicio.obtenerLugar( Integer.parseInt( lugarParam ) );
                 this.calificaciones = lugarServicio.listarCalificaciones(id);
                 this.horarios = lugarServicio.listarHorarios(id);
+                this.fotos = lugar.getFoto();
+                System.out.println(fotos.size());
             } catch (Exception e) {
                 e.printStackTrace();
             }

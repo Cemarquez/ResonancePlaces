@@ -19,6 +19,7 @@ public interface LugarServicio {
     List<Calificacion>listarCalificaciones(Integer codigo);
     Calificacion crearCalificacion(Calificacion c);
     Foto registrarFoto(Foto foto);
+    List<String> obtenerFotos(Integer id);
 
 
 }

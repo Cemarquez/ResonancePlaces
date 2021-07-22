@@ -1,9 +1,6 @@
 package co.edu.uniquindio.resonance.repositorios;
 
-import co.edu.uniquindio.resonance.entidades.Calificacion;
-import co.edu.uniquindio.resonance.entidades.Categoria;
-import co.edu.uniquindio.resonance.entidades.Horario;
-import co.edu.uniquindio.resonance.entidades.Lugar;
+import co.edu.uniquindio.resonance.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -46,6 +43,8 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
 
     @Query("select h from Horario h  where h.lugar.codigo =?1 ")
     List<Horario> listarHorarios(Integer parametro);
+
+
 
 
 }

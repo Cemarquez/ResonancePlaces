@@ -102,4 +102,9 @@ public class LugarServicioImpl implements LugarServicio{
     public Foto registrarFoto(Foto foto) {
         return fotoRepo.save(foto);
     }
+
+    @Override
+    public List<String> obtenerFotos(Integer id) {
+        return null;
+    }
 }
