@@ -5,8 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
 
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
@@ -14,6 +14,7 @@
 
         <h:outputScript library="js" name="script-lugar.js" />
         <h:outputScript library="js" name="mapbox-gl.js" />
+        <h:outputScript library="js" name="archivo.js" />
         <h:outputStylesheet library="css" name="mapbox-gl.css" />
     </ui:define>
 
@@ -66,11 +67,79 @@
                                 <p:growl id="messages" showDetail="true" keepAlive="true"/>
 
 
+
                             </h:panelGrid>
-                            <br/>
+                        <div class="card">
+                            <p:accordionPanel widgetVar="basic">
+                                <p:tab title="Horarios">
+                                    <p class="p-m-0">
+                                        <h:panelGrid columns="5" cellpadding="5">
+                                            <p:outputLabel value="Lunes: "/>
+                                            <p:datePicker id="hour_lunes" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{lugarBean.horarios.get(0).continuidad}"/>
+                                            <p:outputLabel value=" a "/>
+                                            <p:datePicker id="hour2_lunes" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:selectBooleanCheckbox value="#{calendarJava8View.activo}" itemLabel="¿Cerrado?">
+                                            <p:ajax update="hour_lunes hour2_lunes " listener="#{calendarJava8View.updateBoolean}"/>
+                                            </p:selectBooleanCheckbox>
+
+                                            <p:outputLabel value="Martes: "/>
+                                            <p:datePicker id="hour_martes" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:outputLabel value=" a "/>
+                                            <p:datePicker id="hour2_martes" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:selectBooleanCheckbox value="#{calendarJava8View.activo}" itemLabel="¿Cerrado?">
+                                                <p:ajax update="hour_martes hour2_martes " listener="#{calendarJava8View.updateBoolean}"/>
+                                            </p:selectBooleanCheckbox>
+
+                                            <p:outputLabel value="Miercoles: "/>
+                                            <p:datePicker id="hour_miercoles" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:outputLabel value=" a "/>
+                                            <p:datePicker id="hour2_miercoles" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:selectBooleanCheckbox value="#{calendarJava8View.activo}" itemLabel="¿Cerrado?">
+                                                <p:ajax update="hour_miercoles hour2_miercoles " listener="#{calendarJava8View.updateBoolean}"/>
+                                            </p:selectBooleanCheckbox>
+
+                                            <p:outputLabel value="Jueves: "/>
+                                            <p:datePicker id="hour_jueves" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:outputLabel value=" a "/>
+                                            <p:datePicker id="hour2_jueves" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:selectBooleanCheckbox value="#{calendarJava8View.activo}" itemLabel="¿Cerrado?">
+                                                <p:ajax update="hour_jueves hour2_jueves " listener="#{calendarJava8View.updateBoolean}"/>
+                                            </p:selectBooleanCheckbox>
+
+                                            <p:outputLabel value="Viernes: "/>
+                                            <p:datePicker id="hour_viernes" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:outputLabel value=" a "/>
+                                            <p:datePicker id="hour2_viernes" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:selectBooleanCheckbox value="#{calendarJava8View.activo}" itemLabel="¿Cerrado?">
+                                                <p:ajax update="hour_viernes hour2_viernes " listener="#{calendarJava8View.updateBoolean}"/>
+                                            </p:selectBooleanCheckbox>
+
+                                            <p:outputLabel value="Sabado: "/>
+                                            <p:datePicker id="hour_sabado" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:outputLabel value=" a "/>
+                                            <p:datePicker id="hour2_sabado" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:selectBooleanCheckbox value="#{calendarJava8View.activo}" itemLabel="¿Cerrado?">
+                                                <p:ajax update="hour_sabado hour2_sabado " listener="#{calendarJava8View.updateBoolean}"/>
+                                            </p:selectBooleanCheckbox>
+
+                                            <p:outputLabel value="Domingo: "/>
+                                            <p:datePicker id="hour_domingo" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:outputLabel value=" a "/>
+                                            <p:datePicker id="hour2_domingo" value="#{calendarJava8View.time6}" hourFormat="12" pattern="HH:mm" disabled="#{calendarJava8View.activo}"/>
+                                            <p:selectBooleanCheckbox value="#{calendarJava8View.activo}" itemLabel="¿Cerrado?">
+                                                <p:ajax update="hour_domingo hour2_domingo " listener="#{calendarJava8View.updateBoolean}"/>
+                                            </p:selectBooleanCheckbox>
+
+                                        </h:panelGrid>
+                                    </p>
+                                </p:tab>
+                            </p:accordionPanel>
+                        </div>
+
+
+                        <br/>
                             <p:commandButton action="#{lugarBean.registrarLugar}" value="Registrar"
                                              update="@form" />
-                            <p:growl showDetail="true" />
 
 
                     </div>

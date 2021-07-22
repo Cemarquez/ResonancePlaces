@@ -67,6 +67,30 @@ public class LugarBean {
     private ArrayList<String> imagenes;
 
 
+    @Setter @Getter
+    private Horario horarioLunes;
+
+    @Setter @Getter
+    private Horario horarioMartes;
+
+    @Setter @Getter
+    private Horario horarioMiercoles;
+
+    @Setter @Getter
+    private Horario horarioJueves;
+
+    @Setter @Getter
+    private Horario horarioViernes;
+
+    @Setter @Getter
+    private Horario horarioSabado;
+
+    @Setter @Getter
+    private Horario horarioDomingo;
+
+    @Getter @Setter
+    private List<Horario> horarios;
+
 
     @PostConstruct
     public void inicializar(){
@@ -78,7 +102,9 @@ public class LugarBean {
         this.categorias = categoriaServicio.listarCategorias();
         this.ciudades = ciudadServicio.listarCiudades();
         this.lugares = lugarServicio.listarLugares();
-
+        for (int i=0;i<7;i++){
+            horarios.add(new Horario());
+        }
     }
 
     public String registrarLugar(){
