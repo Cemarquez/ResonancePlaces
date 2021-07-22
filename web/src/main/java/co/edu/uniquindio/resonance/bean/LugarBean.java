@@ -18,8 +18,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -93,7 +96,8 @@ public class LugarBean {
     private List<Horario> horarios;
 
     @Getter @Setter
-    private LocalDate time;
+    private ArrayList<Horario> abierto;
+
 
     @PostConstruct
     public void inicializar(){
@@ -106,14 +110,21 @@ public class LugarBean {
         this.ciudades = ciudadServicio.listarCiudades();
         this.lugares = lugarServicio.listarLugares();
         this.horarios = new ArrayList<>();
-        for (int i=0;i<1;i++){
-            Horario h = new Horario();
-            h.setCerrado(false);
-            h.setDia("Lunes");
-
-            horarios.add(h);
-        }
-
+        this.horarioLunes = new Horario("Lunes", false);
+        this.horarioMartes = new Horario("Martes", false);
+        this.horarioMiercoles = new Horario("Miercoles", false);
+        this.horarioJueves = new Horario("Jueves", false);
+        this.horarioViernes = new Horario("Viernes", false);
+        this.horarioSabado = new Horario("Sabado", false);
+        this.horarioDomingo = new Horario("Domingo", false);
+        this.abierto = new ArrayList<>();
+        horarios.add(horarioLunes);
+        horarios.add(horarioMartes);
+        horarios.add(horarioMiercoles);
+        horarios.add(horarioJueves);
+        horarios.add(horarioViernes);
+        horarios.add(horarioSabado);
+        horarios.add(horarioDomingo);
 
     }
 
@@ -124,10 +135,8 @@ public class LugarBean {
                     if (!imagenes.isEmpty()) {
                         lugar.setUsuario(usuarioLogin);
                         lugar.setFoto(imagenes);
-                        lugar.setHorarios(horarios);
-                        horarios.get(0).setLugar(lugar);
                         lugarServicio.registrarLugar(lugar);
-                        horarioServicio.registrarHorario(horarios.get(0));
+                        registrarHorarios();
                         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                                 "Registro exitoso");
                         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
@@ -154,9 +163,26 @@ public class LugarBean {
         return null;
     }
 
+    public void registrarHorarios() throws Exception {
+            for(int i = 0; i<horarios.size(); i++){
+                Horario h = horarios.get(i);
+                h.setLugar(lugar);
+                if(!h.isCerrado()){
+                 abierto.add(h);
+                }
+            }
 
-    public void subirImagenes(FileUploadEvent event)
-    {
+            for(Horario h : abierto) {
+                System.out.println(h);
+               horarioServicio.registrarHorario(h);
+            }
+
+
+
+
+    }
+
+    public void subirImagenes(FileUploadEvent event) {
         UploadedFile imagen = event.getFile();
         String nombreImagen = subirImagen(imagen);
         if(nombreImagen!= null)
@@ -169,7 +195,6 @@ public class LugarBean {
 
     public String subirImagen(UploadedFile file)
     {
-
         try {
             InputStream input = file.getInputStream();
             String filename = FilenameUtils.getName(file.getFileName());

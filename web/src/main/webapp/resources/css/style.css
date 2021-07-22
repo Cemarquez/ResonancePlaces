@@ -24,6 +24,11 @@ body {
     height: 35px;
     position: center;
 }
+.form-inputLugar{
+    width: 350px;
+    height: 35px;
+    position: center;
+}
 .btnIniciarS{
     width: 200px;
     height: 30px;

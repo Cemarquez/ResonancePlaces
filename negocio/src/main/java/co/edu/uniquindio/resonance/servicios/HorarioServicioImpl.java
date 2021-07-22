@@ -36,13 +36,6 @@ public class HorarioServicioImpl implements HorarioServicio{
             throw  new Exception("El horario ya existe");
         }
 
-        if (horario.getHoraInicio() ==  null ){
-            throw new Exception("Ingrese hora de inicio valida");
-        }
-
-        if (horario.getHoraCierre() == null){
-            throw new Exception("Ingrese hora de cierre valida");
-        }
 
         if (horario.getDia().length()>50){
             throw new Exception("La descripcion no puede exceder los 50 caracteres");

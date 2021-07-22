@@ -47,6 +47,10 @@ public class Horario {
     private Lugar lugar;
 
 
+    public Horario(String dia, boolean cerrado) {
+        this.dia = dia;
+        this.cerrado = cerrado;
+    }
 
     public boolean updateCerrado(){
         return !cerrado;

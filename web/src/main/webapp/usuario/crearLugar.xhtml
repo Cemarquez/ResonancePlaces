@@ -23,7 +23,7 @@
 
         <div class="container mt-4 mb-4" >
             <h:form id="crear-lugar">
-            <p:panel header="Registrar usuario">
+            <p:panel header="Crear lugar" style="font-size: large">
                 <div class="row">
                     <div class="col">
                         <div id="mapa" style=" width: 100%; height: 400px">
@@ -36,62 +36,109 @@
 
                             <h:panelGrid columns="3" cellpadding="5">
                                 <p:outputLabel for="nombre_lugar" value="Nombre:" />
-                                <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true" placeholder="Ingrese el nombre del lugar" requiredMessage="Debe introducir el nombre." validatorMessage="Verifique el nombre ingresado.">
+                                <p:inputText autocomplete="off" styleClass="form-inputLugar" id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true" placeholder="Ingrese el nombre del lugar" requiredMessage="Debe introducir el nombre." validatorMessage="Verifique el nombre ingresado.">
                                     <f:validateLength minimum="3" maximum="70" />
                                 </p:inputText> <p:message for="nombre_lugar"/>
 
                                 <p:outputLabel for="descripcion_lugar" value="Descripción:" />
-                                <p:inputTextarea rows="6" cols="33" id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" required="true" placeholder="Ingrese la descripción" requiredMessage="Debe introducir una descripción valida." validatorMessage="Verifique el mensaje ingresado."/>
+                                <p:inputTextarea styleClass="form-inputLugar" rows="6" cols="33" id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" required="true" placeholder="Ingrese la descripción" requiredMessage="Debe introducir una descripción valida." validatorMessage="Verifique el mensaje ingresado."/>
                                 <p:message for="descripcion_lugar"/>
 
                                 <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
-                                <h:selectOneMenu id= "ciudad_lugar" value="#{lugarBean.lugar.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
+                                <p:selectOneMenu  id= "ciudad_lugar" value="#{lugarBean.lugar.ciudad}" required="true" style="width: 350px; height: 35px" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
                                     <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
                                     <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{lugarBean.ciudades}"/>
-                                </h:selectOneMenu>
+                                </p:selectOneMenu>
                                 <p:message for="ciudad_lugar"/>
 
                                 <p:outputLabel for="categoria_lugar" value="Categoria:"/>
-                                <h:selectOneMenu id= "categoria_lugar" value="#{lugarBean.lugar.categoria}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una categoria." converter="#{categoriaConverter}">
+                                <p:selectOneMenu id= "categoria_lugar" value="#{lugarBean.lugar.categoria}" style="width: 350px; height: 35px" required="true" styleClass="form-inputLugar" requiredMessage="Debe seleccionar una categoria." converter="#{categoriaConverter}">
                                     <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
                                     <f:selectItems var="categoria"  itemLabel="#{categoria.nombre}"  value="#{lugarBean.categorias}"/>
-                                </h:selectOneMenu>
+                                </p:selectOneMenu>
                                 <p:message for="categoria_lugar"/>
 
                                 <p:outputLabel for="imagen_lugar" value = "Imagenes: " />
-                                <p:fileUpload id = "imagen_lugar" listener="#{lugarBean.subirImagenes}" requiredMessage="Debe subir al menos una imagen del lugar."  mode="advanced" dragDropSupport="true"
+                                <p:fileUpload  style="width: 350px" id = "imagen_lugar" listener="#{lugarBean.subirImagenes}" requiredMessage="Debe subir al menos una imagen del lugar."  mode="advanced" dragDropSupport="true"
                                               multiple="true" update="messages" sizeLimit="1000000" fileLimit="5"
                                               allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
                                 <p:message for="imagen_lugar"/>
 
                                 <p:growl id="messages" showDetail="true" keepAlive="true"/>
 
+                                    <p:accordionPanel widgetVar="basic">
+                                        <p:tab title="Horarios">
+                                            <p class="p-m-0">
+                                                <h:panelGrid columns="5" cellpadding="5">
+                                                    <p:outputLabel value="Lunes: "/>
+                                                    <p:datePicker  autocomplete="off" id="hour_lunes" timeOnly="true" value="#{lugarBean.horarioLunes.horaInicio}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioLunes.cerrado}"/>
+                                                    <p:outputLabel  value=" a "/>
+                                                    <p:datePicker  autocomplete="off" id="hour2_lunes" timeOnly="true" value="#{lugarBean.horarioLunes.horaCierre}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioLunes.cerrado}"/>
+                                                    <p:selectBooleanCheckbox value="#{lugarBean.horarioLunes.cerrado}" itemLabel="¿Cerrado?">
+                                                        <p:ajax update="hour_lunes hour2_lunes " listener="#{lugarBean.horarioLunes.updateCerrado}"/>
+                                                    </p:selectBooleanCheckbox>
 
+                                                    <p:outputLabel value="Martes: "/>
+                                                    <p:datePicker  autocomplete="off" id="hour_martes" timeOnly="true" value="#{lugarBean.horarioMartes.horaInicio}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioMartes.cerrado}"/>
+                                                    <p:outputLabel  value=" a "/>
+                                                    <p:datePicker  autocomplete="off" id="hour2_martes" timeOnly="true" value="#{lugarBean.horarioMartes.horaCierre}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioMartes.cerrado}"/>
+                                                    <p:selectBooleanCheckbox value="#{lugarBean.horarioMartes.cerrado}" itemLabel="¿Cerrado?">
+                                                        <p:ajax update="hour_martes hour2_martes " listener="#{lugarBean.horarioMartes.updateCerrado}"/>
+                                                    </p:selectBooleanCheckbox>
 
+                                                    <p:outputLabel value="Miercoles: "/>
+                                                    <p:datePicker  autocomplete="off" id="hour_miercoles" timeOnly="true" value="#{lugarBean.horarioMiercoles.horaInicio}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioMiercoles.cerrado}"/>
+                                                    <p:outputLabel value=" a "/>
+                                                    <p:datePicker  autocomplete="off" id="hour2_miercoles" timeOnly="true" value="#{lugarBean.horarioMiercoles.horaCierre}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioMiercoles.cerrado}"/>
+                                                    <p:selectBooleanCheckbox value="#{lugarBean.horarioMiercoles.cerrado}" itemLabel="¿Cerrado?">
+                                                        <p:ajax update="hour_miercoles hour2_miercoles " listener="#{lugarBean.horarioMiercoles.updateCerrado}"/>
+                                                    </p:selectBooleanCheckbox>
+
+                                                    <p:outputLabel value="Jueves: "/>
+                                                    <p:datePicker  autocomplete="off" id="hour_jueves" timeOnly="true" value="#{lugarBean.horarioJueves.horaInicio}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioJueves.cerrado}"/>
+                                                    <p:outputLabel value=" a "/>
+                                                    <p:datePicker  autocomplete="off" id="hour2_jueves" timeOnly="true" value="#{lugarBean.horarioJueves.horaCierre}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioJueves.cerrado}"/>
+                                                    <p:selectBooleanCheckbox value="#{lugarBean.horarioJueves.cerrado}" itemLabel="¿Cerrado?">
+                                                        <p:ajax update="hour_jueves hour2_jueves " listener="#{lugarBean.horarioJueves.updateCerrado}"/>
+                                                    </p:selectBooleanCheckbox>
+
+                                                    <p:outputLabel value="Viernes: "/>
+                                                    <p:datePicker  autocomplete="off" id="hour_viernes" timeOnly="true" value="#{lugarBean.horarioViernes.horaInicio}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioViernes.cerrado}"/>
+                                                    <p:outputLabel value=" a "/>
+                                                    <p:datePicker  autocomplete="off" id="hour2_viernes" timeOnly="true" value="#{lugarBean.horarioViernes.horaCierre}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioViernes.cerrado}"/>
+                                                    <p:selectBooleanCheckbox value="#{lugarBean.horarioViernes.cerrado}" itemLabel="¿Cerrado?">
+                                                        <p:ajax update="hour_viernes hour2_viernes " listener="#{lugarBean.horarioViernes.updateCerrado}"/>
+                                                    </p:selectBooleanCheckbox>
+
+                                                    <p:outputLabel value="Sabado: "/>
+                                                    <p:datePicker  autocomplete="off" id="hour_sabado" timeOnly="true" value="#{lugarBean.horarioSabado.horaInicio}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioSabado.cerrado}"/>
+                                                    <p:outputLabel value=" a "/>
+                                                    <p:datePicker  autocomplete="off" id="hour2_sabado" timeOnly="true" value="#{lugarBean.horarioSabado.horaCierre}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioSabado.cerrado}"/>
+                                                    <p:selectBooleanCheckbox value="#{lugarBean.horarioSabado.cerrado}" itemLabel="¿Cerrado?">
+                                                        <p:ajax update="hour_sabado hour2_sabado " listener="#{lugarBean.horarioSabado.updateCerrado}"/>
+                                                    </p:selectBooleanCheckbox>
+
+                                                    <p:outputLabel value="Domingo: "/>
+                                                    <p:datePicker  autocomplete="off" id="hour_domingo" timeOnly="true" value="#{lugarBean.horarioDomingo.horaInicio}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioDomingo.cerrado}"/>
+                                                    <p:outputLabel value=" a "/>
+                                                    <p:datePicker  autocomplete="off" id="hour2_domingo" timeOnly="true" value="#{lugarBean.horarioDomingo.horaCierre}" hourFormat="24" pattern="HH:mm" disabled="#{lugarBean.horarioDomingo.cerrado}"/>
+                                                    <p:selectBooleanCheckbox value="#{lugarBean.horarioDomingo.cerrado}" itemLabel="¿Cerrado?">
+                                                        <p:ajax update="hour_domingo hour2_domingo " listener="#{lugarBean.horarioDomingo.updateCerrado}"/>
+                                                    </p:selectBooleanCheckbox>
+                                                </h:panelGrid>
+
+                                            </p>
+                                        </p:tab>
+                                    </p:accordionPanel>
+
+                                <br/>
+                                <p:outputLabel value=""/>
+                                <p:commandButton action="#{lugarBean.registrarLugar}" style="width: 85px; height: 30px"  value="Crear"
+                                                 update="@form" />
                             </h:panelGrid>
-                        <div class="card">
-                            <p:accordionPanel widgetVar="basic">
-                                <p:tab title="Horarios">
-                                    <p class="p-m-0">
-                                        <h:panelGrid columns="5" cellpadding="5">
-                                            <p:outputLabel value="Lunes: "/>
-                                            <p:datePicker  id="hour_lunes" timeOnly="true" value="#{lugarBean.horarios.get(0).horaInicio}" hourFormat="24"  disabled="#{lugarBean.horarios.get(0).cerrado}"/>
-                                            <p:outputLabel value=" a "/>
-                                            <p:datePicker  id="hour2_lunes"  timeOnly="true" value="#{lugarBean.horarios.get(0).horaCierre}" hourFormat="24"  disabled="#{lugarBean.horarios.get(0).cerrado}"/>
-                                            <p:selectBooleanCheckbox value="#{lugarBean.horarios.get(0).cerrado}" itemLabel="¿Cerrado?">
-                                                <p:ajax update="hour_lunes hour2_lunes " listener="#{lugarBean.horarios.get(0).updateCerrado}"/>
-                                            </p:selectBooleanCheckbox>
-
-                                        </h:panelGrid>
-                                    </p>
-                                </p:tab>
-                            </p:accordionPanel>
-                        </div>
 
 
-                        <br/>
-                            <p:commandButton action="#{lugarBean.registrarLugar}" value="Registrar"
-                                             update="@form" />
+
 
 
                     </div>
