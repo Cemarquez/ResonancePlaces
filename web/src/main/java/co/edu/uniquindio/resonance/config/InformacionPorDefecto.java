@@ -6,6 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
+
 @Component
 public class InformacionPorDefecto implements CommandLineRunner {
 
@@ -20,6 +29,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private HorarioServicio horarioServicio;
 
 
 
@@ -61,6 +72,21 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 lugarServicio.registrarLugar(lugar);
                 lugarServicio.registrarLugar(lugar2);
 
+                DateTimeFormatter formatter =
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S", Locale.US);
+
+                String text = "2011-02-18 08:30:00.0";
+                LocalDateTime localDateTime = LocalDateTime.parse(text, formatter);
+                LocalTime local = localDateTime.toLocalTime();
+                Horario horario = new Horario();
+                horario.setLugar(lugar);
+                horario.setDia("lunes");
+                horario.setCerrado(false);
+                horario.setHoraInicio(local);
+                horario.setHoraCierre(local);
+                System.out.println(horario);
+                horarioServicio.registrarHorario(horario);
+
                 Usuario usuario = new Usuario("user", "Carlos", "caflores@gmail.com", "user");
                 usuarioServicio.registrarUsuario(usuario);
 
@@ -86,6 +112,12 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
 
 
-
     }
+
+    public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
 }

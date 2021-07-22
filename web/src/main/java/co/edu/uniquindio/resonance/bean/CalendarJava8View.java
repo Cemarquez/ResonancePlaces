@@ -100,11 +100,6 @@ public class CalendarJava8View implements Serializable {
         time4= LocalTime.of(10, 30);
     }
 
-    public boolean updateBoolean(){
-        PrimeFaces.current().executeScript("console.log('" + activo + "')");
-
-        return !activo;
-    }
     public void onDateSelect(SelectEvent<LocalDate> event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

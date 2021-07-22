@@ -1,10 +1,7 @@
 package co.edu.uniquindio.resonance.bean;
 
 import co.edu.uniquindio.resonance.entidades.*;
-import co.edu.uniquindio.resonance.servicios.CategoriaServicio;
-import co.edu.uniquindio.resonance.servicios.CiudadServicio;
-import co.edu.uniquindio.resonance.servicios.LugarServicio;
-import co.edu.uniquindio.resonance.servicios.UsuarioServicio;
+import co.edu.uniquindio.resonance.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
@@ -21,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +49,9 @@ public class LugarBean {
 
     @Getter @Setter
     private Ciudad ciudad;
+
+    @Autowired
+    private HorarioServicio horarioServicio;
 
     @Getter @Setter
     private List<Categoria> categorias;
@@ -91,6 +92,8 @@ public class LugarBean {
     @Getter @Setter
     private List<Horario> horarios;
 
+    @Getter @Setter
+    private LocalDate time;
 
     @PostConstruct
     public void inicializar(){
@@ -102,24 +105,29 @@ public class LugarBean {
         this.categorias = categoriaServicio.listarCategorias();
         this.ciudades = ciudadServicio.listarCiudades();
         this.lugares = lugarServicio.listarLugares();
-        for (int i=0;i<7;i++){
-            horarios.add(new Horario());
+        this.horarios = new ArrayList<>();
+        for (int i=0;i<1;i++){
+            Horario h = new Horario();
+            h.setCerrado(false);
+            h.setDia("Lunes");
+
+            horarios.add(h);
         }
+
+
     }
 
     public String registrarLugar(){
-
         if(usuarioLogin!=null) {
-
-
             try {
-
-
                 if (lugar.getLatitud() != 0 || lugar.getLongitud() != 0) {
                     if (!imagenes.isEmpty()) {
                         lugar.setUsuario(usuarioLogin);
                         lugar.setFoto(imagenes);
+                        lugar.setHorarios(horarios);
+                        horarios.get(0).setLugar(lugar);
                         lugarServicio.registrarLugar(lugar);
+                        horarioServicio.registrarHorario(horarios.get(0));
                         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                                 "Registro exitoso");
                         FacesContext.getCurrentInstance().addMessage(null, facesMsg);

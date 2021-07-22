@@ -44,7 +44,7 @@ public class HorarioServicioImpl implements HorarioServicio{
             throw new Exception("Ingrese hora de cierre valida");
         }
 
-        if (horario.getDescripcion().length()>50){
+        if (horario.getDia().length()>50){
             throw new Exception("La descripcion no puede exceder los 50 caracteres");
         }
 
@@ -78,7 +78,7 @@ public class HorarioServicioImpl implements HorarioServicio{
             throw new Exception("Ingrese hora de cierre valida");
         }
 
-        if (horario.getDescripcion().length()>50){
+        if (horario.getDia().length()>50){
             throw new Exception("La descripcion no puede exceder los 50 caracteres");
         }
 

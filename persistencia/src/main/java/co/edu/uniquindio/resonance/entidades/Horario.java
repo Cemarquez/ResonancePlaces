@@ -4,8 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
-import java.util.Objects;
+
 /**
  * Clase Horario para la entidad Horario
  * @author Brian Giraldo - Cesar Marquez - Esteban Sanchez
@@ -21,26 +23,21 @@ public class Horario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
-    @NotBlank
     @Column(name = "codigo", length = 50 , nullable = false)
     private int codigo;
 
-    @Column(name = "descripcion_horario", length = 50 , nullable = false)
-    private String descripcion;
+    @Column(name = "dia_horario", length = 50 , nullable = false)
+    private String dia;
 
-    @Temporal(TemporalType.TIME)
-    @NotBlank
     @Column(name = "hora_inicio", nullable = false)
-    private Date horaInicio;
+    private LocalTime horaInicio;
 
-    @Temporal(TemporalType.TIME)
-    @NotBlank
     @Column(name = "hora_final", nullable = false)
-    private Date horaCierre;
+    private LocalTime horaCierre;
 
-    @NotBlank
-    @Column(name = "continuidad", nullable = false)
-    private boolean continuidad;
+
+    @Column(name = "cerrado", nullable = false)
+    private boolean cerrado;
 
     /**
      * Relacion entre horario y lugar, muchos horarios tienen un lugar
@@ -49,20 +46,9 @@ public class Horario {
     @JoinColumn(name = "codigo_lugar", nullable = false)
     private Lugar lugar;
 
-    /**
-     * Constructor para la clase Horario
-     * @param descripcion descripcion del horario
-     * @param horaInicio hora inicio del horario
-     * @param horaCierre hora cierre del horario
-     * @param continuidad continuidad del horario
-     * @param lugar lugar del horario
-     */
-    public Horario(String descripcion, Date horaInicio, Date horaCierre, boolean continuidad, Lugar lugar) {
 
-        this.descripcion = descripcion;
-        this.horaInicio = horaInicio;
-        this.horaCierre = horaCierre;
-        this.continuidad = continuidad;
-        this.lugar = lugar;
+
+    public boolean updateCerrado(){
+        return !cerrado;
     }
 }
