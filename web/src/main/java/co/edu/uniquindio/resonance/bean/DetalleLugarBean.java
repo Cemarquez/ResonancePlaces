@@ -3,6 +3,7 @@ package co.edu.uniquindio.resonance.bean;
 import co.edu.uniquindio.resonance.entidades.Calificacion;
 import co.edu.uniquindio.resonance.entidades.Horario;
 import co.edu.uniquindio.resonance.entidades.Lugar;
+import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +35,13 @@ public class DetalleLugarBean  implements Serializable {
     @Setter
     private List<Horario> horarios;
 
+    private double valor;
+    private String titulo;
+    private String mensaje;
+
+    @Value(value ="#{seguridadBean.usuario}")
+    private Usuario usuarioLogin;
+
     @PostConstruct
     public void inicializar() {
         if(lugarParam!=null && !lugarParam.isEmpty()) {
@@ -49,6 +57,18 @@ public class DetalleLugarBean  implements Serializable {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public void crearComentario(){
+
+        if (usuarioLogin!=null) {
+
+            Calificacion calificacion = new Calificacion(valor, titulo, mensaje, usuarioLogin, lugar);
+            lugarServicio.crearCalificacion(calificacion);
+        }
+
+
     }
 
 }

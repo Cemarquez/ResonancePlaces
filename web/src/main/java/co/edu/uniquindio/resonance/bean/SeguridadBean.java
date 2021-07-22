@@ -34,6 +34,8 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     @NotBlank
     private String email,password;
+    @Getter @Setter
+    private String rol;
 
     @Autowired
     private AdministradorServicio administradorServicio;
@@ -53,13 +55,17 @@ public class SeguridadBean implements Serializable {
                 moderador = moderadorServicio.iniciarSesion(email,password);
 
                 if (administrador!=null){
+
+                    rol = "admin";
                     autenticado=true;
                     return "/index?faces-redirect=true";
                 } else if (moderador!=null){
                     autenticado=true;
+                    rol = "moderador";
                     return "/index?faces-redirect=true";
                 } else if (usuario!=null){
                     autenticado=true;
+                    rol = "usuario";
                     return "/index?faces-redirect=true";
                 } else{
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",

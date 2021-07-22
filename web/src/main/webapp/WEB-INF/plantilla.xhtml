@@ -6,6 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
@@ -35,13 +36,25 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                             </li>
-                            <li class="nav-item">
+
+                            <li class="nav-item"  jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'admin'}" >
+                                <a class="nav-link" href="/administrador/crearModerador.xhtml">Crear moderador</a>
+                            </li>
+
+                            <li class="nav-item" jsf:rendered="#{!seguridadBean.autenticado}">
                                 <a class="nav-link" href="/registrarUsuario.xhtml">Registrarse</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/crearLugar.xhtml">Crear Lugar</a>
+                            <li class="nav-item"  jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol =='usuario'}" >
+                                <a class="nav-link" href="/usuario/perfil.xhtml">Perfil</a>
+                            </li>
+
+                            <li class="nav-item"  jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario' }" >
+                                <a class="nav-link" href="/usuario/crearLugar.xhtml">Crear lugar</a>
                             </li>
                         </ul>
+
+
+
                         <div class="d-flex">
                             <h:form class="d-flex me-2">
                                 <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
