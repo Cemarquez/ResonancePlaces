@@ -30,24 +30,26 @@
 
                         <p:outputLabel for="nickname_usuario" value="Nickname:" />
                         <p:inputText id="nickname_usuario" value="#{usuarioBean.usuario.nickname}" placeholder="Ingrese su nickname" required="true" requiredMessage="Debe introducir un nickname de usuario." validatorMessage="Verifique el nickname ingresado." styleClass="formularioUsuario">
-                            <f:validateLength minimum="5" maximum="70"  styleClass="formularioUsuario"/>
+                            <f:validateLength minimum="5" maximum="70" />
                         </p:inputText>
                         <p:message for="nickname_usuario"/>
-
-
-                        <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
-                        <h:selectOneMenu id= "ciudad_usuario" value="#{usuarioBean.usuario.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
-                            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
-                            <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{usuarioBean.ciudades}"/>
-                        </h:selectOneMenu>
-                        <p:message for="ciudad_usuario"/>
 
 
                         <p:outputLabel for="password_usuario" value="Contraseña:"/>
                         <p:password id="password_usuario" value="#{usuarioBean.usuario.contrasena}" feedback="true"
                                     promptLabel="Ingresa tu contraseña" weakLabel="Débil"
-                                    styleClass="formularioUsuario" goodLabel="Buena" strongLabel="Fuerte" required="true" placeholder="Ingrese su contraseña" requiredMessage="Debe introducir una contraseña." validatorMessage="Verifique la contraseña ingresada." toggleMask="true" redisplay="true"/>
+                                    goodLabel="Buena" strongLabel="Fuerte" required="true" placeholder="Ingrese su contraseña" requiredMessage="Debe introducir una contraseña." validatorMessage="Verifique la contraseña ingresada." toggleMask="true" redisplay="true"/>
                         <p:message for="password_usuario"/>
+
+                        <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
+                        <p:selectOneMenu style="width: 400px" id= "ciudad_usuario" value="#{usuarioBean.usuario.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
+                            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                            <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{usuarioBean.ciudades}"/>
+                        </p:selectOneMenu>
+                        <p:message for="ciudad_usuario"/>
+
+
+
 
 
 

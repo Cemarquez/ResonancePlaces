@@ -20,7 +20,6 @@ public class Favorito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank
     @Column(name = "codigo", nullable = false)
     @EqualsAndHashCode.Include
     private int codigo;
@@ -37,7 +36,6 @@ public class Favorito {
      * Relacion entre favorito y lugar, muchos favoritos tienen un lugar
      */
     @ManyToOne
-    @NotBlank
     @JoinColumn(name = "codigo_lugar", nullable = false)
     private Lugar lugar;
 

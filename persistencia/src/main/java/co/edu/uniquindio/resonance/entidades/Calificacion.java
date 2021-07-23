@@ -33,7 +33,6 @@ public class Calificacion {
     private String titulo;
 
     @Column(name="mensaje", nullable = false)
-    @NotBlank
     private String mensaje;
 
     /**
