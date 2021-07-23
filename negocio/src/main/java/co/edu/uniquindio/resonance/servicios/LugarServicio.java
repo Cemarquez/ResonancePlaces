@@ -1,9 +1,6 @@
 package co.edu.uniquindio.resonance.servicios;
 
-import co.edu.uniquindio.resonance.entidades.Calificacion;
-import co.edu.uniquindio.resonance.entidades.Foto;
-import co.edu.uniquindio.resonance.entidades.Horario;
-import co.edu.uniquindio.resonance.entidades.Lugar;
+import co.edu.uniquindio.resonance.entidades.*;
 
 import java.util.List;
 
@@ -20,6 +17,7 @@ public interface LugarServicio {
     Calificacion crearCalificacion(Calificacion c);
     Foto registrarFoto(Foto foto);
     List<String> obtenerFotos(Integer id);
-
+    void marcarFavorito(Lugar lugar, Usuario usuario);
+    Favorito obtenerFavorito(Lugar lugar, Usuario usuario);
 
 }

@@ -44,6 +44,8 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
     @Query("select h from Horario h  where h.lugar.codigo =?1 ")
     List<Horario> listarHorarios(Integer parametro);
 
+    @Query("select f from Favorito f where f.lugar.codigo = ?2 and f.usuario.nickname = ?1")
+    Favorito obtenerFavorito(String nicknameUsuario, Integer codigoLugar);
 
 
 

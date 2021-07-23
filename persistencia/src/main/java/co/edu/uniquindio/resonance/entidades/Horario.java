@@ -35,8 +35,6 @@ public class Horario {
     @Column(name = "hora_final", nullable = false)
     private LocalTime horaCierre;
 
-
-    @Column(name = "cerrado", nullable = false)
     private boolean cerrado;
 
     /**

@@ -173,13 +173,8 @@ public class LugarBean {
             }
 
             for(Horario h : abierto) {
-                System.out.println(h);
                horarioServicio.registrarHorario(h);
             }
-
-
-
-
     }
 
     public void subirImagenes(FileUploadEvent event) {

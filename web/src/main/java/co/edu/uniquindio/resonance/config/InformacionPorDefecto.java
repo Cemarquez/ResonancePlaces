@@ -49,9 +49,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
             ciudadServicio.registrarCiudad(ciudad3);
             Ciudad ciudad4 = new Ciudad("Sevilla");
             ciudadServicio.registrarCiudad(ciudad4);
-        }
 
-        if (categoriaServicio.listarCategorias().size()==0){
 
             Categoria categoria = new Categoria("Restaurante", "Categoria dedicada a sitios de comida, cafes, etc");
             Categoria categoria1 = new Categoria("Hotel", "Categoria reservada a hospedajes hoteleros");
@@ -69,6 +67,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 lugar2.setLongitud(-75.65548385940279);
                 lugar.getFoto().add("vacio.png");
                 lugar2.getFoto().add("vacio.png");
+                lugar.setCiudad(ciudad);
+                lugar2.setCiudad(ciudad1);
                 lugarServicio.registrarLugar(lugar);
                 lugarServicio.registrarLugar(lugar2);
 
@@ -96,20 +96,10 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 lugarServicio.crearCalificacion(calificacion);
                 lugarServicio.crearCalificacion(calificacion2);
 
-            }
+
 
         }
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
     }

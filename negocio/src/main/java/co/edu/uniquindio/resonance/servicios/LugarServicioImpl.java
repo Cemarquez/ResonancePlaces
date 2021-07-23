@@ -1,10 +1,8 @@
 package co.edu.uniquindio.resonance.servicios;
 
-import co.edu.uniquindio.resonance.entidades.Calificacion;
-import co.edu.uniquindio.resonance.entidades.Foto;
-import co.edu.uniquindio.resonance.entidades.Horario;
-import co.edu.uniquindio.resonance.entidades.Lugar;
+import co.edu.uniquindio.resonance.entidades.*;
 import co.edu.uniquindio.resonance.repositorios.CalificacionRepo;
+import co.edu.uniquindio.resonance.repositorios.FavoritoRepo;
 import co.edu.uniquindio.resonance.repositorios.FotoRepo;
 import co.edu.uniquindio.resonance.repositorios.LugarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,9 @@ public class LugarServicioImpl implements LugarServicio{
 
     @Autowired
     private CalificacionRepo calificacionRepo;
+
+    @Autowired
+    private FavoritoRepo favoritoRepo;
 
     @Override
     public Lugar registrarLugar(Lugar lugar) throws Exception {
@@ -106,5 +107,24 @@ public class LugarServicioImpl implements LugarServicio{
     @Override
     public List<String> obtenerFotos(Integer id) {
         return null;
+    }
+
+    @Override
+    public void marcarFavorito(Lugar lugar, Usuario usuario) {
+
+        Favorito buscado = lugarRepo.obtenerFavorito(usuario.getNickname(), lugar.getCodigo());
+        if(buscado!=null){
+            Favorito guardado = new Favorito(usuario, lugar);
+            favoritoRepo.save(guardado);
+        }else{
+            favoritoRepo.delete(buscado);
+        }
+
+
+    }
+
+    @Override
+    public Favorito obtenerFavorito(Lugar lugar, Usuario usuario) {
+        return lugarRepo.obtenerFavorito(usuario.getNickname(), lugar.getCodigo());
     }
 }
