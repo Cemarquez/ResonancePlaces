@@ -24,7 +24,7 @@ public class Calificacion {
     private int codigo;
 
     @Column(name="valor", nullable = false)
-    private double valor;
+    private int valor;
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha", nullable = false)
     private Date fecha;
@@ -52,22 +52,11 @@ public class Calificacion {
     private Lugar lugar;
 
 
-    /**
-     * Constructor de Calificacion
-     * @param valor Valor de la calificacion
-     * @param titulo Titulo de la calificacion
-     * @param mensaje Mensaje de la calificacion
-     * @param usuario Usuario que hace la calificacion
-     * @param lugar Lugar que es calificado
-     */
-    public Calificacion( double valor, String titulo, String mensaje, Usuario usuario, Lugar lugar) {
-
+    public Calificacion(int valor,  String titulo, String mensaje, Usuario usuario, Lugar lugar) {
         this.valor = valor;
         this.titulo = titulo;
         this.mensaje = mensaje;
         this.usuario = usuario;
         this.lugar = lugar;
     }
-
-
 }

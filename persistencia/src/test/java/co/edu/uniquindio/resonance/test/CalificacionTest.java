@@ -58,7 +58,7 @@ public class CalificacionTest {
         Assertions.assertNotNull(usuarioGuardado);
 
 
-        Calificacion calificacion = new Calificacion(3.0,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
+        Calificacion calificacion = new Calificacion(3,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
         Calificacion calificacionGuardada = calificacionRepo.save(calificacion);
 
         Assertions.assertNotNull(calificacionGuardada);
@@ -85,7 +85,7 @@ public class CalificacionTest {
         Assertions.assertNotNull(usuarioGuardado);
 
 
-        Calificacion calificacion = new Calificacion(3.0,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
+        Calificacion calificacion = new Calificacion(3,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
         Calificacion calificacionGuardada = calificacionRepo.save(calificacion);
         calificacionRepo.delete(calificacionGuardada);
         Calificacion buscado = calificacionRepo.findById(calificacionGuardada.getCodigo()).orElse(null);
@@ -112,7 +112,7 @@ public class CalificacionTest {
 
 
 
-        Calificacion calificacion = new Calificacion(3.0,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
+        Calificacion calificacion = new Calificacion(3,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
         Calificacion calificacionGuardada = calificacionRepo.save(calificacion);
 
         calificacionGuardada.setTitulo("Paisaje espectacular");

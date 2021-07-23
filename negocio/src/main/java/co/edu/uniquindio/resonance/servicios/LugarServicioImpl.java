@@ -113,7 +113,7 @@ public class LugarServicioImpl implements LugarServicio{
     public void marcarFavorito(Lugar lugar, Usuario usuario) {
 
         Favorito buscado = lugarRepo.obtenerFavorito(usuario.getNickname(), lugar.getCodigo());
-        if(buscado!=null){
+        if(buscado==null){
             Favorito guardado = new Favorito(usuario, lugar);
             favoritoRepo.save(guardado);
         }else{

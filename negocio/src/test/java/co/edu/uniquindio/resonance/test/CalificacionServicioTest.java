@@ -67,7 +67,7 @@ public class CalificacionServicioTest {
         Assertions.assertNotNull(usuarioGuardado);
 
 
-        Calificacion calificacion = new Calificacion(3.0,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
+        Calificacion calificacion = new Calificacion(3,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
         Calificacion calificacionGuardada = null;
         try {
             calificacionGuardada = calificacionServicio.registrarCalificacion(calificacion);
@@ -98,7 +98,7 @@ public class CalificacionServicioTest {
 
 
 
-        Calificacion calificacion = new Calificacion(3.0,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
+        Calificacion calificacion = new Calificacion(3,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
 
         try {
             Calificacion calificacionGuardada = calificacionServicio.registrarCalificacion(calificacion);
@@ -134,7 +134,7 @@ public class CalificacionServicioTest {
 
 
 
-        Calificacion calificacion = new Calificacion(3.0,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
+        Calificacion calificacion = new Calificacion(3,"Excelente lugar","Buena atencion pero la comida muy regular",usuarioGuardado,lugarGuardado);
         Calificacion calificacionGuardada = null;
         try {
             calificacionGuardada = calificacionServicio.registrarCalificacion(calificacion);

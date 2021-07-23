@@ -37,12 +37,12 @@
                            <div class="box" >
                                <div class="m-lg-3">
                                    <div class="row">
-                                       <div class="col-7" >
-                                           <p:rating readonly="true"/>
+                                       <div class="col-7"  >
+                                           <p:rating readonly="true" value="#{detalleLugarBean.obtenerCalificacion()}" />
                                        </div>
                                        <div class="col ml">
                                            <h:form id="favorito_lugar">
-                                               <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form"/>
+                                               <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado}"/>
                                            </h:form>
                                        </div>
                                        <h1 class="text-detalle-h1"> #{detalleLugarBean.lugar.nombre}</h1>
@@ -74,6 +74,37 @@
 
 
             </div>
+
+
+            <p:panel header="Descripción" styleClass="mt-3">
+              <p>
+                  #{detalleLugarBean.lugar.descripcion}
+              </p>
+            </p:panel>
+
+            <p:panel header="Crear nuevo comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}">
+                <h:form id="crear_comentario">
+                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:outputLabel value="Titulo: " for="titulo_comentario"/>
+                        <p:inputText id="titulo_comentario" required="true" value="#{detalleLugarBean.nuevaCalificacion.titulo}" placeholder="Ponle un titulo a tu calificación" requiredMessage="Debe ingresar un titulo" styleClass="form-input-comentario-titulo"/>
+                        <p:rating value="#{detalleLugarBean.nuevaCalificacion.valor}" required="true" requiredMessage="Debe seleccioanr la calificación"/>
+                        <br/>
+                        <p:inputTextarea id="mensaje_comentario" value="#{detalleLugarBean.nuevaCalificacion.mensaje}" required="true" placeholder="Escribe sobre la experiencia, servicio, ubicación..." requiredMessage="Debe ingresar su comentario" styleClass="form-input-comentario" style="height: 50px"/>
+                        <p:outputLabel value=""/>
+                        <p:outputLabel value=""/>
+                        <p:commandButton action="#{detalleLugarBean.crearComentario}" style="height: 30px"  value="Enviar calificación" update="@form" />
+
+                    </h:panelGrid>
+                    <p:growl showDetail="true"/>
+                </h:form>
+
+
+            </p:panel>
+
+                <p:panel header="Comentarios" styleClass="mt-3">
+
+                </p:panel>
+
 
         </div>
 

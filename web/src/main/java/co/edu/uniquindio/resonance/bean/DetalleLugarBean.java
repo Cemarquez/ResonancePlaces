@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,6 +56,8 @@ public class DetalleLugarBean  implements Serializable {
     @Getter @Setter
     private boolean favorito;
 
+    @Setter @Getter
+    private Calificacion nuevaCalificacion;
 
     @PostConstruct
     public void inicializar() {
@@ -65,7 +69,7 @@ public class DetalleLugarBean  implements Serializable {
                 this.calificaciones = lugarServicio.listarCalificaciones(id);
                 this.horarios = lugarServicio.listarHorarios(id);
                 this.fotos = lugar.getFoto();
-
+                this.nuevaCalificacion = new Calificacion();
                 if(usuarioLogin!=null)
                 if(lugarServicio.obtenerFavorito(lugar, usuarioLogin) !=null){
                     favorito = true;
@@ -78,17 +82,27 @@ public class DetalleLugarBean  implements Serializable {
         }
     }
 
+    public int obtenerCalificacion(){
+        int calificacion=0;
+        for(Calificacion c : lugar.getCalificaciones()){
+            calificacion += c.getValor();
+        }
+
+        return calificacion/lugar.getCalificaciones().size();
+    }
 
     public void crearComentario(){
-
         if (usuarioLogin!=null) {
 
-            Calificacion calificacion = new Calificacion(valor, titulo, mensaje, usuarioLogin, lugar);
-            lugarServicio.crearCalificacion(calificacion);
+            nuevaCalificacion.setLugar(lugar);
+            nuevaCalificacion.setUsuario(usuarioLogin);
+            lugarServicio.crearCalificacion(nuevaCalificacion);
+            nuevaCalificacion = new Calificacion();
         }
 
 
     }
+
 
     public void marcarFavotiro(){
 

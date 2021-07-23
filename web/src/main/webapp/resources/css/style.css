@@ -69,6 +69,18 @@ body {
     height: 35px;
     position: center;
 }
+
+.form-input-comentario{
+    width: 350px;
+    height: 50px;
+    position: center;
+}
+
+.form-input-comentario-titulo{
+    width: 350px;
+    height: 25px;
+    position: center;
+}
 .btnIniciarS{
     width: 200px;
     height: 30px;
