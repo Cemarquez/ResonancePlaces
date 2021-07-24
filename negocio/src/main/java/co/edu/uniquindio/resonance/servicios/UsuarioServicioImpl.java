@@ -154,7 +154,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public List<Lugar> obtenerLugaresRechazados(String nickname) {
-        return null;
+        return usuarioRepo.obtenerLugaresRechazados(nickname);
     }
 
     @Override

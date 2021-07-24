@@ -64,6 +64,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             categoriaServicio.registrarCategoria(categoria1);
 
             if (lugarServicio.listarLugares().size()==0){
+                Usuario usuario = new Usuario("user", "Carlos", "caflores@gmail.com", "user");
+                usuarioServicio.registrarUsuario(usuario);
 
                 Lugar lugar = new Lugar(categoria,"Un genocidio que da gusto", "Mussolinis pizza");
                 lugar.setLatitud(4.553806232733308);
@@ -75,6 +77,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 lugar2.getFoto().add("vacio.png");
                 lugar.setCiudad(ciudad);
                 lugar2.setCiudad(ciudad1);
+                lugar.setUsuario(usuario);
+                lugar2.setUsuario(usuario);
                 lugarServicio.registrarLugar(lugar);
                 lugarServicio.registrarLugar(lugar2);
 
@@ -100,10 +104,6 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 mod.setAdministrador(admin);
                 moderadorServicio.registarModerador(mod);
 
-
-
-                Usuario usuario = new Usuario("user", "Carlos", "caflores@gmail.com", "user");
-                usuarioServicio.registrarUsuario(usuario);
 
 
 

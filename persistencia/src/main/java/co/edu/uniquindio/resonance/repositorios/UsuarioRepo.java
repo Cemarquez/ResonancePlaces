@@ -33,7 +33,7 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
      * @param nickname
      * @return
      */
-    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.estado = true")
+    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.estado = true and l.rechazado=false")
     List<Lugar> obtenerLugaresAutorizados(String nickname);
 
     /**
@@ -43,6 +43,9 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
      */
     @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.estado = false")
     List<Lugar> obtenerLugaresNoAutorizados(String nickname);
+
+    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.rechazado = true")
+    List<Lugar> obtenerLugaresRechazados(String nickname);
 
     /**
      * Query que permite obtener los lugares favoritos de un usuario determinado
@@ -118,5 +121,6 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
      */
     @Query("select  u from Usuario u where u.email like  concat('%',?1,'%')  ")
     List<Usuario> obtenerUsuariosDeDominio(String dominio);
+
 
 }
