@@ -1,7 +1,9 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.Administrador;
+import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Moderador;
+import co.edu.uniquindio.resonance.repositorios.LugarRepo;
 import co.edu.uniquindio.resonance.repositorios.ModeradorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,12 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
     @Autowired
     private ModeradorRepo moderadorRepo;
+    @Autowired
+    private LugarRepo lugarRepo;
 
     @Override
     public Moderador registarModerador(Moderador moderador) throws Exception {
-        return null;
+        return moderadorRepo.save(moderador);
     }
 
     @Override
@@ -48,6 +52,33 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         }
 
         return user;
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresSinAprobar() {
+
+
+
+        return moderadorRepo.obtenerLugaresSinAprobar();
+    }
+
+    @Override
+    public void aprobarLugar(int codigoLugar) {
+        Lugar lugar = lugarRepo.findById(codigoLugar).get();
+        lugar.setEstado(true);
+        lugar.setRechazado(false);
+
+        lugarRepo.save(lugar);
+
+    }
+
+    @Override
+    public void rechazarLugar(int codigoLugar) {
+        Lugar lugar = lugarRepo.findById(codigoLugar).get();
+        lugar.setRechazado(true);
+        lugar.setEstado(true);
+        lugarRepo.save(lugar);
+
     }
 
 

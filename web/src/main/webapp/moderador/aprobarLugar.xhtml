@@ -2,11 +2,57 @@
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Title</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
 
-</body>
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+<ui:define name="head">
+
+</ui:define>
+<ui:define name="title">Lugares creados</ui:define>
+    <ui:define name="content">
+    <h:form id="form">
+
+        <h:outputText value="No hay lugares pendientes" rendered="#{moderadorBean.lugaresSinAprobar.isEmpty()}" />
+        <p:dataView var="lugar" value="#{moderadorBean.lugaresSinAprobar}"  rendered="#{!moderadorBean.lugaresSinAprobar.isEmpty()}" rows="12" paginator="true"  listIcon="pi pi-bars"  >
+
+
+
+            <p:dataViewListItem >
+                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                    <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                            <h:outputText value="Tipo:" />
+                            <h:outputText value="#{lugar.categoria.nombre}" />
+                            <h:outputText value="Descripción:" />
+                            <h:outputText value="#{lugar.descripcion}" />
+                        </h:panelGrid>
+                    </p:outputPanel>
+
+                    <p:outputPanel>
+                        <h:panelGrid>
+                            <p:commandButton value="Ver detalle" action="#{moderadorBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                            <p:commandButton value="Aprobar" action="#{moderadorBean.aprobarLugar(lugar.codigo)}"  update="@form" styleClass="ui-button-raised ui-button-success mt-2" icon="pi pi-check" iconPos="right" />
+                            <p:commandButton value="Rechazar" action="#{moderadorBean.rechazarLugar(lugar.codigo)}" update="@form" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-ban" iconPos="right" />
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </h:panelGrid>
+            </p:dataViewListItem>
+
+        </p:dataView>
+
+
+    </h:form>
+
+    </ui:define>
+
+</ui:composition>
+
 </html>

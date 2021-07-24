@@ -22,7 +22,6 @@ public class Moderador {
     @Id
     @Column(name="nickname", nullable = false)
     @EqualsAndHashCode.Include
-    @NotBlank
     private String nickname;
 
     @Column(name="nombre", length = 70)

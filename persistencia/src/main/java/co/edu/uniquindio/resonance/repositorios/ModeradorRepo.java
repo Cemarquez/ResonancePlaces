@@ -33,6 +33,11 @@ public interface ModeradorRepo extends JpaRepository<Moderador,String> {
     @Query("select m from Moderador m where ?1 MEMBER OF m.lugares")
     boolean esLugarModerador(int idLugar);
 
+    @Query("select l from Lugar l where l.estado= false  ")
+    List <Lugar> obtenerLugaresSinAprobar();
+
+
+
     Moderador findByNicknameAndContrasena(String nicknmame, String contrasena);
 
     Moderador findAdministradorByEmailAndContrasena(String usuario,String contrasena);
