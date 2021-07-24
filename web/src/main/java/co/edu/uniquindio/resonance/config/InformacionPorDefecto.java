@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.config;
 
+import co.edu.uniquindio.resonance.bean.ModeradorBean;
 import co.edu.uniquindio.resonance.entidades.*;
 import co.edu.uniquindio.resonance.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
     private CalificacionServicio calificacionServicio;
     @Autowired
     private UsuarioServicio usuarioServicio;
+    //new ws
+    @Autowired
+    private AdministradorServicio administradorServicio;
+    @Autowired
+    private ModeradorServicio moderadorServicio;
 
     @Autowired
     private HorarioServicio horarioServicio;
@@ -87,8 +93,19 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 System.out.println(horario);
                 horarioServicio.registrarHorario(horario);
 
+                //new es
+                Administrador admin = new Administrador("admin","admin","admin@gmail.com","admin");
+                administradorServicio.registrarAdministrador(admin);
+                Moderador mod = new Moderador("mod","mod","mod@gmail.com","mod");
+                mod.setAdministrador(admin);
+                moderadorServicio.registarModerador(mod);
+
+
+
                 Usuario usuario = new Usuario("user", "Carlos", "caflores@gmail.com", "user");
                 usuarioServicio.registrarUsuario(usuario);
+
+
 
                 Calificacion calificacion = new Calificacion(1,"Brutal","Soy bipolar", usuario,lugar);
                 Calificacion calificacion2 = new Calificacion(4,"Nada mal","Buenos precios", usuario,lugar2);

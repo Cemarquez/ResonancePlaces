@@ -1,6 +1,18 @@
 
+.ml-1{
 
+}
 
+.margin-dataview{
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.margin-dataview-1{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
 body {
     background: #eee !important;
 }
@@ -31,6 +43,7 @@ body {
 .ml{
     margin-left: 180px !important;
 }
+
 
 
 .text-detalle-h1{

@@ -62,7 +62,7 @@ public class SeguridadBean implements Serializable {
                 } else if (moderador!=null){
                     autenticado=true;
                     rol = "moderador";
-                    return "/index?faces-redirect=true";
+                    return "/moderador/aprobarLugar?faces-redirect=true";
                 } else if (usuario!=null){
                     autenticado=true;
                     rol = "usuario";

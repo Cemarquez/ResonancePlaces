@@ -12,6 +12,7 @@ import java.io.IOException;
 public class SeguridadFilter implements Filter {
 
     public static final String PAGINA_INICIO = "/index.xhtml";
+    public static final String PAGINA_MODERADOR ="/moderador/aprobarLugar.xhtml";
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
 

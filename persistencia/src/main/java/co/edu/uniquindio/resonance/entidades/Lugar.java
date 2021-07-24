@@ -84,6 +84,8 @@ public class Lugar {
     @Column(name = "estado")
     private boolean estado;
 
+    @Column(name = "rechazado")
+    private boolean rechazado;
     /**
      * Relacion que corresponde a la lista de horarios asignados a un lugar
      */

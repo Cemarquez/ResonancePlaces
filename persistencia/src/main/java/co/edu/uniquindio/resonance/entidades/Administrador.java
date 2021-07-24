@@ -22,7 +22,6 @@ import java.util.List;
 public class Administrador {
 
     @Id
-    @NotBlank
     @Column(name="nickname", nullable = false)
     @EqualsAndHashCode.Include
     private String nickname;
