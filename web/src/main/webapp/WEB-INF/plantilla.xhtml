@@ -69,15 +69,13 @@
             <p:dialog header="" widgetVar="login" modal="true" rendered="#{!seguridadBean.autenticado}">
                 <div class="wrapper">
                     <h:form styleClass="form-signin">
-                        <div class="col-7">
-                            <h2 class="form-signin-heading">Iniciar sesión</h2>
-                        </div>
+                            <h2 class="form-signin-heading"> Iniciar sesión</h2>
 
                         <div class="col-7 mt-5">
                             <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" placeholder="Ingrese su email o nickname" styleClass="form-inputPF"/>
                         </div>
                         <div class="col-7">
-                            <p:password id="password_login" value="#{seguridadBean.password}" required="true" placeholder="Ingrese su contraseña" styleClass="form-inputPF"/>
+                            <p:password id="password_login" value="#{seguridadBean.password}" required="true" placeholder="Ingrese su contraseña" styleClass="form-inputPF mt-4"/>
                             <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}" update="@form" styleClass="mt-4 btnIniciarS"  icon = "pi pi-sign-in" iconPos="left"/>
 
                             <p:growl for="login-bean" showDetail="true"  />

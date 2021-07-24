@@ -1,12 +1,184 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Title</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-</body>
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+<ui:define name="head">
+
+</ui:define>
+<ui:define name="title">Registrar usuario</ui:define>
+<ui:define name="content">
+
+    <div class="container mt-4 mb-4" >
+
+        <p:panel header="Perfil" style="font-size: large">
+
+    <p:tabView>
+        <p:tab title="Editar Perfil">
+            <h:form>
+
+
+                <h:panelGrid columns="3" cellpadding="5">
+
+                    <p:outputLabel for="nickname_usuario" value="Nickname:" />
+                    <p:inputText id="nickname_usuario" value="#{perfilBean.usuario.nickname}" placeholder="#{perfilBean.usuario.nickname}" readonly= "true" required="true" requiredMessage="Debe introducir un nickname de usuario." validatorMessage="Verifique el nickname ingresado." styleClass="formularioUsuario">
+                        <f:validateLength minimum="5" maximum="70" />
+                    </p:inputText>
+                    <p:message for="nickname_usuario"/>
+
+                    <p:outputLabel for="nombre_usuario" value="Nombre:" />
+                    <p:inputText id="nombre_usuario" value="#{perfilBean.usuario.nombre}" required="true" placeholder="#{perfilBean.usuario.nombre}" requiredMessage="Debe introducir su nombre." validatorMessage="Verifique el nombre ingresado." styleClass="formularioUsuario" >
+                        <f:validateLength minimum="3" maximum="70" />
+                    </p:inputText> <p:message for="nombre_usuario"/>
+
+                    <p:outputLabel for="email_usuario" value="Email:" />
+                    <p:inputText id="email_usuario" value="#{perfilBean.usuario.email}" required="true" placeholder="#{perfilBean.usuario.email}" requiredMessage="Debe introducir un email valido." validatorMessage="Verifique el email ingresado." styleClass="formularioUsuario"/>
+                    <p:message for="email_usuario"/>
+
+                    <p:outputLabel for="password_usuario" value="Contraseña:"/>
+                    <p:password id="password_usuario" value="#{perfilBean.usuario.contrasena}" feedback="true" toggleMask="true" redisplay="true"
+                                promptLabel="Ingresa tu contraseña" styleClass="formularioUsuario" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte"
+                                required="true" placeholder="#{perfilBean.usuario.contrasena}" requiredMessage="Debe introducir una contraseña." validatorMessage="Verifique la contraseña ingresada." />
+                    <p:message for="password_usuario"/>
+
+                    <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
+                    <p:selectOneMenu style="width: 400px" id= "ciudad_usuario" value="#{perfilBean.usuario.ciudad}" required="true" styleClass="ui-selectable" requiredMessage="Debe seleccionar una ciudad." converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                        <f:selectItems var="ciudad"  itemLabel="#{ciudad.nombre}"  value="#{usuarioBean.ciudades}"/>
+                    </p:selectOneMenu>
+                    <p:message for="ciudad_usuario"/>
+
+
+
+
+
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{perfilBean.actualizarUsuario}" value="Actualizar Información"
+                                 update="@form" />
+                <p:growl showDetail="true" />
+
+
+
+            </h:form>
+        </p:tab>
+        <p:tab title="Lugares autorizados">
+            <h:form id="form">
+                <p:dataView var="lugar" value="#{perfilBean.lugaresAutorizados}" rows="12" paginator="true" listIcon="pi pi-bars" >
+
+
+                    <p:dataViewListItem>
+                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                            <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Tipo:" />
+                                    <h:outputText value="#{lugar.categoria.nombre}" />
+                                    <h:outputText value="Descripción:" />
+                                    <h:outputText value="#{lugar.descripcion}" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                        </h:panelGrid>
+                    </p:dataViewListItem>
+
+                </p:dataView>
+
+
+            </h:form>
+        </p:tab>
+
+        <p:tab title="Lugares prendientes">
+            <h:form id="form2">
+                <p:dataView var="lugar" value="#{perfilBean.lugaresNoAutorizados}" rows="12" paginator="true" listIcon="pi pi-bars" >
+
+                    <p:dataViewListItem>
+                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                            <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Tipo:" />
+                                    <h:outputText value="#{lugar.categoria.nombre}" />
+                                    <h:outputText value="Descripción:" />
+                                    <h:outputText value="#{lugar.descripcion}" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                        </h:panelGrid>
+                    </p:dataViewListItem>
+
+                </p:dataView>
+
+
+            </h:form>
+        </p:tab>
+
+        <p:tab title="Lugares rechazados">
+            <h:form id="form4">
+                <p:dataView var="lugar" value="#{perfilBean.lugaresRechazados}" rows="12" paginator="true"  listIcon="pi pi-bars" >
+
+                    <p:dataViewListItem>
+                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                            <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Tipo:" />
+                                    <h:outputText value="#{lugar.categoria.nombre}" />
+                                    <h:outputText value="Descripción:" />
+                                    <h:outputText value="#{lugar.descripcion}" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                        </h:panelGrid>
+                    </p:dataViewListItem>
+
+                </p:dataView>
+
+
+            </h:form>
+        </p:tab>
+
+        <p:tab title="Favoritos">
+            <h:form id="form3">
+                <p:dataView var="lugar" value="#{perfilBean.lugaresFavoritos}" rows="12" paginator="true" listIcon="pi pi-bars" >
+
+                    <p:dataViewListItem>
+                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                            <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Tipo:" />
+                                    <h:outputText value="#{lugar.categoria.nombre}" />
+                                    <h:outputText value="Descripción:" />
+                                    <h:outputText value="#{lugar.descripcion}" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                        </h:panelGrid>
+                    </p:dataViewListItem>
+
+                </p:dataView>
+
+
+            </h:form>
+        </p:tab>
+    </p:tabView>
+        </p:panel>
+    </div>
+    </ui:define>
+</ui:composition>
 </html>

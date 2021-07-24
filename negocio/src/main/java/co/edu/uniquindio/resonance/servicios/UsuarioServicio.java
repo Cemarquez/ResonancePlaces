@@ -1,5 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
+import co.edu.uniquindio.resonance.entidades.Favorito;
+import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Usuario;
 
 import java.util.List;
@@ -16,5 +18,9 @@ public interface UsuarioServicio {
     Usuario obtenerUsuario(String nickname) throws Exception;
     List<Usuario> listarUsuarios();
     Usuario iniciarSesion(String usuario, String contrasena) throws Exception;
+    List<Lugar> obtenerLugaresAutorizados(String nickname);
+    List<Lugar> obtenerLugaresNoAutorizados(String nickname);
+    List<Lugar> obtenerFavoritos (String nickname);
+    List<Lugar> obtenerLugaresRechazados(String nickname);
 
 }

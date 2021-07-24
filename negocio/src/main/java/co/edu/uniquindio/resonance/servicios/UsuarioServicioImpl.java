@@ -1,5 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
+import co.edu.uniquindio.resonance.entidades.Favorito;
+import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,6 +140,27 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         }
         return  user;
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresAutorizados(String nickname) {
+        return usuarioRepo.obtenerLugaresAutorizados(nickname);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresNoAutorizados(String nickname) {
+        return usuarioRepo.obtenerLugaresNoAutorizados(nickname);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresRechazados(String nickname) {
+        return null;
+    }
+
+    @Override
+    public List<Lugar> obtenerFavoritos(String nickname) {
+
+        return usuarioRepo.obtenerLugaresFavoritos(nickname);
     }
 
     /**

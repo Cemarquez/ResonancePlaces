@@ -29,6 +29,22 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
     List<Lugar> obtenerLugares(String nickname);
 
     /**
+     * Query que permite obtener los lugares autorizados de un usuario determinado
+     * @param nickname
+     * @return
+     */
+    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.estado = true")
+    List<Lugar> obtenerLugaresAutorizados(String nickname);
+
+    /**
+     * Query que permite obtener los lugares no autorizados de un usuario determinado
+     * @param nickname
+     * @return
+     */
+    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.estado = false")
+    List<Lugar> obtenerLugaresNoAutorizados(String nickname);
+
+    /**
      * Query que permite obtener los lugares favoritos de un usuario determinado
      * @param nickname
      * @return
