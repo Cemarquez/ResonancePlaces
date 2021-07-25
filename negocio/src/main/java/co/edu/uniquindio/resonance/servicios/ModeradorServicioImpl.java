@@ -5,6 +5,7 @@ import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.repositorios.LugarRepo;
 import co.edu.uniquindio.resonance.repositorios.ModeradorRepo;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,21 +64,38 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     }
 
     @Override
-    public void aprobarLugar(int codigoLugar) {
+    public List<Lugar> obtenerLugaresAprobados(String nicknameModerador) {
+        return moderadorRepo.obtenerLugaresAutorizados(nicknameModerador);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresRechazados(String nicknameModerador) {
+        return moderadorRepo.obtenerLugaresRechazados(nicknameModerador);
+    }
+
+    @Override
+    public void aprobarLugar(int codigoLugar,String nicknameModerador) {
+        Moderador mod = moderadorRepo.findById(nicknameModerador).get();
         Lugar lugar = lugarRepo.findById(codigoLugar).get();
         lugar.setEstado(true);
         lugar.setRechazado(false);
-
+        lugar.setModerador(mod);
         lugarRepo.save(lugar);
+        moderadorRepo.obtenerLugaresAutorizados(nicknameModerador).add(lugar);
+        moderadorRepo.save(mod);
 
     }
 
     @Override
-    public void rechazarLugar(int codigoLugar) {
+    public void rechazarLugar(int codigoLugar,String nicknameModerador) {
         Lugar lugar = lugarRepo.findById(codigoLugar).get();
+        Moderador mod = moderadorRepo.findById(nicknameModerador).get();
         lugar.setRechazado(true);
         lugar.setEstado(true);
+        lugar.setModerador(mod);
         lugarRepo.save(lugar);
+        moderadorRepo.obtenerLugaresRechazados(nicknameModerador).add(lugar);
+        moderadorRepo.save(mod);
 
     }
 

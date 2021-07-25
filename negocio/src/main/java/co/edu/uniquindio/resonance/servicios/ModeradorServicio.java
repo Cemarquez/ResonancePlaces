@@ -14,9 +14,12 @@ public interface ModeradorServicio {
     Moderador iniciarSesion(String usuario, String contrasena) throws Exception;
 
     List<Lugar> obtenerLugaresSinAprobar();
-    void aprobarLugar (int codigoLugar);
 
-    void rechazarLugar(int codigoLugar);
+    List<Lugar> obtenerLugaresAprobados(String nicknameModerador);
+    List<Lugar> obtenerLugaresRechazados(String nicknameModerador);
+    void aprobarLugar (int codigoLugar, String nicknameModerador);
+
+    void rechazarLugar(int codigoLugar,String nicknameModerador);
 
 
     }
