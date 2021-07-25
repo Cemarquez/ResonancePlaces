@@ -1,8 +1,10 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.Administrador;
+import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.AdministradorRepo;
+import co.edu.uniquindio.resonance.repositorios.ModeradorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,8 @@ public class AdministradorServicioImpl implements  AdministradorServicio, Serial
 
     @Autowired
     private AdministradorRepo administradorRepo;
+    @Autowired
+    private ModeradorRepo moderadorRepo;
 
 
     @Override
@@ -71,5 +75,32 @@ public class AdministradorServicioImpl implements  AdministradorServicio, Serial
 
         }
         return user;
+    }
+
+    @Override
+    public void crearModerador(Moderador moderador, String adminNickname) {
+        Administrador admin = administradorRepo.findById(adminNickname).get();
+        moderador.setAdministrador(admin);
+        admin.getModeradores().add(moderador);
+        moderadorRepo.save(moderador);
+        administradorRepo.save(admin);
+
+
+    }
+
+    @Override
+    public List<Moderador> listarModeradores(String adminNickname) {
+
+            return administradorRepo.listarModeradores(adminNickname);
+    }
+
+    @Override
+    public void eliminarModerador(String adminNickname, Moderador moderador) {
+        Administrador admin = administradorRepo.findById(adminNickname).get();
+        admin.getModeradores().remove(moderador);
+        moderadorRepo.delete(moderador);
+        administradorRepo.save(admin);
+
+
     }
 }

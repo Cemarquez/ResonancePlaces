@@ -42,7 +42,7 @@ public class Administrador {
     /**
      * Relación que corresponde a la lista de moderadores asignados por el administrador
      */
-    @OneToMany (mappedBy = "administrador")
+    @OneToMany (mappedBy = "administrador", fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Moderador> moderadores;
 
