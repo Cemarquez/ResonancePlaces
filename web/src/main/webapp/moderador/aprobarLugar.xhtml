@@ -15,10 +15,15 @@
 </ui:define>
 <ui:define name="title">Lugares creados</ui:define>
     <ui:define name="content">
+        <p:tabView dynamic="true" cache="false" >
+
+            <p:tab title="Lugares pendientes" >
+
     <h:form id="form">
 
-        <h:outputText value="No hay lugares pendientes" rendered="#{moderadorBean.lugaresSinAprobar.isEmpty()}" />
+       <h2> <h:outputText value="No hay lugares pendientes"  rendered="#{moderadorBean.lugaresSinAprobar.isEmpty()}" /></h2>
         <p:dataView var="lugar" value="#{moderadorBean.lugaresSinAprobar}"  rendered="#{!moderadorBean.lugaresSinAprobar.isEmpty()}" rows="12" paginator="true"  listIcon="pi pi-bars"  >
+
 
 
 
@@ -39,8 +44,8 @@
                     <p:outputPanel>
                         <h:panelGrid>
                             <p:commandButton value="Ver detalle" action="#{moderadorBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
-                            <p:commandButton value="Aprobar" action="#{moderadorBean.aprobarLugar(lugar.codigo)}"  update="@form" styleClass="ui-button-raised ui-button-success mt-2" icon="pi pi-check" iconPos="right" />
-                            <p:commandButton value="Rechazar" action="#{moderadorBean.rechazarLugar(lugar.codigo)}" update="@form" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-ban" iconPos="right" />
+                            <p:commandButton value="Aprobar" action="#{moderadorBean.aprobarLugar(lugar.codigo,moderadorBean.moderadorLogin.nickname)}"  update="@form" styleClass="ui-button-raised ui-button-success mt-2" icon="pi pi-check" iconPos="right" />
+                            <p:commandButton value="Rechazar" action="#{moderadorBean.rechazarLugar(lugar.codigo,moderadorBean.moderadorLogin.nickname)}" update="@form" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-ban" iconPos="right" />
                         </h:panelGrid>
                     </p:outputPanel>
                 </h:panelGrid>
@@ -50,6 +55,95 @@
 
 
     </h:form>
+    </p:tab>
+
+
+            <p:tab title="Lugares aprobados">
+
+                <h:form id="form2">
+
+                   <h2><h:outputText value="No hay lugares aprobados"  rendered="#{moderadorBean.lugaresAprobados.isEmpty()}" /> </h2>
+                    <p:dataView var="lugar" value="#{moderadorBean.lugaresAprobados}"  rendered="#{!moderadorBean.lugaresAprobados.isEmpty()}" rows="12" paginator="true"  listIcon="pi pi-bars"  >
+
+
+
+
+                        <p:dataViewListItem >
+                            <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                                <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value="Nombre:" />
+                                        <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                        <h:outputText value="Tipo:" />
+                                        <h:outputText value="#{lugar.categoria.nombre}" />
+                                        <h:outputText value="Descripción:" />
+                                        <h:outputText value="#{lugar.descripcion}" />
+                                    </h:panelGrid>
+                                </p:outputPanel>
+
+                                <p:outputPanel>
+                                    <h:panelGrid>
+                                        <p:commandButton value="Ver detalle" action="#{moderadorBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                        <p:commandButton value="Aprobado" action="#{moderadorBean.aprobarLugar(lugar.codigo,moderadorBean.moderadorLogin.nickname)}"  update="@form"  disabled="true" styleClass="ui-button-raised ui-button-success mt-2" icon="pi pi-check" iconPos="right" />
+
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </p:dataViewListItem>
+
+                    </p:dataView>
+
+
+                </h:form>
+            </p:tab>
+
+
+
+            <p:tab title="Lugares rechazados">
+
+                <h:form id="form3">
+
+                   <h2><h:outputText value="No hay lugares rechazados" rendered="#{moderadorBean.lugaresRechazados.isEmpty()}" /></h2>
+                    <p:dataView var="lugar" value="#{moderadorBean.lugaresRechazados}"  rendered="#{!moderadorBean.lugaresRechazados.isEmpty()}" rows="12" paginator="true"  listIcon="pi pi-bars"  >
+
+
+
+
+                        <p:dataViewListItem >
+                            <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                                <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value="Nombre:" />
+                                        <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                        <h:outputText value="Tipo:" />
+                                        <h:outputText value="#{lugar.categoria.nombre}" />
+                                        <h:outputText value="Descripción:" />
+                                        <h:outputText value="#{lugar.descripcion}" />
+                                    </h:panelGrid>
+                                </p:outputPanel>
+
+                                <p:outputPanel>
+                                    <h:panelGrid>
+                                        <p:commandButton value="Ver detalle" action="#{moderadorBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                        <p:commandButton value="Rechazado" action="#{moderadorBean.aprobarLugar(lugar.codigo,moderadorBean.moderadorLogin.nickname)}"  update="@form" disabled="true" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-times" iconPos="right" />
+
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </p:dataViewListItem>
+
+                    </p:dataView>
+
+
+                </h:form>
+            </p:tab>
+
+    </p:tabView>
+
+
+
 
     </ui:define>
 

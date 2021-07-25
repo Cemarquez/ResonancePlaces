@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 /**
@@ -46,14 +47,23 @@ public class Moderador {
     /**
      * Relación correspondiente a la lista de lugares que el moderador ha autorizado 1 ---> n
      */
-    @OneToMany( mappedBy = "moderador")
+    @OneToMany( mappedBy = "moderador",fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Lugar> lugares;
+
+    /**
+     * Relación correspondiente a la lista de lugares que el moderador ha rechazado 1 ---> n
+     */
+    @OneToMany(mappedBy = "moderador",fetch = FetchType.EAGER)
+    @ToString.Exclude
+    private  List<Lugar> lugaresRechazados;
 
     public Moderador(String nickname, String nombre, String email, String contrasena) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.email = email;
         this.contrasena = contrasena;
+        this.lugares = new ArrayList<>();
+        this.lugaresRechazados = new ArrayList<>();
     }
 }

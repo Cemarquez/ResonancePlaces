@@ -26,15 +26,32 @@ public interface ModeradorRepo extends JpaRepository<Moderador,String> {
     @Query("select m from Moderador m where m.email = ?1")
     Moderador buscarModPorEmail(String email);
 
-
-    @Query("select l from Moderador m, IN (m.lugares) l where m.nickname = ?1 ")
+    /*
+    @Query("select l from Moderador m, IN (m.lugares)  l where m.nickname = ?1")
     List<Lugar> obtenerLugaresAutorizados(String nickname);
+
+    @Query("select l from Moderador m, IN (m.lugaresRechazados) l where m.nickname = ?1 ")
+    List<Lugar> obtenerLugaresRechazados(String nickname);
+    */
+
+
+    @Query("select l from Lugar l join Moderador m  ON l.moderador.nickname = m.nickname where m.nickname=?1 and l.estado= true and l.rechazado= false")
+    List<Lugar> obtenerLugaresAutorizados(String nickname);
+
+    @Query("select l from Lugar l join Moderador m  ON l.moderador.nickname = m.nickname where m.nickname=?1 and l.estado= true and l.rechazado= true")
+    List<Lugar> obtenerLugaresRechazados(String nickname);
+
+
+
 
     @Query("select m from Moderador m where ?1 MEMBER OF m.lugares")
     boolean esLugarModerador(int idLugar);
 
     @Query("select l from Lugar l where l.estado= false  ")
     List <Lugar> obtenerLugaresSinAprobar();
+
+
+
 
 
 

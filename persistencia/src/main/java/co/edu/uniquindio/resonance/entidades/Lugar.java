@@ -64,7 +64,7 @@ public class Lugar {
     /**
      * Relacion que corresponde a la lista de fotos que fueron asignadas a un lugar
      */
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     @Column(name="url_foto")
         private List<String> foto;
@@ -124,7 +124,7 @@ public class Lugar {
         this.nombre = nombre;
     }
 
-
+    @Transactional
     public String getImagenPrincipal(){
         if(getFoto().size()>0){
             return foto.get(0);
