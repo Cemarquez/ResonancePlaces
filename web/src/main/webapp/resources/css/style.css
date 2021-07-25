@@ -71,13 +71,72 @@ body {
 
 }
 
+.text-comentario-h2{
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    color: #222222 !important;
+    font-size: 16px !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    padding: 0px !important;
+}
+
 .lista-horario{
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
     color: #222222 !important;
     font-size: 13px !important;
-    font-weight: inherit !important;
+    font-weight: lighter !important;
     line-height: inherit !important;
     padding: 0px !important;
+    margin-bottom: 0px;
+}
+.estado-lugar-cerrado{
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    background-color: red;
+    font-weight: bolder !important;
+    border-radius: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.estado-lugar-abierto{
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    background-color: forestgreen;
+    font-weight: bolder !important;
+    border-radius: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.lista-comentario{
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    color: #222222 !important;
+    font-size: 13px !important;
+    font-weight: lighter !important;
+    line-height: inherit !important;
+    padding: 0px !important;
+    margin-bottom: 0px;
+}
+.lista-comentario-respuesta{
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    color: #7e7e7e !important;
+    font-size: 13px !important;
+    font-weight: lighter !important;
+    line-height: inherit !important;
+    padding: 0px !important;
+}
+.titulo-comentario{
+    font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.35;
+}
+
+.noBorders *{
+    border: none !important;
 }
 
 
@@ -91,6 +150,7 @@ body {
     width: 350px;
     height: 50px;
     position: center;
+    border-image: initial;
 }
 
 .form-input-comentario-titulo{

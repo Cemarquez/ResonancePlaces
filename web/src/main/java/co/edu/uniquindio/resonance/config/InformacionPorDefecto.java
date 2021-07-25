@@ -85,17 +85,17 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 DateTimeFormatter formatter =
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S", Locale.US);
 
-                String text = "2011-02-18 08:30:00.0";
-                LocalDateTime localDateTime = LocalDateTime.parse(text, formatter);
+                String text1 = "2011-02-18 08:30:00.0";
+                String text2 = "2011-02-18 22:30:00.0";
+                LocalDateTime localDateTime = LocalDateTime.parse(text1, formatter);
                 LocalTime local = localDateTime.toLocalTime();
-                Horario horario = new Horario();
-                horario.setLugar(lugar);
-                horario.setDia("lunes");
-                horario.setCerrado(false);
-                horario.setHoraInicio(local);
-                horario.setHoraCierre(local);
-                System.out.println(horario);
-                horarioServicio.registrarHorario(horario);
+
+                LocalDateTime localDateTime2 = LocalDateTime.parse(text2, formatter);
+                LocalTime local2 = localDateTime2.toLocalTime();
+                Horario h = new Horario("Lunes", local, local2, false, lugar);
+                Horario h2 = new Horario("Domingo", local, local2, false, lugar);
+                horarioServicio.registrarHorario(h);
+                horarioServicio.registrarHorario(h2);
 
                 //new es
                 Administrador admin = new Administrador("admin","admin","admin@gmail.com","admin");

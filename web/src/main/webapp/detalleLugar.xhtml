@@ -42,7 +42,7 @@
                                        </div>
                                        <div class="col ml">
                                            <h:form id="favorito_lugar">
-                                               <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado}"/>
+                                               <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}"/>
                                            </h:form>
                                        </div>
                                        <h1 class="text-detalle-h1"> #{detalleLugarBean.lugar.nombre}</h1>
@@ -56,16 +56,16 @@
 
                        </div>
 
+                        <p:panel header="Horarios" styleClass="mt-4">
+                            <h:outputLabel value="#{detalleLugarBean.estado}" styleClass="#{detalleLugarBean.estadoStyle}"/>
+                            <p:dataList emptyMessage="No hay horarios para este lugar." value="#{detalleLugarBean.lugar.horarios}" var="horario" type="definition" itemType="disc" styleClass="noBorders">
 
-                        <div class="mt-4" >
-                                <p:dataList emptyMessage="No hay horarios para este lugar." value="#{detalleLugarBean.lugar.horarios}" var="horario" style="font-size: 16px">
-                                    <f:facet name="header">Horarios</f:facet>
-                                    <p class="lista-horario">
-                                        <b>#{horario.dia}: </b>  #{horario.horaInicio} a #{horario.horaCierre}
-                                    </p>
-                                </p:dataList>
+                                <p class="lista-horario">
+                                    <b>#{horario.dia}: </b>  #{horario.horaInicio} a #{horario.horaCierre}
+                                </p>
+                            </p:dataList>
+                        </p:panel>
 
-                        </div>
 
 
 
@@ -82,8 +82,8 @@
               </p>
             </p:panel>
 
-            <p:panel header="Crear nuevo comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}">
-                <h:form id="crear_comentario">
+            <p:panel header="Crear nuevo comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}">
+                <h:form id="crear-comentarios">
                     <h:panelGrid columns="3" cellpadding="5">
                         <p:outputLabel value="Titulo: " for="titulo_comentario"/>
                         <p:inputText id="titulo_comentario" required="true" value="#{detalleLugarBean.nuevaCalificacion.titulo}" placeholder="Ponle un titulo a tu calificación" requiredMessage="Debe ingresar un titulo" styleClass="form-input-comentario-titulo"/>
@@ -92,19 +92,38 @@
                         <p:inputTextarea id="mensaje_comentario" value="#{detalleLugarBean.nuevaCalificacion.mensaje}" required="true" placeholder="Escribe sobre la experiencia, servicio, ubicación..." requiredMessage="Debe ingresar su comentario" styleClass="form-input-comentario" style="height: 50px"/>
                         <p:outputLabel value=""/>
                         <p:outputLabel value=""/>
-                        <p:commandButton action="#{detalleLugarBean.crearComentario}" style="height: 30px"  value="Enviar calificación" update="@form" />
+                        <p:commandButton action="#{detalleLugarBean.crearComentario}" style="height: 30px"  value="Enviar calificación" update="@form lista-comentarios" />
 
                     </h:panelGrid>
                     <p:growl showDetail="true"/>
-                </h:form>
 
+            </h:form>
 
             </p:panel>
 
                 <p:panel header="Comentarios" styleClass="mt-3">
+                    <p class="titulo-comentario"> Últimos comentarios realizados</p>
+                    <p:dataList id="lista-comentarios" value="#{detalleLugarBean.calificaciones}" var="calificacion" emptyMessage="No hay comentarios" type="definition" itemType="disc" styleClass="noBorders" >
+                        <div class="mt-4">
+                            <p:rating readonly="true" value="#{calificacion.valor}" />
+                            <h2 class="text-comentario-h2"> #{calificacion.titulo} </h2>
+                            <p class="lista-comentario" > #{calificacion.mensaje}</p>
+                        </div>
+                        <h:form>
+                        <h:panelGrid columns="3" cellpadding="5" rendered="#{!calificacion.tieneRespuesta() and detalleLugarBean.isDuenio()}">
+                            <i class="pi pi-angle-right"></i>
+                            <p:inputTextarea id="respuesta_comentario" value="#{detalleLugarBean.respuesta}" required="true" placeholder="Escribe una respuesta" requiredMessage="Debe ingresar su respuesta" styleClass="form-input-comentario" style="height: 48px;"/>
+                            <p:commandButton action="#{detalleLugarBean.crearRespuesta(calificacion.codigo)}" style="height: 48px"  value="Enviar respuesta" update="lista-comentarios" />
+                        </h:panelGrid>
+                        </h:form>
 
+                        <h:panelGrid columns="3" cellpadding="5" rendered="#{calificacion.tieneRespuesta()}">
+                            <i class="pi pi-angle-right"></i>
+                            <p:outputLabel value="#{calificacion.respuesta}" styleClass="lista-comentario-respuesta"/>
+                            <p:outputLabel value="#{calificacion.fecha}" styleClass="lista-comentario-respuesta" />
+                        </h:panelGrid>
+                    </p:dataList>
                 </p:panel>
-
 
         </div>
 

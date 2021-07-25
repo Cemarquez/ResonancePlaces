@@ -50,6 +50,14 @@ public class Horario {
         this.cerrado = cerrado;
     }
 
+    public Horario(String dia, LocalTime horaInicio, LocalTime horaCierre, boolean cerrado, Lugar lugar) {
+        this.dia = dia;
+        this.horaInicio = horaInicio;
+        this.horaCierre = horaCierre;
+        this.cerrado = cerrado;
+        this.lugar = lugar;
+    }
+
     public boolean updateCerrado(){
         return !cerrado;
     }

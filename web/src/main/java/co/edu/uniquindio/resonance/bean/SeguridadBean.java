@@ -24,23 +24,29 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     private Administrador administrador;
+
     @Getter @Setter
     private Moderador moderador;
+
     @Getter @Setter
     private Usuario usuario;
+
     @Getter @Setter
     private boolean autenticado;
 
     @Getter @Setter
     @NotBlank
     private String email,password;
+
     @Getter @Setter
     private String rol;
 
     @Autowired
     private AdministradorServicio administradorServicio;
+
     @Autowired
     private ModeradorServicio moderadorServicio;
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -62,6 +68,7 @@ public class SeguridadBean implements Serializable {
                 } else if (moderador!=null){
                     autenticado=true;
                     rol = "moderador";
+                    System.out.println(rol);
                     return "/moderador/aprobarLugar?faces-redirect=true";
                 } else if (usuario!=null){
                     autenticado=true;

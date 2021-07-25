@@ -16,6 +16,7 @@ public interface CalificacionServicio {
     void eliminarCalificacion(Calificacion calificacion) throws Exception;
     Calificacion actualizarCalificacion(Calificacion calificacion) throws Exception;
     List<Calificacion> listarCalificaciones();
+    Calificacion obtenerCalificacion(Integer id);
 
 
 

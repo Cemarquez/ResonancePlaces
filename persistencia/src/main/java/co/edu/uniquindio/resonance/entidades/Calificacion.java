@@ -29,7 +29,6 @@ public class Calificacion {
     @Column(name = "fecha", nullable = false)
     private Date fecha;
     @Column(name="titulo", nullable = false)
-    @NotBlank
     private String titulo;
 
     @Column(name="mensaje", nullable = false)
@@ -42,6 +41,9 @@ public class Calificacion {
     @ToString.Exclude
     @JoinColumn(name = "nickname_usuario", nullable = false)
     private Usuario usuario;
+
+    @Column(name = "respuesta")
+    private String respuesta;
 
     /**
      * Relacion entre calificacion y lugar, muchas calificaciones tienen un lugar
@@ -57,5 +59,12 @@ public class Calificacion {
         this.mensaje = mensaje;
         this.usuario = usuario;
         this.lugar = lugar;
+    }
+
+    public boolean tieneRespuesta(){
+        if(respuesta!=null)
+            return true;
+
+        return false;
     }
 }

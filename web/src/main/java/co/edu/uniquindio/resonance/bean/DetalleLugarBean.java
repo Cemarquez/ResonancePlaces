@@ -4,6 +4,7 @@ import co.edu.uniquindio.resonance.entidades.Calificacion;
 import co.edu.uniquindio.resonance.entidades.Horario;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.servicios.CalificacionServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.*;
 
 @Component
 @ViewScoped
@@ -30,6 +34,9 @@ public class DetalleLugarBean  implements Serializable {
 
     @Autowired
     private LugarServicio lugarServicio;
+
+    @Autowired
+    private CalificacionServicio calificacionServicio;
 
     @Setter
     @Getter
@@ -66,6 +73,15 @@ public class DetalleLugarBean  implements Serializable {
     @Getter
     private Calificacion nuevaCalificacion;
 
+    @Getter @Setter
+    private String respuesta;
+
+    @Getter @Setter
+    private String estado;
+
+    @Getter @Setter
+    private String estadoStyle;
+
     @PostConstruct
     public void inicializar() {
         if (lugarParam != null && !lugarParam.isEmpty()) {
@@ -82,6 +98,12 @@ public class DetalleLugarBean  implements Serializable {
                         favorito = true;
                         this.styleBoton = "rounded-button ui-button-danger";
                     }
+                this.estado ="Cerrado";
+                    this.estadoStyle= "estado-lugar-cerrado";
+                if(isAbierto()) {
+                    this.estado = "Abierto";
+                    this.estadoStyle = "estado-lugar-abierto";
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,6 +132,7 @@ public class DetalleLugarBean  implements Serializable {
                 nuevaCalificacion.setUsuario(usuarioLogin);
                 lugarServicio.crearCalificacion(nuevaCalificacion);
                 nuevaCalificacion = new Calificacion();
+                this.calificaciones = lugarServicio.listarCalificaciones(lugar.getCodigo());
             }
 
 
@@ -132,6 +155,46 @@ public class DetalleLugarBean  implements Serializable {
 
         }
 
+        public void crearRespuesta(Integer id){
+            Calificacion c = calificacionServicio.obtenerCalificacion(id);
+            c.setRespuesta(respuesta);
+            try {
+                calificacionServicio.actualizarCalificacion(c);
+                this.calificaciones = lugarServicio.listarCalificaciones(lugar.getCodigo());
+                this.respuesta=null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
+
+        public boolean isDuenio(){
+        if(usuarioLogin!=null)
+            if(usuarioLogin.getNickname().equals(lugar.getUsuario().getNickname()))
+                return true;
+
+            return false;
+        }
+
+        public boolean isAbierto(){
+            Date date = new Date();
+            for(Horario h : horarios){
+                if(h.getDia().equalsIgnoreCase(obtenerDia(date))){
+                    LocalTime horaActual = LocalTime.now(ZoneId.of("America/Bogota"));
+                    System.out.println(h.getHoraInicio() + ", " + h.getHoraCierre() + ", " + horaActual +", " + ZoneId.systemDefault());
+                    if(h.getHoraInicio().compareTo(horaActual) <0 && h.getHoraCierre().compareTo(horaActual)>0){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public String obtenerDia(Date date){
+            String DIA[] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
+            Calendar calendario = Calendar.getInstance();
+
+            return DIA[calendario.get(Calendar.DAY_OF_WEEK) - 1];
+        }
 
 }

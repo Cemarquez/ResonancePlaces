@@ -124,4 +124,9 @@ public class CalificacionServicioImpl implements CalificacionServicio {
     public List<Calificacion> listarCalificaciones() {
         return calificacionRepo.findAll();
     }
+
+    @Override
+    public Calificacion obtenerCalificacion(Integer id) {
+        return calificacionRepo.findById(id).get();
+    }
 }
