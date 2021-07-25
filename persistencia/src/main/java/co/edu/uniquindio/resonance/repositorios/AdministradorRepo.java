@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.repositorios;
 
 import co.edu.uniquindio.resonance.entidades.Administrador;
+import co.edu.uniquindio.resonance.entidades.Moderador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,7 +23,8 @@ public interface AdministradorRepo extends JpaRepository<Administrador, String> 
 
     Administrador findAdministradorByEmailAndContrasena(String usuario,String contrasena);
 
-
+    @Query("select a.moderadores from Administrador a where a.nickname=?1")
+    List<Moderador> listarModeradores(String nicknameAdmin);
 
 
 
