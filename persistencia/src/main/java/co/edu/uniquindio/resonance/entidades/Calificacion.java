@@ -47,8 +47,6 @@ public class Calificacion {
     @JoinColumn(name = "nickname_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "respuesta")
-    private String respuesta;
 
     /**
      * Relacion entre calificacion y lugar, muchas calificaciones tienen un lugar
