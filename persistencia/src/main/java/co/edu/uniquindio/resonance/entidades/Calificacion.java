@@ -25,11 +25,16 @@ public class Calificacion {
 
     @Column(name="valor", nullable = false)
     private int valor;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha", nullable = false)
     private Date fecha;
+
     @Column(name="titulo", nullable = false)
     private String titulo;
+
+    @Column(name ="respuesta")
+    private String respuesta;
 
     @Column(name="mensaje", nullable = false)
     private String mensaje;
@@ -51,6 +56,8 @@ public class Calificacion {
     @ManyToOne
     @JoinColumn(name = "codigo_lugar", nullable = false)
     private Lugar lugar;
+
+
 
 
     public Calificacion(int valor,  String titulo, String mensaje, Usuario usuario, Lugar lugar) {
