@@ -42,7 +42,7 @@
                                        </div>
                                        <div class="col ml">
                                            <h:form id="favorito_lugar">
-                                               <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado}"/>
+                                               <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado and !seguridadBean.rol=='moderador' and !detalleLugarBean.lugar.rechazado} "/>
                                            </h:form>
                                        </div>
                                        <h1 class="text-detalle-h1"> #{detalleLugarBean.lugar.nombre}</h1>
@@ -82,7 +82,7 @@
               </p>
             </p:panel>
 
-            <p:panel header="Crear nuevo comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}">
+            <p:panel header="Crear nuevo comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado and !seguridadBean.rol=='moderador' and !detalleLugarBean.lugar.rechazado}">
                 <h:form id="crear_comentario">
                     <h:panelGrid columns="3" cellpadding="5">
                         <p:outputLabel value="Titulo: " for="titulo_comentario"/>
