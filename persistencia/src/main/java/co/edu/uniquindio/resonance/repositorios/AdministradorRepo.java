@@ -2,6 +2,7 @@ package co.edu.uniquindio.resonance.repositorios;
 
 import co.edu.uniquindio.resonance.entidades.Administrador;
 import co.edu.uniquindio.resonance.entidades.Moderador;
+import co.edu.uniquindio.resonance.entidades.Reporte;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -26,7 +27,8 @@ public interface AdministradorRepo extends JpaRepository<Administrador, String> 
     @Query("select a.moderadores from Administrador a where a.nickname=?1")
     List<Moderador> listarModeradores(String nicknameAdmin);
 
-
+    @Query("select new co.edu.uniquindio.resonance.repositorios.Reporte1DTO(l.categoria.nombre,count(l.codigo) )   from Lugar l GROUP BY l.categoria.nombre")
+    List<Reporte1DTO>  generarReporte1();
 
 
 
