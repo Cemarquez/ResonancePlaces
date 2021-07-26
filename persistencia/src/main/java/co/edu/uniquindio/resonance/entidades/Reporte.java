@@ -51,4 +51,6 @@ public class Reporte implements Serializable {
         this.descripcion = descripcion;
         this.nombre = nombre;
     }
+
+
 }
