@@ -52,9 +52,12 @@ public class UsuarioBean implements Serializable {
     public void registrarUsuario(){
         try {
             usuarioServicio.registrarUsuario(usuario);
+            EmailBean.sendEmailBienvenida(usuario.getEmail(), usuario.getNickname());
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Registro exitoso");
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+
+            usuario = new Usuario();
         } catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
                     e.getMessage());
