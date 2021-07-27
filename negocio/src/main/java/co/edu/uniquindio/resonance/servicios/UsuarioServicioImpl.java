@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.servicios;
 
+import co.edu.uniquindio.resonance.entidades.Calificacion;
 import co.edu.uniquindio.resonance.entidades.Favorito;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Usuario;
@@ -143,6 +144,20 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
+    public Usuario recuperarContrasenia(String usuario) throws Exception {
+
+        Usuario user = usuarioRepo.findByNickname(usuario);
+
+        if (user!=null){
+            return user;
+        } else {
+
+            user = usuarioRepo.findByEmail(usuario);
+        }
+        return  user;
+    }
+
+    @Override
     public List<Lugar> obtenerLugaresAutorizados(String nickname) {
         return usuarioRepo.obtenerLugaresAutorizados(nickname);
     }
@@ -155,6 +170,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public List<Lugar> obtenerLugaresRechazados(String nickname) {
         return usuarioRepo.obtenerLugaresRechazados(nickname);
+    }
+
+    @Override
+    public List<Calificacion> obtenerComentariosSinRespuesta(String nickname) {
+        return usuarioRepo.obtenerComentariosSinRespuesta(nickname);
     }
 
     @Override
@@ -178,8 +198,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
      * @return
      */
     public boolean estaDisponible(String email){
-        Optional<Usuario> usuario = usuarioRepo.findByEmail(email);
-        return usuario.isEmpty();
+        Usuario usuario = usuarioRepo.findByEmail(email);
+        if(usuario != null)
+            return false;
+        else
+            return true;
+
     }
 
 

@@ -6,6 +6,7 @@ import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.servicios.CalificacionServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
+import co.edu.uniquindio.resonance.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -37,6 +38,9 @@ public class DetalleLugarBean  implements Serializable {
 
     @Autowired
     private CalificacionServicio calificacionServicio;
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @Setter
     @Getter
@@ -131,6 +135,7 @@ public class DetalleLugarBean  implements Serializable {
                 nuevaCalificacion.setLugar(lugar);
                 nuevaCalificacion.setUsuario(usuarioLogin);
                 lugarServicio.crearCalificacion(nuevaCalificacion);
+                EmailBean.sendEmailComentario(lugar.getUsuario().getEmail(), usuarioLogin.getNickname(), nuevaCalificacion.getMensaje() , nuevaCalificacion.getTitulo(),lugar.getNombre());
                 nuevaCalificacion = new Calificacion();
                 this.calificaciones = lugarServicio.listarCalificaciones(lugar.getCodigo());
             }
@@ -160,8 +165,10 @@ public class DetalleLugarBean  implements Serializable {
             c.setRespuesta(respuesta);
             try {
                 calificacionServicio.actualizarCalificacion(c);
+                EmailBean.sendEmailRespuesta(c.getUsuario().getEmail(), lugar.getUsuario().getNickname(), c.getMensaje(), c.getTitulo(), lugar.getNombre(), c.getRespuesta());
                 this.calificaciones = lugarServicio.listarCalificaciones(lugar.getCodigo());
                 this.respuesta=null;
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

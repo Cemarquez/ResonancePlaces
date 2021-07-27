@@ -27,6 +27,9 @@ public class UsuarioBean implements Serializable {
     @Autowired
     private CiudadServicio ciudadServicio;
 
+    @Autowired
+    private SeguridadBean seguridadBean;
+
     @Getter @Setter
     private Usuario usuario;
 
@@ -49,22 +52,24 @@ public class UsuarioBean implements Serializable {
     }
 
 
-    public void registrarUsuario(){
+    public String registrarUsuario() {
         try {
             usuarioServicio.registrarUsuario(usuario);
             EmailBean.sendEmailBienvenida(usuario.getEmail(), usuario.getNickname());
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Registro exitoso");
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-
-            usuario = new Usuario();
+            seguridadBean.setEmail(usuario.getNickname());
+            seguridadBean.setPassword(usuario.getContrasena());
+            return seguridadBean.iniciarSesion();
         } catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
                     e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         }
 
-    }
 
+        return null;
+    }
 
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.repositorios;
 
 
+import co.edu.uniquindio.resonance.entidades.Calificacion;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Usuario;
 import org.springframework.data.domain.PageRequest;
@@ -68,7 +69,7 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
      * @param email
      * @return
      */
-    Optional<Usuario> findByEmail(String email);
+    Usuario findByEmail(String email);
 
     /**
      * Query que permite obtener un usuario acorde a un nickname determinado
@@ -121,6 +122,10 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
      */
     @Query("select  u from Usuario u where u.email like  concat('%',?1,'%')  ")
     List<Usuario> obtenerUsuariosDeDominio(String dominio);
+
+    @Query("select c from  Calificacion c inner join Lugar l on c.lugar.codigo = l.codigo inner join Usuario  u on l.usuario.nickname = u.nickname where  u.nickname =?1 and c.respuesta is null")
+    //select c.mensaje from Calificacion c inner join Lugar l on c.codigo_lugar = l.codigo inner join Usuario u on l.nickname_usuario = u.nickname where u.nickname = 'RyanGiraldo';
+    List<Calificacion> obtenerComentariosSinRespuesta(String nickname);
 
 
 }
