@@ -1,8 +1,10 @@
 package co.edu.uniquindio.resonance.bean;
 
+import co.edu.uniquindio.resonance.entidades.Calificacion;
 import co.edu.uniquindio.resonance.entidades.Favorito;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.servicios.CalificacionServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import co.edu.uniquindio.resonance.servicios.UsuarioServicio;
 import lombok.Getter;
@@ -48,8 +50,19 @@ public class perfilBean implements Serializable {
     @Autowired
     private LugarServicio lugarServicio;
 
+    @Setter @Getter
+    private List<Calificacion> calificacionesSinRespuesta;
+
+    @Autowired
+    private CalificacionServicio calificacionServicio;
+
+
+    @Getter @Setter
+    private String respuesta;
+
     @PostConstruct
     public void inicializar() {
+        this.calificacionesSinRespuesta = usuarioServicio.obtenerComentariosSinRespuesta(usuario.getNickname());
         this.lugaresAutorizados = usuarioServicio.obtenerLugaresAutorizados(usuario.getNickname());
         this.favoritos = usuario.getFavoritos();
         this.lugaresNoAutorizados = usuarioServicio.obtenerLugaresNoAutorizados(usuario.getNickname());
@@ -69,4 +82,25 @@ public class perfilBean implements Serializable {
         }
     }
 
+    public boolean isPendientes(){
+        if (calificacionesSinRespuesta.size() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public void crearRespuesta(Integer id){
+        Calificacion c = calificacionServicio.obtenerCalificacion(id);
+        c.setRespuesta(respuesta);
+
+        try {
+            calificacionServicio.actualizarCalificacion(c);
+            EmailBean.sendEmailRespuesta(c.getUsuario().getEmail(), c.getLugar().getUsuario().getNickname(), c.getMensaje(), c.getTitulo(), c.getLugar().getNombre(), c.getRespuesta());
+            this.calificacionesSinRespuesta = usuarioServicio.obtenerComentariosSinRespuesta(usuario.getNickname());
+            this.respuesta=null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
