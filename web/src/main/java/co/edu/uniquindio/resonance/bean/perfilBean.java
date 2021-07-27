@@ -90,7 +90,6 @@ public class perfilBean implements Serializable {
     }
 
     public void crearRespuesta(Integer id){
-        System.out.println("ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         Calificacion c = calificacionServicio.obtenerCalificacion(id);
         c.setRespuesta(respuesta);
 
