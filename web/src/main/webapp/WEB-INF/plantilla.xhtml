@@ -58,7 +58,7 @@
                         <div class="d-flex">
                             <h:form class="d-flex me-2">
                                 <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
-                                <p:commandButton styleClass="btn btn-outline-light btn-buscar" icon="pi pi-search" value="Buscar" action="#{busquedaBean.buscar}"  />
+                                <p:commandButton styleClass="btn btn-outline-light btn-buscar" icon="pi pi-search" value="Buscar" action="#{busquedaBean.irAlDetalle}"  />
                             </h:form>
                             <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-user" value="Login" onclick="PF('login').show()" rendered="#{!seguridadBean.autenticado}"  />
                             <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-sign-out" value="Logout" action="#{seguridadBean.cerrarSesion}" rendered="#{seguridadBean.autenticado}"  />

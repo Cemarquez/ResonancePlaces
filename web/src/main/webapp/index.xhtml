@@ -45,20 +45,7 @@
                     <div>
 
                         <h:form id="form">
-                            <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
-
-                                <p:dataViewGridItem>
-                                    <div class="card" style="width: 18rem; height: 29rem">
-                                        <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..." />
-                                        <div class="card-body">
-                                            <h5 class="card-title">#{lugar.nombre}</h5>
-                                            <p class="card-text">#{lugar.descripcion}</p>
-                                        </div>
-                                        <div class="m-3">
-                                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
-                                        </div>
-                                    </div>
-                                </p:dataViewGridItem>
+                            <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" listIcon="pi pi-bars" >
 
                                 <p:dataViewListItem>
                                     <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
