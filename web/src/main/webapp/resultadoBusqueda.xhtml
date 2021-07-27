@@ -7,7 +7,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
 <ui:composition template="/WEB-INF/plantilla.xhtml">
     <ui:define name="head">
 
@@ -17,47 +16,47 @@
     </ui:define>
     <ui:define name="title">Resonance Places | Resultado busqueda</ui:define>
     <ui:define name="content">
+
         <div class="container mt-4" >
 
         <div id='map' >
         </div>
 
-        <div>
+        <div class="mt-4">
 
-            <h:form id="form">
-                <p:dataView var="lugar" value="#{busquedaBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
-
-                    <p:dataViewGridItem>
-                        <div class="card" style="width: 18rem;">
-                            <img src="" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">#{lugar.nombre}</h5>
-                                <p class="card-text">#{lugar.descripcion}</p>
-                                <p:commandButton value="Ver detalle" action="#{lugarBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
-                            </div>
-                        </div>
-                    </p:dataViewGridItem>
-
-                    <p:dataViewListItem>
-                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-                            <p:graphicImage  styleClass="imagen-lugar" />
-                            <p:outputPanel>
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <h:outputText value="Nombre:" />
-                                    <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
-                                    <h:outputText value="Tipo:" />
-                                    <h:outputText value="#{lugar.categoria.nombre}" />
-                                    <h:outputText value="Descripción:" />
-                                    <h:outputText value="#{lugar.descripcion}" />
-                                </h:panelGrid>
-                            </p:outputPanel>
-                            <p:commandButton value="Ver detalle" action="#{lugarBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
-                        </h:panelGrid>
-                    </p:dataViewListItem>
-
-                </p:dataView>
+            <h:form>
+                <p:dataTable var="lugar" value="#{busquedaBean.lugares}" widgetVar="customersTable"
+                             emptyMessage="No hay lugares que cumplan con su criterio"
+                             filteredValue="#{busquedaBean.lugaresFiltrados}">
 
 
+                    <p:column headerText="Nombre" sortBy="#{lugar.nombre}" filterBy="#{lugar.nombre}">
+                        <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" width="32" style="vertical-align: middle" />
+                        <h:outputText value="#{lugar.nombre}" />
+                    </p:column>
+
+                    <p:column headerText="Ciudad" sortBy="#{lugar.ciudad.nombre}" filterBy="#{lugar.ciudad.nombre}">
+                        <span class="flag flag-#{lugar.ciudad.nombre}" style="width: 30px; height: 20px" />
+                        <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{lugar.ciudad.nombre}" />
+                    </p:column>
+
+                    <p:column headerText="Categoria" sortBy="#{lugar.categoria.nombre}" filterBy="#{lugar.categoria.nombre}">
+                        <span class="flag flag-#{lugar.categoria.nombre}" style="width: 30px; height: 20px" />
+                        <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{lugar.categoria.nombre}" />
+                    </p:column>
+
+                    <p:column headerText="Estado">
+                        <span class="estado-lugar-#{busquedaBean.obtenerEstado(lugar).toLowerCase()}" style="width: 30px; height: 20px" >
+                                #{busquedaBean.obtenerEstado(lugar)}
+                        </span>
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton value="Ver detalle" action="#{busquedaBean.irAlDetalleLugar(lugar.codigo)}" update="@form" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                    </p:column>
+
+
+                </p:dataTable>
             </h:form>
 
 

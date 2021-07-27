@@ -115,8 +115,6 @@ public class Lugar {
     private Ciudad ciudad;
 
 
-
-
     public Lugar(Categoria categoria ,String descripcion, String nombre) {
         foto = new ArrayList<>();
         this.categoria = categoria;
