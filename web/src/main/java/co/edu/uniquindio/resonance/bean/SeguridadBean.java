@@ -100,6 +100,41 @@ public class SeguridadBean implements Serializable {
     return null;
     }
 
+    public String recuperarContrasenia() {
+
+        if (email != null){
+
+            try {
+
+                usuario = usuarioServicio.recuperarContrasenia(email);
+
+               if (usuario!=null){
+                   usuario.setContrasena(EmailBean.getPassword());
+                   usuarioServicio.actualizarUsuario(usuario);
+                   EmailBean.sendEmailContraseña(usuario.getEmail(), usuario.getContrasena());
+                   FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                           "¡Contraseña enviada a tu email!");
+                   FacesContext.getCurrentInstance().addMessage("olvidaste-bean", facesMsg);
+                    return null;
+                } else{
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
+                            "¡Dirección de correo o usuario incorrecto!");
+                    FacesContext.getCurrentInstance().addMessage("olvidaste-bean",facesMsg);
+                    return null;
+                }
+
+
+
+            } catch (Exception e) {
+
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta",e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("olvidaste-bean",m);
+            }
+
+        }
+
+        return null;
+    }
 
     public String cerrarSesion() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
