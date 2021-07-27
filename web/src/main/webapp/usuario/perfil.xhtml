@@ -19,7 +19,7 @@
 
         <p:panel header="Perfil" style="font-size: large">
 
-    <p:tabView>
+    <p:tabView id="tabs-perfil">
         <p:tab title="Editar Perfil">
             <h:form>
 
@@ -151,7 +151,6 @@
         </p:tab>
 
         <p:tab title="Comentarios sin reponder" rendered="#{perfilBean.isPendientes()}" id="tabComen">
-            <p:panel header="Comentarios" styleClass="mt-3">
 
                 <p:dataList id="lista-comentarios" value="#{perfilBean.calificacionesSinRespuesta}" var="calificacion" emptyMessage="No hay comentarios" type="definition" itemType="disc" styleClass="noBorders" >
                     <div class="mt-4">
@@ -160,10 +159,10 @@
                         <p class="lista-comentario" > #{calificacion.mensaje}</p>
                     </div>
                     <h:form id="form5">
-                        <h:panelGrid columns="3" cellpadding="5">
+                        <h:panelGrid columns="3" cellpadding="5" id="panelGrid">
                             <i class="pi pi-angle-right"></i>
                             <p:inputTextarea id="respuesta_comentario" value="#{perfilBean.respuesta}" required="true" placeholder="Escribe una respuesta" requiredMessage="Debe ingresar su respuesta" styleClass="form-input-comentario" style="height: 48px;"/>
-                            <p:commandButton action="#{perfilBean.crearRespuesta(calificacion.codigo)}" style="height: 48px"  value="Enviar respuesta"/>
+                            <p:commandButton action="#{perfilBean.crearRespuesta(calificacion.codigo)}" style="height: 48px"  value="Enviar respuesta" update="tabs-perfil:lista-comentarios"/>
                         </h:panelGrid>
 
                     </h:form>
@@ -171,7 +170,6 @@
                 </p:dataList>
 
 
-            </p:panel>
         </p:tab>
 
         <p:tab title="Favoritos">
