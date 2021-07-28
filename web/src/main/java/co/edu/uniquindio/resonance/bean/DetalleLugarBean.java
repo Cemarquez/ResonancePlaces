@@ -1,15 +1,13 @@
 package co.edu.uniquindio.resonance.bean;
 
-import co.edu.uniquindio.resonance.entidades.Calificacion;
-import co.edu.uniquindio.resonance.entidades.Horario;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
 import co.edu.uniquindio.resonance.servicios.CalificacionServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import co.edu.uniquindio.resonance.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -20,10 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.*;
 
 @Component
@@ -81,11 +76,14 @@ public class DetalleLugarBean  implements Serializable {
     @Getter @Setter
     private String estadoStyle;
 
+    @Getter @Setter
+    private List<Date> rangoFechasReserva;
+
     @PostConstruct
     public void inicializar() {
         if (lugarParam != null && !lugarParam.isEmpty()) {
             try {
-
+                this.rangoFechasReserva = new ArrayList<>();
                 this.favorito = false;
                 int id = Integer.parseInt(lugarParam);
                 this.lugar = lugarServicio.obtenerLugar(Integer.parseInt(lugarParam));
@@ -138,6 +136,7 @@ public class DetalleLugarBean  implements Serializable {
 
 
         }
+
 
 
         public void marcarFavotiro () {
@@ -198,6 +197,18 @@ public class DetalleLugarBean  implements Serializable {
             Calendar calendario = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.of("America/Bogota")));
 
             return DIA[calendario.get(Calendar.DAY_OF_WEEK) - 1];
+        }
+
+        public void crearReserva(){
+            LocalDate fechaInicio = rangoFechasReserva.get(0).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFin = rangoFechasReserva.get(rangoFechasReserva.size()-1).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Reserva reserva = new Reserva(fechaInicio, fechaFin, lugar, usuarioLogin );
+            usuarioServicio.registrarReserva(reserva);
+            rangoFechasReserva = new ArrayList<>();
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                    "Reserva exitosa!");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+
         }
 
 }

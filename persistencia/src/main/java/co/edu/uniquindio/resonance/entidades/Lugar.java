@@ -93,12 +93,17 @@ public class Lugar {
     @ToString.Exclude
     private List<Horario> horarios;
 
+    @OneToMany(mappedBy = "lugar")
+    @ToString.Exclude
+    private List<Reserva> reservas;
+
     /**
      * Relacion que corresponde a la lista de calificaciones/comentarios aportados por los visitantes de un lugar
      */
     @OneToMany(mappedBy = "lugar")
     @ToString.Exclude
     private List<Calificacion> calificaciones;
+
 
     /**
      * Relacion que corresponde al moderador que autorizó el lugar

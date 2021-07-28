@@ -94,12 +94,17 @@ body {
     color: #ffffff !important;
     font-size: 13px !important;
     background-color: red;
-    font-weight: bolder !important;
+    ffont-weight: bolder !important;
     border-radius: 10px;
     padding-left: 4px;
     padding-right: 4px;
+
 }
 
+
+#formDate range_input .ui-inputfield {
+    width: 250px; !important;
+}
 .estado-lugar-abierto{
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
     color: #ffffff !important;
@@ -110,6 +115,16 @@ body {
     padding-left: 4px;
     padding-right: 4px;
 }
+.btn-reserva{
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 15px !important;
+    font-weight: lighter !important;
+    line-height: inherit !important;
+    height: 40px;
+    width: 200px;
+    margin-left: 30%
+}
+
 
 .lista-comentario{
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;

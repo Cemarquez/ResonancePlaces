@@ -1,9 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
-import co.edu.uniquindio.resonance.entidades.Calificacion;
-import co.edu.uniquindio.resonance.entidades.Favorito;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
+import co.edu.uniquindio.resonance.repositorios.ReservaRepo;
 import co.edu.uniquindio.resonance.repositorios.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +17,9 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UsuarioServicioImpl implements UsuarioServicio {
+
+    @Autowired
+    private ReservaRepo reservaRepo;
 
     private final UsuarioRepo usuarioRepo;
     public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
@@ -175,6 +176,23 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public List<Calificacion> obtenerComentariosSinRespuesta(String nickname) {
         return usuarioRepo.obtenerComentariosSinRespuesta(nickname);
+    }
+
+    @Override
+    public Reserva registrarReserva(Reserva reserva) {
+        return reservaRepo.save(reserva);
+    }
+
+    @Override
+    public void eliminarReserva(Integer id) {
+        Reserva reserva = reservaRepo.findById(id).get();
+
+        reservaRepo.delete(reserva);
+    }
+
+    @Override
+    public List<Reserva> obtenerReservas(String nickname) {
+        return reservaRepo.obtenerReservas(nickname);
     }
 
     @Override

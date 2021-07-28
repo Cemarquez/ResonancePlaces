@@ -28,6 +28,7 @@ public class LugarServicioImpl implements LugarServicio{
     @Autowired
     private FavoritoRepo favoritoRepo;
 
+
     @Override
     public Lugar registrarLugar(Lugar lugar) throws Exception {
         Optional<Lugar> buscado = lugarRepo.findById(lugar.getCodigo());
@@ -45,10 +46,27 @@ public class LugarServicioImpl implements LugarServicio{
     public void eliminarLugar(Lugar lugar) throws Exception {
         Optional<Lugar> buscado = lugarRepo.findById(lugar.getCodigo());
 
+
+
         if(!buscado.isPresent()){
             throw new Exception("No existe un lugar con ese codigo!");
         }
 
+        for (Favorito f : lugarRepo.obtenerFavoritos(lugar.getCodigo())){
+            favoritoRepo.delete(f);
+        }
+
+        for(Calificacion f : lugarRepo.obtenerCalificaciones(lugar.getCodigo())){
+            calificacionRepo.delete(f);
+        }
+
+        for(Horario h : lugarRepo.obtenerHorarios(lugar.getCodigo())){
+            
+        }
+
+
+        List<String> fotosClone = lugar.getFoto();
+        lugar.getFoto().removeAll(fotosClone);
         lugarRepo.delete(lugar);
     }
 
