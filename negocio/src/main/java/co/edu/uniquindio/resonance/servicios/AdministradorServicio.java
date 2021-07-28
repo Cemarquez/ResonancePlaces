@@ -3,6 +3,7 @@ package co.edu.uniquindio.resonance.servicios;
 import co.edu.uniquindio.resonance.entidades.Administrador;
 import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.repositorios.Reporte1DTO;
+import co.edu.uniquindio.resonance.repositorios.Reporte2DTO;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public interface AdministradorServicio  {
     List<Moderador> listarModeradores(String adminNickname);
     void eliminarModerador(String adminNickname, Moderador moderador);
     List<Reporte1DTO>generarReporte1();
+    List<Reporte2DTO>generarReporte2();
 
 
 }

@@ -4,6 +4,7 @@ import co.edu.uniquindio.resonance.entidades.Administrador;
 import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.entidades.Reporte;
 import co.edu.uniquindio.resonance.repositorios.Reporte1DTO;
+import co.edu.uniquindio.resonance.repositorios.Reporte2DTO;
 import co.edu.uniquindio.resonance.servicios.AdministradorServicio;
 import co.edu.uniquindio.resonance.servicios.ModeradorServicio;
 import co.edu.uniquindio.resonance.servicios.ReporteServicio;
@@ -22,6 +23,8 @@ import org.primefaces.model.charts.optionconfig.animation.Animation;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
+import org.primefaces.model.charts.polar.PolarAreaChartDataSet;
+import org.primefaces.model.charts.polar.PolarAreaChartModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -51,10 +54,17 @@ public class AdministradorBean {
     private BarChartModel barModel;
 
     @Getter @Setter
+    private PolarAreaChartModel  polarAreaModel;
+
+    @Getter @Setter
     protected List<Reporte> reportes;
 
     @Getter @Setter
     private List<Reporte1DTO> reporte1;
+
+    @Getter @Setter
+    private List<Reporte2DTO> reporte2;
+
 
 
 
@@ -65,7 +75,9 @@ public class AdministradorBean {
         this.moderadores =administradorServicio.listarModeradores(administradorLogin.getNickname());
         this.moderador = new Moderador();
         this.reporte1 = administradorServicio.generarReporte1();
+        this.reporte2 = administradorServicio.generarReporte2();
         createBarModel();
+        createPolarAreaModel();
 
     }
 
@@ -110,10 +122,13 @@ public class AdministradorBean {
         BarChartDataSet barDataSet = new BarChartDataSet();
         barDataSet.setLabel("Reporte 1");
 
+        List<String> labels = new ArrayList<>();
+
         List<Number> values = new ArrayList<>();
         for (int i=0; i<reporte1.size();i++){
 
             values.add(reporte1.get(i).getCantidad());
+            labels.add(reporte1.get(i).getCategoria());
 
         }
 
@@ -143,13 +158,9 @@ public class AdministradorBean {
 
         data.addChartDataSet(barDataSet);
 
-        List<String> labels = new ArrayList<>();
-
-        for (int i=0;i<reporte1.size();i++){
-            labels.add(reporte1.get(i).getCategoria());
 
 
-        }
+
 
         data.setLabels(labels);
         barModel.setData(data);
@@ -167,11 +178,14 @@ public class AdministradorBean {
 
         Title title = new Title();
         title.setDisplay(true);
-        title.setText("Bar Chart");
+        title.setFontSize(16);
+        title.setText("Cantidad de lugares creados por categoria ");
         options.setTitle(title);
 
+
+
         Legend legend = new Legend();
-        legend.setDisplay(true);
+        legend.setDisplay(false);
         legend.setPosition("top");
         LegendLabel legendLabels = new LegendLabel();
         legendLabels.setFontStyle("bold");
@@ -179,6 +193,8 @@ public class AdministradorBean {
         legendLabels.setFontSize(24);
         legend.setLabels(legendLabels);
         options.setLegend(legend);
+
+
 
         // disable animation
         Animation animation = new Animation();
@@ -189,6 +205,34 @@ public class AdministradorBean {
 
 
     }
+
+    private void createPolarAreaModel() {
+        polarAreaModel = new PolarAreaChartModel();
+        ChartData data = new ChartData();
+
+        PolarAreaChartDataSet dataSet = new PolarAreaChartDataSet();
+        List<Number> values = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+
+        for (int i=0; i<reporte2.size();i++){
+
+            values.add(reporte2.get(i).getCantidad());
+            labels.add(reporte2.get(i).getCiudad());
+
+        }
+        dataSet.setData(values);
+        data.setLabels(labels);
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(255, 99, 132)");
+        bgColors.add("rgb(75, 192, 192)");
+        bgColors.add("rgb(255, 205, 86)");
+        bgColors.add("rgb(201, 203, 207)");
+        bgColors.add("rgb(54, 162, 235)");
+        dataSet.setBackgroundColor(bgColors);
+        data.addChartDataSet(dataSet);
+        polarAreaModel.setData(data);
+    }
+
 
 
 
