@@ -32,11 +32,26 @@
             <div class="container mt-4 mb-4" >
 
                 <p:panel header="Lugares más polulares" style="font-size: large">
+                <h:form>
+                    <h2 class="text-comentario-h2 mt-5"> Categorias </h2>
+                    <p:dataView id="categorias" var="categoria" value="#{inicioBean.categorias}"  rows="10"  layout="grid" style="width: 800px">
+                        <p:dataViewGridItem columns="10" >
+                            <p:panel id="pnl"  style="text-align:center; border: none">
+                                <h:panelGrid columns="1" style="width:100%; border: none">
+                                    <p:graphicImage url="/uploads/#{categoria.nombre.toLowerCase()}.png"  width="32" height="32" onclick="#{inicioBean.filtrar}"/>
+                                    <p:outputLabel value="#{categoria.nombre}" />
+                                </h:panelGrid>
+                            </p:panel>
+
+                        </p:dataViewGridItem>
+                    </p:dataView>
+
+
 
                 <div class="" >
                     <div>
 
-                        <h:form id="form">
+
                             <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" listIcon="pi pi-bars" >
 
                                 <p:dataViewListItem>
@@ -59,7 +74,7 @@
                             </p:dataView>
 
 
-                        </h:form>
+
 
 
 
@@ -67,6 +82,7 @@
 
                     </div>
                 </div>
+                </h:form>
                 </p:panel>
             </div>
 
