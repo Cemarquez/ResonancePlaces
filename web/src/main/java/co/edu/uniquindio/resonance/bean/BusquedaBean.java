@@ -24,10 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -78,7 +75,6 @@ public class BusquedaBean {
         for(Horario h : horarios){
             if(h.getDia().equalsIgnoreCase(obtenerDia(date))){
                 LocalTime horaActual = LocalTime.now(ZoneId.of("America/Bogota"));
-                System.out.println(h.getHoraInicio() + ", " + h.getHoraCierre() + ", " + horaActual +", " + ZoneId.systemDefault());
                 if(h.getHoraInicio().compareTo(horaActual) <0 && h.getHoraCierre().compareTo(horaActual)>0){
                     return true;
                 }
@@ -89,8 +85,7 @@ public class BusquedaBean {
 
     public String obtenerDia(Date date){
         String DIA[] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
-        Calendar calendario = Calendar.getInstance();
-
+        Calendar calendario = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.of("America/Bogota")));
         return DIA[calendario.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
@@ -99,8 +94,4 @@ public class BusquedaBean {
         return "/detalleLugar?faces-redirect=true&amp;lugar="+id;
     }
 
-    public void reload() throws IOException {
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-    }
 }

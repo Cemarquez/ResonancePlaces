@@ -199,7 +199,7 @@ public class DetalleLugarBean  implements Serializable {
 
         public String obtenerDia(Date date){
             String DIA[] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
-            Calendar calendario = Calendar.getInstance();
+            Calendar calendario = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.of("America/Bogota")));
 
             return DIA[calendario.get(Calendar.DAY_OF_WEEK) - 1];
         }
