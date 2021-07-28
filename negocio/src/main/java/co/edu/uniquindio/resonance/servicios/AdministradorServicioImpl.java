@@ -6,6 +6,7 @@ import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.AdministradorRepo;
 import co.edu.uniquindio.resonance.repositorios.ModeradorRepo;
 import co.edu.uniquindio.resonance.repositorios.Reporte1DTO;
+import co.edu.uniquindio.resonance.repositorios.Reporte2DTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,6 +109,15 @@ public class AdministradorServicioImpl implements  AdministradorServicio, Serial
     @Override
     public List<Reporte1DTO> generarReporte1() {
        List<Reporte1DTO> reportes = administradorRepo.generarReporte1();
+
+
+
+        return reportes;
+    }
+
+    @Override
+    public List<Reporte2DTO> generarReporte2() {
+        List<Reporte2DTO> reportes = administradorRepo.generarReporte2();
 
 
 
