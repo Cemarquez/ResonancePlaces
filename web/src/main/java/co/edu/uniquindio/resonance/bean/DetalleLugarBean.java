@@ -42,16 +42,15 @@ public class DetalleLugarBean  implements Serializable {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @Setter
-    @Getter
+    @Getter @Setter
     private Lugar lugar;
 
-    @Setter
-    @Getter
+
+    @Getter @Setter
     private List<Calificacion> calificaciones;
 
-    @Setter
-    @Getter
+
+    @Getter @Setter
     private List<Horario> horarios;
 
     private double valor;
@@ -61,20 +60,16 @@ public class DetalleLugarBean  implements Serializable {
     @Value(value = "#{seguridadBean.usuario}")
     private Usuario usuarioLogin;
 
-    @Getter
-    @Setter
+    @Setter @Getter
     private List<String> fotos;
 
-    @Getter
-    @Setter
+    @Setter @Getter
     private String styleBoton = "rounded-button ui-button-danger ui-button-outlined";
 
-    @Getter
-    @Setter
+    @Setter @Getter
     private boolean favorito;
 
-    @Setter
-    @Getter
+    @Getter @Setter
     private Calificacion nuevaCalificacion;
 
     @Getter @Setter
@@ -90,6 +85,7 @@ public class DetalleLugarBean  implements Serializable {
     public void inicializar() {
         if (lugarParam != null && !lugarParam.isEmpty()) {
             try {
+
                 this.favorito = false;
                 int id = Integer.parseInt(lugarParam);
                 this.lugar = lugarServicio.obtenerLugar(Integer.parseInt(lugarParam));

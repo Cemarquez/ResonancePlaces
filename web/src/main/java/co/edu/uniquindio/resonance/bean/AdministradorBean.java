@@ -5,6 +5,8 @@ import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.entidades.Reporte;
 import co.edu.uniquindio.resonance.repositorios.Reporte1DTO;
 import co.edu.uniquindio.resonance.repositorios.Reporte2DTO;
+import co.edu.uniquindio.resonance.repositorios.Reporte3DTO;
+import co.edu.uniquindio.resonance.repositorios.Reporte4DTO;
 import co.edu.uniquindio.resonance.servicios.AdministradorServicio;
 import co.edu.uniquindio.resonance.servicios.ModeradorServicio;
 import co.edu.uniquindio.resonance.servicios.ReporteServicio;
@@ -19,10 +21,14 @@ import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearTicks;
 import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.bar.BarChartOptions;
+import org.primefaces.model.charts.donut.DonutChartDataSet;
+import org.primefaces.model.charts.donut.DonutChartModel;
 import org.primefaces.model.charts.optionconfig.animation.Animation;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
+import org.primefaces.model.charts.pie.PieChartDataSet;
+import org.primefaces.model.charts.pie.PieChartModel;
 import org.primefaces.model.charts.polar.PolarAreaChartDataSet;
 import org.primefaces.model.charts.polar.PolarAreaChartModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +61,10 @@ public class AdministradorBean {
 
     @Getter @Setter
     private PolarAreaChartModel  polarAreaModel;
+    @Getter @Setter
+    private DonutChartModel donutModel;
+    @Getter @Setter
+    private PieChartModel pieModel;
 
     @Getter @Setter
     protected List<Reporte> reportes;
@@ -65,6 +75,11 @@ public class AdministradorBean {
     @Getter @Setter
     private List<Reporte2DTO> reporte2;
 
+    @Getter @Setter
+    private List<Reporte3DTO> reporte3;
+
+    @Getter @Setter
+    private List<Reporte4DTO> reporte4;
 
 
 
@@ -76,8 +91,12 @@ public class AdministradorBean {
         this.moderador = new Moderador();
         this.reporte1 = administradorServicio.generarReporte1();
         this.reporte2 = administradorServicio.generarReporte2();
+        this.reporte3 = administradorServicio.generarReporte3();
+        this.reporte4 = administradorServicio.generarReporte4();
         createBarModel();
         createPolarAreaModel();
+        createDonutModel();
+        createPieModel();
 
     }
 
@@ -86,7 +105,7 @@ public class AdministradorBean {
         try {
            administradorServicio.crearModerador(moderador,administradorLogin.getNickname());
             this.moderadores =administradorServicio.listarModeradores(administradorLogin.getNickname());
-
+            moderador = new Moderador();
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Registro exitoso");
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
@@ -233,6 +252,70 @@ public class AdministradorBean {
         polarAreaModel.setData(data);
     }
 
+    public void createDonutModel() {
+        donutModel = new DonutChartModel();
+        ChartData data = new ChartData();
+
+        DonutChartDataSet dataSet = new DonutChartDataSet();
+        List<Number> values = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+
+        for(int i=0; i<reporte3.size();i++){
+
+            values.add(reporte3.get(i).getCantidad());
+            labels.add(reporte3.get(i).getLugar());
+
+
+        }
+
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(255, 99, 132)");
+        bgColors.add("rgb(54, 162, 235)");
+        bgColors.add("rgb(255, 205, 86)");
+        dataSet.setBackgroundColor(bgColors);
+
+        data.addChartDataSet(dataSet);
+
+
+        data.setLabels(labels);
+
+        donutModel.setData(data);
+    }
+
+    private void createPieModel() {
+        pieModel = new PieChartModel();
+        ChartData data = new ChartData();
+
+        PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        for (int i=0;i<reporte4.size();i++){
+
+            values.add(reporte4.get(i).getCantidadComentarios());
+            labels.add(reporte4.get(i).getLugar());
+
+
+        }
+
+
+
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(255, 99, 132)");
+        bgColors.add("rgb(54, 162, 235)");
+        bgColors.add("rgb(255, 205, 86)");
+        dataSet.setBackgroundColor(bgColors);
+
+        data.addChartDataSet(dataSet);
+
+
+        data.setLabels(labels);
+
+        pieModel.setData(data);
+    }
 
 
 

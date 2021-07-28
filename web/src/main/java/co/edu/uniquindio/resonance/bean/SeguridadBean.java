@@ -64,7 +64,7 @@ public class SeguridadBean implements Serializable {
 
                     rol = "admin";
                     autenticado=true;
-                    return "/index?faces-redirect=true";
+                    return "/administrador/administrar?faces-redirect=true";
                 } else if (moderador!=null){
                     autenticado=true;
                     rol = "moderador";

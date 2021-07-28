@@ -127,4 +127,9 @@ public class LugarServicioImpl implements LugarServicio{
     public Favorito obtenerFavorito(Lugar lugar, Usuario usuario) {
         return lugarRepo.obtenerFavorito(usuario.getNickname(), lugar.getCodigo());
     }
+
+    @Override
+    public List<Lugar> listarLugaresAutorizados() {
+        return lugarRepo.listarLugaresAutorizados();
+    }
 }

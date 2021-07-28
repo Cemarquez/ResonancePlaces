@@ -27,7 +27,7 @@ public class InicioBean implements Serializable {
     @PostConstruct
     public void inicializar()
     {
-        this.lugares = lugarServicio.listarLugares();
+        this.lugares = lugarServicio.listarLugaresAutorizados();
 
         List<MarketDTO> markers = this.lugares.stream().map(l -> new MarketDTO(l.getCodigo(), l.getLatitud(), l.getLongitud(), l.getNombre())).collect(Collectors.toList());
         PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(markers)  + ");");

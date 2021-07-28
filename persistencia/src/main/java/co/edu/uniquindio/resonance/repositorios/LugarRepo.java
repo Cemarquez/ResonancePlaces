@@ -35,7 +35,7 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
     @Query("select c.nombre, avg(ca.valor) as prom from Categoria c INNER JOIN c.lugar l INNER JOIN l.calificaciones ca where l.ciudad.nombre = ?1  group by l.categoria order by(prom) DESC " )
     List<Object[]> devolverCategoriaPromMayor(String ciudad);
 
-    @Query("select l from Lugar  l where l.nombre like concat('%', :parametro, '%')")
+    @Query("select l from Lugar  l where l.nombre like concat('%', :parametro, '%') and l.rechazado = false AND l.estado = true")
     List<Lugar> buscarLugares(String parametro);
 
     @Query("select c from Calificacion c  where c.lugar.codigo =?1 ")
@@ -47,6 +47,8 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
     @Query("select f from Favorito f where f.lugar.codigo = ?2 and f.usuario.nickname = ?1")
     Favorito obtenerFavorito(String nicknameUsuario, Integer codigoLugar);
 
+    @Query("SELECT l FROM Lugar l WHERE l.rechazado = false AND l.estado = true")
+    List<Lugar> listarLugaresAutorizados();
 
 
 }

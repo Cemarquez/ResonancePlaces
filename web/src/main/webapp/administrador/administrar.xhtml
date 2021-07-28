@@ -11,7 +11,9 @@
     <ui:define name="title">Administrador</ui:define>
 
     <ui:define name="content">
+        <div class="container mt-4 mb-4" >
 
+        <p:panel header="Moderador" style="font-size: large">
 
         <p:tabView dynamic="true" cache="false" >
             <p:tab title="Crear moderador" >
@@ -38,14 +40,17 @@
 
                                 <p:outputLabel for="password_moderador" value="Contraseña:"/>
                                 <p:password id="password_moderador" value="#{administradorBean.moderador.contrasena}" feedback="true"
-                                            promptLabel="Ingresa tu contraseña" weakLabel="Débil" styleClass="formulariUsuario"
+                                            promptLabel="Ingresa tu contraseña" weakLabel="Débil" styleClass="formularioUsuario"
                                             goodLabel="Buena" strongLabel="Fuerte" required="true" placeholder="Ingrese su contraseña" requiredMessage="Debe introducir una contraseña." validatorMessage="Verifique la contraseña ingresada." toggleMask="true" redisplay="true"/>
                                 <p:message for="password_moderador"/>
+
+                                <p:outputLabel  value=""/>
+                                <p:commandButton  action="#{administradorBean.crearModerador}" value="Crear moderador"
+                                                  update="@form" />
+                                <p:growl showDetail="true" />
                             </h:panelGrid>
                             <br/>
-                            <p:commandButton  action="#{administradorBean.crearModerador}" value="Crear"
-                                              update="@form" />
-                            <p:growl showDetail="true" />
+
 
 
 
@@ -167,7 +172,7 @@
                             Card subtitle
                         </f:facet>
 
-                        <h2>Reporte 3 descripcion </h2>
+                        <h2> Cantidad de favoritos por lugar </h2>
 
                         <f:facet name="footer">
                             <p:commandButton icon="pi pi-check" value="Ver reporte" style="width: auto; height: auto;font-size:16px;"  onclick="PF('reporte3').show()"/>
@@ -175,10 +180,33 @@
                         </f:facet>
 
                         <p:dialog header="Reporte 3" widgetVar="reporte3" showEffect="fade">
-                            <p:barChart model="#{administradorBean.barModel}" style="width: 100%; height: 500px" />
+                            <p:donutChart model="#{administradorBean.donutModel}" style="width: 100%; height: 500px" />
                         </p:dialog>
                     </p:card>
 
+
+                    <p:card style="width: 25em">
+                        <f:facet name="header">
+                            <!--   <img alt="user header" src="../../resources/demo/images/usercard.png"/> -->
+                        </f:facet>
+                        <f:facet name="Reporte 4">
+                            Advanced Card
+                        </f:facet>
+                        <f:facet name="Reporte #4 de ResonancePlaces">
+                            Card subtitle
+                        </f:facet>
+
+                        <h2> Lugares  con mas comentarios </h2>
+
+                        <f:facet name="footer">
+                            <p:commandButton icon="pi pi-check" value="Ver reporte" style="width: auto; height: auto;font-size:16px;"  onclick="PF('reporte4').show()"/>
+
+                        </f:facet>
+
+                        <p:dialog header="Reporte 4" widgetVar="reporte4" showEffect="fade">
+                            <p:pieChart model="#{administradorBean.pieModel}" style="width: 100%; height: 500px" />
+                        </p:dialog>
+                    </p:card>
 
 
 
@@ -192,6 +220,9 @@
 
 
         </p:tabView>
+
+        </p:panel>
+        </div>
 
     </ui:define>
 </ui:composition>
