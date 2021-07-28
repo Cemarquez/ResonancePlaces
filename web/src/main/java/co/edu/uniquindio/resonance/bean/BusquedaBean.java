@@ -52,7 +52,7 @@ public class BusquedaBean {
         if( busquedaParam!=null && !busquedaParam.isEmpty()) {
             lugaresFiltrados = new ArrayList<>();
             lugares = lugarServicio.buscarLugares(busquedaParam);
-            List<MarketDTO> markers = this.lugares.stream().map(l -> new MarketDTO(l.getCodigo(), l.getLatitud(), l.getLongitud(), l.getNombre())).collect(Collectors.toList());
+            List<MarketDTO> markers = this.lugaresFiltrados.stream().map(l -> new MarketDTO(l.getCodigo(), l.getLatitud(), l.getLongitud(), l.getNombre())).collect(Collectors.toList());
             PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(markers)  + ");");
         }
     }

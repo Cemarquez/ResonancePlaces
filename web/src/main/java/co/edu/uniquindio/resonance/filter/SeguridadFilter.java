@@ -15,7 +15,8 @@ public class SeguridadFilter implements Filter {
     public static final String PAGINA_MODERADOR ="/moderador/aprobarLugar.xhtml";
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
-
+        ( (HttpServletResponse) servletResponse).setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        ( (HttpServletResponse) servletResponse).setHeader("Pragma", "no-cache");
         try {
             final HttpServletRequest request = (HttpServletRequest) servletRequest;
             final HttpServletResponse response = (HttpServletResponse) servletResponse;

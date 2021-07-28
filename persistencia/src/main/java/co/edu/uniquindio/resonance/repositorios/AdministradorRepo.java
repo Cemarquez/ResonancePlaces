@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Repository
 public interface AdministradorRepo extends JpaRepository<Administrador, String> {
-
+    public static final  String SUBCONSULTA = "";
 
     @Query("select ad from Administrador ad")
     List<Administrador> listarAdministradores();
@@ -39,5 +39,16 @@ public interface AdministradorRepo extends JpaRepository<Administrador, String> 
      */
     @Query("select new co.edu.uniquindio.resonance.repositorios.Reporte2DTO(l.ciudad.nombre, count (l.codigo)) from Lugar l GROUP BY  l.ciudad.nombre")
     List<Reporte2DTO>  generarReporte2();
+
+    @Query("select new co.edu.uniquindio.resonance.repositorios.Reporte3DTO( l.nombre, count (f.lugar.codigo))   from Lugar l JOIN Favorito f ON l.codigo = f.lugar.codigo  GROUP BY l.nombre ")
+    List<Reporte3DTO> generarReporte3();
+
+
+
+    @Query("select new co.edu.uniquindio.resonance.repositorios.Reporte4DTO(l.nombre, count(c.codigo)) from Lugar l JOIN Calificacion c ON l.codigo = c.lugar.codigo group by l.nombre ORDER BY  count (c.codigo) DESC" )
+    List<Reporte4DTO> generarReporte4();
+
+
+
 
 }

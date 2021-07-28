@@ -19,5 +19,6 @@ public interface LugarServicio {
     List<String> obtenerFotos(Integer id);
     void marcarFavorito(Lugar lugar, Usuario usuario);
     Favorito obtenerFavorito(Lugar lugar, Usuario usuario);
+    List<Lugar> listarLugaresAutorizados();
 
 }
