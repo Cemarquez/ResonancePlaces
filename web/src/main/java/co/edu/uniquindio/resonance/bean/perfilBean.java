@@ -64,8 +64,8 @@ public class perfilBean implements Serializable {
     public void inicializar() {
         this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
         this.calificacionesSinRespuesta = usuarioServicio.obtenerComentariosSinRespuesta(usuario.getNickname());
-        this.lugaresAutorizados = usuarioServicio.obtenerLugaresAutorizados(usuario.getNickname());
         this.favoritos = usuario.getFavoritos();
+        this.lugaresAutorizados = usuarioServicio.obtenerLugaresAutorizados(usuario.getNickname());
         this.lugaresNoAutorizados = usuarioServicio.obtenerLugaresNoAutorizados(usuario.getNickname());
         this.lugaresRechazados = usuarioServicio.obtenerLugaresRechazados(usuario.getNickname());
         this.lugaresFavoritos = usuarioServicio.obtenerFavoritos(usuario.getNickname());
@@ -78,6 +78,11 @@ public class perfilBean implements Serializable {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Lugar eliminado exitosamente!");
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+            this.lugaresAutorizados = usuarioServicio.obtenerLugaresAutorizados(usuario.getNickname());
+            this.lugaresNoAutorizados = usuarioServicio.obtenerLugaresNoAutorizados(usuario.getNickname());
+            this.lugaresRechazados = usuarioServicio.obtenerLugaresRechazados(usuario.getNickname());
+            this.lugaresFavoritos = usuarioServicio.obtenerFavoritos(usuario.getNickname());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
