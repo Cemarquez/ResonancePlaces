@@ -142,6 +142,61 @@
                     </p:dataList>
                 </p:panel>
 
+            <p:panel header="Informacion contacto" styleClass="mt-3">
+
+
+                <h:form>
+
+
+                 <div>
+
+
+                     <div class="ui-fluid p-formgrid p-grid">
+                         <div class="p-field p-col-12 p-md-6">
+                             <label for="asunto">Asunto</label>
+                             <p:inputText id="asunto"  value="#{detalleLugarBean.asuntoContacto}" type="text" />
+                         </div>
+                         <div class="p-field p-col-12 p-md-6">
+                             <label for="correo">Correo</label>
+                             <p:inputText id="correo" type="text" />
+                         </div>
+                         <div class="p-field p-col-12">
+                             <label for="mensaje">Mensaje</label>
+                             <p:inputTextarea id="mensaje" value="#{detalleLugarBean.asuntoContacto}" rows="4" />
+                         </div>
+                     </div>
+
+                     <div class="p-field p-col-12">
+                         <br></br>
+                         <p:commandButton action="#{detalleLugarBean.enviarMensaje}"   style="height: 30px"  value="Enviar" />
+                     </div>
+
+
+
+
+                 </div>
+
+
+
+
+            </h:form>
+
+
+
+                <p:dialog header="Contacto " width="720"  widgetVar="contacto" modal="true" showEffect="fade">
+
+
+
+                </p:dialog>
+
+
+
+            </p:panel>
+
+
+
+
+
         </div>
 
 
