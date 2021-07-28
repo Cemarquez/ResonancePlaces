@@ -1,5 +1,3 @@
-
-
 function crearMapa (lugares) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2VtYXJxdWV6MjkiLCJhIjoiY2tuNHpkYzRpMDB3YjJ1bXlla3R4aDk1dSJ9.hD4UgfbMsz3ezhv9fDPO6Q';
     var map = new mapboxgl.Map({
