@@ -50,5 +50,13 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
     @Query("SELECT l FROM Lugar l WHERE l.rechazado = false AND l.estado = true")
     List<Lugar> listarLugaresAutorizados();
 
+    @Query("SELECT f from Lugar l INNER JOIN Favorito f ON f.lugar.codigo = l.codigo WHERE f.lugar.codigo = ?1")
+        List<Favorito> obtenerFavoritos(Integer codigoLugar);
+
+    @Query("SELECT c from Lugar l INNER JOIN Calificacion c ON c.lugar.codigo = l.codigo WHERE c.lugar.codigo =?1")
+    List<Calificacion> obtenerCalificaciones(Integer codigoLugar);
+
+    @Query("SELECT h from Lugar l INNER JOIN Horario h ON l.codigo = h.lugar.codigo WHERE h.lugar.codigo = ?1")
+    List<Horario> obtenerHorarios(Integer codigoLugar);
 
 }

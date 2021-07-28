@@ -15,6 +15,7 @@
             <h:outputScript library="js" name="script-lugar.js" />
             <h:outputScript library="js" name="mapbox-gl.js" />
             <h:outputStylesheet library="css" name="mapbox-gl.css" />
+            <h:outputScript library="js" name="archivo.js" />
         </ui:define>
     </ui:define>
     <ui:define name="title">Resonance Places | Detalle lugar</ui:define>
@@ -41,6 +42,7 @@
                                            <p:rating readonly="true" value="#{detalleLugarBean.obtenerCalificacion()}" />
                                        </div>
                                        <div class="col ml">
+
                                            <h:form id="favorito_lugar">
                                                <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}"/>
                                            </h:form>
@@ -49,6 +51,21 @@
                                        <h2 class="text-detalle-h2"> #{detalleLugarBean.lugar.ciudad.nombre}</h2>
 
                                    </div>
+
+                                       <p:commandButton styleClass="btn-reserva"  style="height: 40px; width: 200px; margin-left: 30%" value="Reservar" onclick="PF('reserva').show()" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador') and (detalleLugarBean.lugar.categoria.nombre=='Hotel') }"/>
+
+                                        <p:dialog header="Reserva de lugar" widgetVar="reserva"  modal="true" width="350">
+                                            <h:form id="formDate">
+                                            <h:panelGrid columns="1" cellpadding="5">
+                                                <p:outputLabel value="Seleccione sus fechas de reserva:"/>
+                                                <p:datePicker styleClass="mt-2"  id="range" selectionMode="range" value="#{detalleLugarBean.rangoFechasReserva}" readonlyInput="true" required="true" requiredMessage="Debe ingresar fechas"/>
+                                                <p:commandButton styleClass="mt-3"  style="height: 35px; width: 100px;" value="Realizar reserva" update="@form" action="#{detalleLugarBean.crearReserva}" onclick="PF('reserva').hide()" />
+                                                <p:growl showDetail="true" />
+                                            </h:panelGrid>
+                                            </h:form>
+
+                                       </p:dialog>
+
 
                                </div>
 

@@ -20,6 +20,7 @@ import java.util.Date;
 @Setter
 @ToString
 public class Horario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include

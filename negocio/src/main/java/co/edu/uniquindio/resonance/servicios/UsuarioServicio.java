@@ -1,9 +1,6 @@
 package co.edu.uniquindio.resonance.servicios;
 
-import co.edu.uniquindio.resonance.entidades.Calificacion;
-import co.edu.uniquindio.resonance.entidades.Favorito;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
 
 import java.util.List;
 
@@ -25,5 +22,9 @@ public interface UsuarioServicio {
     List<Lugar> obtenerFavoritos (String nickname);
     List<Lugar> obtenerLugaresRechazados(String nickname);
     List<Calificacion> obtenerComentariosSinRespuesta(String nickname);
+    Reserva registrarReserva(Reserva reserva);
+    void eliminarReserva(Integer id);
+    List<Reserva> obtenerReservas(String nickname);
+
 
 }

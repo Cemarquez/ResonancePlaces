@@ -25,24 +25,19 @@ public class Reporte implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="codigo" ,nullable = false )
     @EqualsAndHashCode.Include
-    @NotBlank
     private int codigo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha", nullable = false)
-    @NotBlank
     private Date fecha;
 
     @Column(name = "descripcion", nullable = false )
-    @NotBlank
     private String descripcion;
 
     @Column(name = "nombre", nullable = false, length = 50)
-    @NotBlank
     private String nombre;
 
     @Column(name = "pdfURL", nullable = false, unique = true)
-    @NotBlank
     private String pdfURL;
 
     public Reporte(int codigo, Date fecha, String descripcion, String nombre) {

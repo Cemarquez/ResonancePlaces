@@ -1,9 +1,6 @@
 package co.edu.uniquindio.resonance.bean;
 
-import co.edu.uniquindio.resonance.entidades.Calificacion;
-import co.edu.uniquindio.resonance.entidades.Favorito;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
 import co.edu.uniquindio.resonance.servicios.CalificacionServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import co.edu.uniquindio.resonance.servicios.UsuarioServicio;
@@ -60,8 +57,12 @@ public class perfilBean implements Serializable {
     @Getter @Setter
     private String respuesta;
 
+    @Getter @Setter
+    private List<Reserva> reservas;
+
     @PostConstruct
     public void inicializar() {
+        this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
         this.calificacionesSinRespuesta = usuarioServicio.obtenerComentariosSinRespuesta(usuario.getNickname());
         this.lugaresAutorizados = usuarioServicio.obtenerLugaresAutorizados(usuario.getNickname());
         this.favoritos = usuario.getFavoritos();
@@ -70,6 +71,18 @@ public class perfilBean implements Serializable {
         this.lugaresFavoritos = usuarioServicio.obtenerFavoritos(usuario.getNickname());
     }
 
+    public void eliminarLugar(Integer id){
+        Lugar lugar = lugarServicio.obtenerLugar(id);
+        try {
+            lugarServicio.eliminarLugar(lugar);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                    "Lugar eliminado exitosamente!");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     public void actualizarUsuario() throws Exception {
 
         try {
@@ -102,5 +115,13 @@ public class perfilBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void borrarReserva(Integer id){
+        usuarioServicio.eliminarReserva(id);
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                "Reserva eliminada!");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
     }
 }

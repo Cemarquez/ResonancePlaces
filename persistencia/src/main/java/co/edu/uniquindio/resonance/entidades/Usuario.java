@@ -21,22 +21,19 @@ public class Usuario {
 
     @Id
     @Column(name="nickname",nullable = false, length = 25)
-    @NotBlank
     @EqualsAndHashCode.Include
     private String nickname;
 
     @Column(name="nombre",nullable = false,length = 70)
-    @NotBlank
     private String nombre;
 
     @Email
     @Column(name="email", nullable = false)
-    @NotBlank
     private  String email;
 
     @Column(name="contrasena",nullable = false)
-    @NotBlank
     private String contrasena;
+
 
     /**
      * Relacion entre usuario y favoritos, un usuario tiene muchos favoritos
@@ -44,6 +41,10 @@ public class Usuario {
     @ToString.Exclude
     @OneToMany(mappedBy = "usuario")
     private List<Favorito> favoritos ;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "usuario")
+    private List<Reserva> reservas;
 
     /**
      * Relacion entre usuario y calificaciones, un usuario tiene muchas calificaciones

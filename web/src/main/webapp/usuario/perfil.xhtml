@@ -86,7 +86,13 @@
                                     <h:outputText value="#{lugar.descripcion}" />
                                 </h:panelGrid>
                             </p:outputPanel>
-                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                            <p:outputLabel>
+                                <h:panelGrid>
+                                    <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                    <p:commandButton value="Eliminar   " action="#{perfilBean.eliminarLugar(lugar.codigo)}"  update="@form" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-times" iconPos="right" />
+                                    <p:growl showDetail="true"/>
+                                </h:panelGrid>
+                            </p:outputLabel>
                         </h:panelGrid>
                     </p:dataViewListItem>
 
@@ -113,7 +119,13 @@
                                     <h:outputText value="#{lugar.descripcion}" />
                                 </h:panelGrid>
                             </p:outputPanel>
-                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                            <p:outputLabel>
+                                <h:panelGrid>
+                                    <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                    <p:commandButton value="Eliminar   " action="#{perfilBean.eliminarLugar(lugar.codigo)}"  update="@form" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-times" iconPos="right" />
+                                    <p:growl showDetail="true"/>
+                                </h:panelGrid>
+                            </p:outputLabel>
                         </h:panelGrid>
                     </p:dataViewListItem>
 
@@ -140,7 +152,13 @@
                                     <h:outputText value="#{lugar.descripcion}" />
                                 </h:panelGrid>
                             </p:outputPanel>
-                            <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                            <p:outputLabel>
+                                <h:panelGrid>
+                                    <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                    <p:commandButton value="Eliminar   " action="#{perfilBean.eliminarLugar(lugar.codigo)}"  update="@form" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-times" iconPos="right" />
+                                    <p:growl showDetail="true"/>
+                                </h:panelGrid>
+                            </p:outputLabel>
                         </h:panelGrid>
                     </p:dataViewListItem>
 
@@ -163,6 +181,7 @@
                             <i class="pi pi-angle-right"></i>
                             <p:inputTextarea id="respuesta_comentario" value="#{perfilBean.respuesta}" required="true" placeholder="Escribe una respuesta" requiredMessage="Debe ingresar su respuesta" styleClass="form-input-comentario" style="height: 48px;"/>
                             <p:commandButton action="#{perfilBean.crearRespuesta(calificacion.codigo)}" style="height: 48px"  value="Enviar respuesta" update="tabs-perfil:lista-comentarios"/>
+                            <p:growl showDetail="true"/>
                         </h:panelGrid>
 
                     </h:form>
@@ -198,6 +217,45 @@
 
             </h:form>
         </p:tab>
+
+        <p:tab title="Reservas">
+            <h:form id="form6">
+                <p:dataView var="reserva" value="#{perfilBean.reservas}" rows="12" paginator="true" listIcon="pi pi-bars" >
+
+                    <p:dataViewListItem>
+                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                            <p:graphicImage url="/uploads/#{reserva.lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{reserva.lugar.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Tipo:" />
+                                    <h:outputText value="#{reserva.lugar.categoria.nombre}" />
+                                    <h:outputText value="Descripción:" />
+                                    <h:outputText value="#{reserva.lugar.descripcion}" />
+                                    <h:outputText value="Fecha de inicio:" />
+                                    <h:outputText value="#{reserva.fechaInicio.toString()}" />
+                                    <h:outputText value="Fecha de fin:" />
+                                    <h:outputText value="#{reserva.fechaFin.toString()}" />
+
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <p:outputLabel>
+                                <h:panelGrid>
+                                    <p:commandButton value="Ver detalle" action="#{inicioBean.irAlDetalle(reserva.lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                    <p:commandButton value="Eliminar   " action="#{perfilBean.borrarReserva(reserva.codigo)}"  update="@form" styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-times" iconPos="right" />
+                                    <p:growl showDetail="true"/>
+                                </h:panelGrid>
+                            </p:outputLabel>
+                        </h:panelGrid>
+                    </p:dataViewListItem>
+
+                </p:dataView>
+
+
+            </h:form>
+        </p:tab>
+
     </p:tabView>
         </p:panel>
     </div>
