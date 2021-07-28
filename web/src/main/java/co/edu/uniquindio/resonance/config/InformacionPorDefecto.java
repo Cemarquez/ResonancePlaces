@@ -64,7 +64,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
             categoriaServicio.registrarCategoria(categoria1);
 
             if (lugarServicio.listarLugares().size()==0){
-                Usuario usuario = new Usuario("user", "Carlos", "caflores@gmail.com", "user");
+                Usuario usuario = new Usuario("user", "Carlos", "cemarquezz29@gmail.com", "user");
                 usuarioServicio.registrarUsuario(usuario);
 
                 Lugar lugar = new Lugar(categoria,"Un genocidio que da gusto", "Mussolinis pizza");
