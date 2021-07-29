@@ -20,6 +20,8 @@ import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 @ViewScoped
@@ -136,9 +138,18 @@ public class DetalleLugarBean  implements Serializable {
                 nuevaCalificacion.setLugar(lugar);
                 nuevaCalificacion.setUsuario(usuarioLogin);
                 lugarServicio.crearCalificacion(nuevaCalificacion);
-                EmailBean.sendEmailComentario(lugar.getUsuario().getEmail(), usuarioLogin.getNickname(), nuevaCalificacion.getMensaje() , nuevaCalificacion.getTitulo(),lugar.getNombre());
+                ExecutorService executor = Executors.newFixedThreadPool(10);
+                executor.execute(new Runnable() {
+                    public void run() {
+
+                        EmailBean.sendEmailComentario(lugar.getUsuario().getEmail(), usuarioLogin.getNickname(), nuevaCalificacion.getMensaje() , nuevaCalificacion.getTitulo(),lugar.getNombre());
+                    }
+                });
                 nuevaCalificacion = new Calificacion();
                 this.calificaciones = lugarServicio.listarCalificaciones(lugar.getCodigo());
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                        "Comentario creado!");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
             }
 
 
@@ -167,10 +178,18 @@ public class DetalleLugarBean  implements Serializable {
             c.setRespuesta(respuesta);
             try {
                 calificacionServicio.actualizarCalificacion(c);
-                EmailBean.sendEmailRespuesta(c.getUsuario().getEmail(), lugar.getUsuario().getNickname(), c.getMensaje(), c.getTitulo(), lugar.getNombre(), c.getRespuesta());
+                ExecutorService executor = Executors.newFixedThreadPool(10);
+                executor.execute(new Runnable() {
+                    public void run() {
+                        EmailBean.sendEmailRespuesta(c.getUsuario().getEmail(), lugar.getUsuario().getNickname(), c.getMensaje(), c.getTitulo(), lugar.getNombre(), c.getRespuesta());
+                    }
+                });
+
                 this.calificaciones = lugarServicio.listarCalificaciones(lugar.getCodigo());
                 this.respuesta=null;
-
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                        "Comentario respondido!");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -221,11 +240,19 @@ public class DetalleLugarBean  implements Serializable {
 
         public void enviarMensaje(){
 
-
-        EmailBean.sendEmailContacto(lugar.getUsuario().getEmail(),usuarioLogin.getNickname(),mensajeContacto,asuntoContacto,lugar.getNombre(), emailContacto);
+            ExecutorService executor = Executors.newFixedThreadPool(10);
+            executor.execute(new Runnable() {
+                public void run() {
+                    EmailBean.sendEmailContacto(lugar.getUsuario().getEmail(),usuarioLogin.getNickname(),mensajeContacto,asuntoContacto,lugar.getNombre(), emailContacto);
+                }
+            });
         asuntoContacto = "";
         mensajeContacto= "";
         emailContacto = "";
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                    "Mensaje enviado!");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+
         }
 
 }

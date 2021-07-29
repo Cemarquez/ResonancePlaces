@@ -42,10 +42,10 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,String> {
      * @param nickname
      * @return
      */
-    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.estado = false")
+    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.estado = false and l.estado = false")
     List<Lugar> obtenerLugaresNoAutorizados(String nickname);
 
-    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.rechazado = true")
+    @Query("select l from Usuario u, IN(u.lugares) l where u.nickname = ?1 and l.rechazado = true and l.estado = true")
     List<Lugar> obtenerLugaresRechazados(String nickname);
 
     /**
