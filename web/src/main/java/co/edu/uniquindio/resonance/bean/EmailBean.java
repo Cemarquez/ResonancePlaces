@@ -427,12 +427,14 @@ public class EmailBean implements Serializable {
                 "      <td style=\"background-color: #ecf0f1\">\n" +
                 "        <div style=\"color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif\">\n" +
                 "          <h2 style=\"color: #e67e22; margin: 0 0 7px\">¡El usuario "+ user +" te ha contactado!</h2>\n" +
-                "            Mensaje para el lugar :</p>\n" +
+                "            Mensaje para el lugar :<h3 style=\\\"color: #e67e22; margin: 0 0 7px\\\">"+lugar+"</h3></p>\n" +
+                "          \n" +
+                "          \n" +
                 "          <br>\n" +
-                "          <h3 style=\"color: #e67e22; margin: 0 0 7px\">"+lugar+"</h3>\n" +
-                "            Comentario:</p>\n" +
+                "          <h4 style=\"color: #e67e22; margin: 0 0 7px\">"+ "Asunto: "+ "<strong>"+ tituloComentario  + "</strong>" +"</h4>\n" +
                 "          <br>\n" +
-                "          <h4 style=\"color: #e67e22; margin: 0 0 7px\">"+ tituloComentario + ": "+comentario+"</h4>\n" +
+                "          <h4 style=\"color: #e67e22; margin: 0 0 7px\">"+comentario+"</h4>\n" +
+
                 "          <div style=\"width: 100%;margin:20px 0; display: inline-block;text-align: center\">\n" +
                 "            <img style=\"padding: 0; width: 200px; margin: 5px\" src=\"https://i.postimg.cc/ry9QqH9n/1.jpg\">\n" +
                 "            <img style=\"padding: 0; width: 200px; margin: 5px\" src=\"https://i.postimg.cc/25v7M96x/2.jpg\">\n" +
