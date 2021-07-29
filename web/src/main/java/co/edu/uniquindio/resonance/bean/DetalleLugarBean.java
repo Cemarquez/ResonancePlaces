@@ -83,6 +83,8 @@ public class DetalleLugarBean  implements Serializable {
     private  String mensajeContacto;
     @Getter @Setter
     private String asuntoContacto;
+    @Getter @Setter
+    private String emailContacto;
 
     @PostConstruct
     public void inicializar() {
@@ -220,13 +222,10 @@ public class DetalleLugarBean  implements Serializable {
         public void enviarMensaje(){
 
 
-        EmailBean.sendEmailContacto(lugar.getUsuario().getEmail(),usuarioLogin.getNickname(),mensajeContacto,asuntoContacto,lugar.getNombre());
-
-
-
-
-
-
+        EmailBean.sendEmailContacto(lugar.getUsuario().getEmail(),usuarioLogin.getNickname(),mensajeContacto,asuntoContacto,lugar.getNombre(), emailContacto);
+        asuntoContacto = "";
+        mensajeContacto= "";
+        emailContacto = "";
         }
 
 }

@@ -107,8 +107,10 @@ public class SeguridadBean implements Serializable {
             try {
 
                 usuario = usuarioServicio.recuperarContrasenia(email);
+                moderador = moderadorServicio.recuperarContrasenia(email);
+                administrador = administradorServicio.recuperarContrasenia(email);
 
-               if (usuario!=null){
+               if (usuario!=null && moderador == null && administrador == null){
                    usuario.setContrasena(EmailBean.getPassword());
                    usuarioServicio.actualizarUsuario(usuario);
                    EmailBean.sendEmailContraseña(usuario.getEmail(), usuario.getContrasena());
@@ -116,13 +118,28 @@ public class SeguridadBean implements Serializable {
                            "¡Contraseña enviada a tu email!");
                    FacesContext.getCurrentInstance().addMessage("olvidaste-bean", facesMsg);
                     return null;
-                } else{
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
-                            "¡Dirección de correo o usuario incorrecto!");
-                    FacesContext.getCurrentInstance().addMessage("olvidaste-bean",facesMsg);
-                    return null;
-                }
-
+                } else  if (usuario==null && moderador != null && administrador == null){
+                   moderador.setContrasena(EmailBean.getPassword());
+                   moderadorServicio.actualizarModerador(moderador);
+                   EmailBean.sendEmailContraseña(moderador.getEmail(), moderador.getContrasena());
+                   FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                           "¡Contraseña enviada a tu email!");
+                   FacesContext.getCurrentInstance().addMessage("olvidaste-bean", facesMsg);
+                   return null;
+               } else  if (usuario==null && moderador == null && administrador != null){
+                   administrador.setContrasena(EmailBean.getPassword());
+                   administradorServicio.actualizarAdministrador(administrador);
+                   EmailBean.sendEmailContraseña(administrador.getEmail(), administrador.getContrasena());
+                   FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                           "¡Contraseña enviada a tu email!");
+                   FacesContext.getCurrentInstance().addMessage("olvidaste-bean", facesMsg);
+                   return null;
+               } else{
+                   FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
+                           "¡Dirección de correo o usuario incorrecto!");
+                   FacesContext.getCurrentInstance().addMessage("olvidaste-bean",facesMsg);
+                   return null;
+               }
 
 
             } catch (Exception e) {

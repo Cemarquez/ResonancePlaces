@@ -3,6 +3,7 @@ package co.edu.uniquindio.resonance.servicios;
 import co.edu.uniquindio.resonance.entidades.Administrador;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Moderador;
+import co.edu.uniquindio.resonance.entidades.Usuario;
 import co.edu.uniquindio.resonance.repositorios.LugarRepo;
 import co.edu.uniquindio.resonance.repositorios.ModeradorRepo;
 import org.dom4j.rule.Mode;
@@ -31,9 +32,46 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
     }
 
+    /**
+     * Método que actualiza moderador en la capa de servicios
+     * @param m
+     * @return
+     * @throws Exception
+     */
     @Override
-    public Moderador actualizarModerador(Moderador moderador) throws Exception {
-        return null;
+    public Moderador actualizarModerador(Moderador m) throws Exception {
+
+        Moderador buscado = moderadorRepo.buscarModPorNickname(m.getNickname());
+        boolean sameEmail = false;
+        boolean sameNick = false;
+        if (m.getNickname().equals(buscado.getNickname())){
+            sameNick = true;
+        }
+
+        if (m.getEmail().equals((buscado.getEmail()))){
+            sameEmail = true;
+        }
+
+
+        if(buscado!=null && sameNick==false){
+            throw new Exception("El nickname ya se encuentra en uso");
+        }
+
+        if(!estaDisponible(m.getEmail()) && sameEmail==false) {
+            throw new Exception("El email ya se encuentra en uso");
+        }
+
+        if (m.getNickname().length()>25){
+            throw new Exception("El nickname no puede exceder los 25 caracteres");
+        }
+
+        if (m.getNombre().length()>70){
+            throw new Exception("El nombre no puede exceder 25 caracteres");
+        }
+
+        moderadorRepo.save(m);
+
+        return m;
     }
 
     @Override
@@ -99,5 +137,31 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
     }
 
+    @Override
+    public Moderador recuperarContrasenia(String mod) throws Exception {
 
+        Moderador moderador = moderadorRepo.buscarModPorNickname(mod);
+
+        if (moderador!=null){
+            return moderador;
+        } else {
+
+            moderador = moderadorRepo.buscarModPorEmail(mod);
+        }
+        return  moderador;
+    }
+
+    /**
+     * Método que verifica si un email esta disponible
+     * @param email
+     * @return
+     */
+    public boolean estaDisponible(String email){
+        Moderador moderador = moderadorRepo.buscarModPorEmail(email);
+        if(moderador != null)
+            return false;
+        else
+            return true;
+
+    }
 }

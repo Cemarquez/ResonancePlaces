@@ -1,8 +1,6 @@
 package co.edu.uniquindio.resonance.servicios;
 
-import co.edu.uniquindio.resonance.entidades.Administrador;
-import co.edu.uniquindio.resonance.entidades.Moderador;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
 import co.edu.uniquindio.resonance.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,8 @@ public class AdministradorServicioImpl implements  AdministradorServicio, Serial
     private AdministradorRepo administradorRepo;
     @Autowired
     private ModeradorRepo moderadorRepo;
+    @Autowired
+    private LugarRepo lugarRepo;
 
 
     @Override
@@ -95,12 +95,30 @@ public class AdministradorServicioImpl implements  AdministradorServicio, Serial
 
     @Override
     public void eliminarModerador(String adminNickname, Moderador moderador) {
-        Administrador admin = administradorRepo.findById(adminNickname).get();
+        Administrador admin = administradorRepo.findByNickname(adminNickname);
+
         admin.getModeradores().remove(moderador);
+
+        if(moderador.getLugaresRechazados() != null)
+        {
+            for (Lugar l : moderador.getLugaresRechazados()){
+
+                l.setModerador(null);
+                lugarRepo.save(l);
+            }
+        }
+
+        if(moderador.getLugares() != null)
+        {
+            for (Lugar l : moderador.getLugares()){
+
+                l.setModerador(null);
+                lugarRepo.save(l);
+            }
+        }
+
         moderadorRepo.delete(moderador);
         administradorRepo.save(admin);
-
-
     }
 
     @Override
@@ -128,6 +146,20 @@ public class AdministradorServicioImpl implements  AdministradorServicio, Serial
 
 
         return reportes;
+    }
+
+    @Override
+    public Administrador recuperarContrasenia(String admin) throws Exception {
+
+        Administrador administrador = administradorRepo.findByNickname(admin);
+
+        if (administrador!=null){
+            return administrador;
+        } else {
+
+            administrador = administradorRepo.findByEmail(admin);
+        }
+        return  administrador;
     }
 
     @Override

@@ -410,7 +410,7 @@ public class EmailBean implements Serializable {
     }
 
 
-    public static void sendEmailContacto (String remitente, String user, String comentario, String tituloComentario, String lugar) {
+    public static void sendEmailContacto (String remitente, String user, String comentario, String tituloComentario, String lugar, String correoUsuario) {
 
         //Variable for gmail
         String host="smtp.gmail.com";
@@ -434,6 +434,7 @@ public class EmailBean implements Serializable {
                 "          <h4 style=\"color: #e67e22; margin: 0 0 7px\">"+ "Asunto: "+ "<strong>"+ tituloComentario  + "</strong>" +"</h4>\n" +
                 "          <br>\n" +
                 "          <h4 style=\"color: #e67e22; margin: 0 0 7px\">"+comentario+"</h4>\n" +
+                "            Respondele al correo :<h3 style=\\\"color: #e67e22; margin: 0 0 7px\\\">"+correoUsuario+"</h3></p>\n" +
 
                 "          <div style=\"width: 100%;margin:20px 0; display: inline-block;text-align: center\">\n" +
                 "            <img style=\"padding: 0; width: 200px; margin: 5px\" src=\"https://i.postimg.cc/ry9QqH9n/1.jpg\">\n" +

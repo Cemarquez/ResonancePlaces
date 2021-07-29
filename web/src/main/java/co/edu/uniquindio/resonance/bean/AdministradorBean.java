@@ -121,10 +121,10 @@ public class AdministradorBean {
 
         try {
             administradorServicio.eliminarModerador(administradorLogin.getNickname(),mod);
-            this.moderadores =administradorServicio.listarModeradores(administradorLogin.getNickname());
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Moderador eliminado exitosamente");
-            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+            FacesContext.getCurrentInstance().addMessage(null ,facesMsg);
+            this.moderadores =administradorServicio.listarModeradores(administradorLogin.getNickname());
         } catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta",
                     e.getMessage());
