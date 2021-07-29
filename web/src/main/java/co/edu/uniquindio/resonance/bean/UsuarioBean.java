@@ -16,6 +16,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 @ViewScoped
@@ -54,8 +56,17 @@ public class UsuarioBean implements Serializable {
 
     public String registrarUsuario() {
         try {
+
             usuarioServicio.registrarUsuario(usuario);
-            EmailBean.sendEmailBienvenida(usuario.getEmail(), usuario.getNickname());
+            ExecutorService executor = Executors.newFixedThreadPool(10);
+            executor.execute(new Runnable() {
+                public void run() {
+                    EmailBean.sendEmailBienvenida(usuario.getEmail(), usuario.getNickname());
+                }
+            });
+
+            executor.shutdown();
+
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Registro exitoso");
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
