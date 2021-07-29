@@ -1,10 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.*;
-import co.edu.uniquindio.resonance.repositorios.CalificacionRepo;
-import co.edu.uniquindio.resonance.repositorios.FavoritoRepo;
-import co.edu.uniquindio.resonance.repositorios.FotoRepo;
-import co.edu.uniquindio.resonance.repositorios.LugarRepo;
+import co.edu.uniquindio.resonance.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +24,9 @@ public class LugarServicioImpl implements LugarServicio{
 
     @Autowired
     private FavoritoRepo favoritoRepo;
+
+    @Autowired
+    private HorarioRepo horarioRepo;
 
 
     @Override
@@ -61,7 +61,7 @@ public class LugarServicioImpl implements LugarServicio{
         }
 
         for(Horario h : lugarRepo.obtenerHorarios(lugar.getCodigo())){
-            
+            horarioRepo.delete(h);
         }
 
 

@@ -59,9 +59,27 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
             Categoria categoria = new Categoria("Restaurante", "Categoria dedicada a sitios de comida, cafes, etc");
             Categoria categoria1 = new Categoria("Hotel", "Categoria reservada a hospedajes hoteleros");
+            Categoria categoria2 = new Categoria("Cafeteria","Categoria reservada a las cafeterias");
+            Categoria categoria3 = new Categoria("Bar","Categoria resevada a los bares");
+            Categoria categoria4 = new Categoria("Discoteca","Categoría resevada a las discotecas");
+            Categoria categoria5 = new Categoria("Cine","Categoría resevada a los cines");
+            Categoria categoria6 = new Categoria("Centro comercial","Categoría resevada a los centros comerciales");
+            Categoria categoria7 = new Categoria("Miscelanea","Categoría resevada a las tiendas, papelerias");
+            Categoria categoria8 = new Categoria("Museo","Categoría resevada a los museos");
+            Categoria categoria9 = new Categoria("Super mercado","Categoría resevada a los super mercados");
+            Categoria categoria10 = new Categoria("Lugares de interes","Categoría resevada a los lugares varios");
 
             categoriaServicio.registrarCategoria(categoria);
             categoriaServicio.registrarCategoria(categoria1);
+            categoriaServicio.registrarCategoria(categoria2);
+            categoriaServicio.registrarCategoria(categoria3);
+            categoriaServicio.registrarCategoria(categoria4);
+            categoriaServicio.registrarCategoria(categoria5);
+            categoriaServicio.registrarCategoria(categoria6);
+            categoriaServicio.registrarCategoria(categoria7);
+            categoriaServicio.registrarCategoria(categoria8);
+            categoriaServicio.registrarCategoria(categoria9);
+            categoriaServicio.registrarCategoria(categoria10);
 
             if (lugarServicio.listarLugares().size()==0){
                 Usuario usuario = new Usuario("user", "Carlos", "cemarquezz29@gmail.com", "user");
