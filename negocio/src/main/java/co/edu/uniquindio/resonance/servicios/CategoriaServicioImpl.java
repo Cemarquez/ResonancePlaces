@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.Categoria;
+import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.repositorios.CategoriaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,10 @@ public class CategoriaServicioImpl implements  CategoriaServicio{
         Categoria categoria = categoriaRepo.findById(codigo).get();
 
         return categoria;
+    }
+
+    @Override
+    public List<Lugar> obtenerLugares(int codigo) {
+        return categoriaRepo.obtenerLugares(codigo);
     }
 }
