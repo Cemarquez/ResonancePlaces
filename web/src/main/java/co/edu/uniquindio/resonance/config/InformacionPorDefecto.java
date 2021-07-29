@@ -95,44 +95,114 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 Usuario usuario5= new Usuario("Sebancho", "Sebastian", "sebastic123@gmail.com", "123456");
                 usuarioServicio.registrarUsuario(usuario5);
 
+                Administrador admin = new Administrador("admin","admin","admin@gmail.com","admin");
+                administradorServicio.registrarAdministrador(admin);
+                Moderador mod = new Moderador("mod","mod","mod@gmail.com","mod");
+                mod.setAdministrador(admin);
+
                 Lugar lugar = new Lugar(categoria,"Un genocidio que da gusto", "Mussolinis pizza");
                 lugar.setLatitud(4.553806232733308);
                 lugar.setLongitud(-75.65548385940279);
                 lugar.getFoto().add("porDefecto.jpg");
                 lugar.setCiudad(ciudad);
                 lugar.setUsuario(usuario);
+                lugar.setModerador(mod);
+                lugar.setEstado(true);
+                lugar.setRechazado(false);
+                mod.getLugares().add(lugar);
 
 
                 Lugar lugar2 = new Lugar(categoria1,"Un hostal  pequeño para los tacaños", "Pobretel");
                 lugar2.setLatitud(4.5234806232733308);
-                lugar2.setLongitud(-75.33458385940279);
+                lugar2.setLongitud(-74.33458385940279);
                 lugar2.getFoto().add("porDefecto.jpg");
                 lugar2.setCiudad(ciudad1);
                 lugar2.setUsuario(usuario1);
+                lugar2.setEstado(true);
+                lugar2.setRechazado(true);
+                mod.getLugaresRechazados().add(lugar2);
 
                 Lugar lugar3 = new Lugar(categoria2,"Maid cafe", "Cafeteria uwu");
                 lugar3.setLatitud(4.5234806232733308);
-                lugar3.setLongitud(-75.33458385940279);
+                lugar3.setLongitud(-73.33458385940279);
                 lugar3.getFoto().add("cafeteria.jpg");
                 lugar3.setCiudad(ciudad2);
                 lugar3.setUsuario(usuario2);
 
                 Lugar lugar4 = new Lugar(categoria3,"Bar rock", "Bar rockefeller");
                 lugar4.setLatitud(4.5234806232733308);
-                lugar4.setLongitud(-75.33458385940279);
+                lugar4.setLongitud(-75.34358385940279);
                 lugar4.getFoto().add("bar.jpg");
                 lugar4.setCiudad(ciudad3);
                 lugar4.setUsuario(usuario3);
 
                 Lugar lugar5 = new Lugar(categoria4,"Shango night club", "Discoteca shan-go ");
-                lugar5.setLatitud(4.5234806232733308);
-                lugar5.setLongitud(-75.33458385940279);
+                lugar5.setLatitud(4.5234436232733308);
+                lugar5.setLongitud(-75.37658385940279);
                 lugar5.getFoto().add("disco.jpg");
                 lugar5.setCiudad(ciudad4);
                 lugar5.setUsuario(usuario4);
+                lugar5.setModerador(mod);
+                lugar5.setEstado(true);
+                lugar5.setRechazado(true);
+                mod.getLugaresRechazados().add(lugar5);
 
+
+                Lugar lugar6 = new Lugar(categoria5,"mejor cinema de ningun lado", "Cinemark");
+                lugar6.setLatitud(3.51233432733308);
+                lugar6.setLongitud(-75.11458385940279);
+                lugar6.getFoto().add("porDefecto.jpg");
+                lugar6.setCiudad(ciudad);
+                lugar6.setUsuario(usuario1);
+
+                Lugar lugar7 = new Lugar(categoria6,"Centro comercial picho", "Unicentro");
+                lugar7.setLatitud(3.55533432733308);
+                lugar7.setLongitud(-75.99458385940279);
+                lugar7.getFoto().add("centro1.jpg");
+                lugar7.getFoto().add("centro2.jpg");
+                lugar7.setCiudad(ciudad);
+                lugar7.setUsuario(usuario3);
+                lugar7.setModerador(mod);
+                lugar7.setEstado(true);
+                lugar7.setRechazado(false);
+                mod.getLugares().add(lugar7);
+
+                Lugar lugar8 = new Lugar(categoria7,"Tienda de don arturo", "Don Silvio Shop");
+                lugar8.setLatitud(4.99933432733308);
+                lugar8.setLongitud(-76.99458385940279);
+                lugar8.getFoto().add("tienda1.jpg");
+                lugar8.getFoto().add("tienda2.jpg");
+                lugar8.setCiudad(ciudad2);
+                lugar8.setUsuario(usuario2);
+                lugar8.setModerador(mod);
+                lugar8.setEstado(true);
+                lugar8.setRechazado(false);
+                mod.getLugares().add(lugar8);
+
+                Lugar lugar9 = new Lugar(categoria8,"el museo de garay grande", "museodon");
+                lugar9.setLatitud(3.1233432733308);
+                lugar9.setLongitud(-76.99454485940279);
+                lugar9.getFoto().add("museo.jpg");
+                lugar9.setCiudad(ciudad3);
+                lugar9.setUsuario(usuario4);
+                lugar9.setModerador(mod);
+                lugar9.setEstado(true);
+                lugar9.setRechazado(false);
+                mod.getLugares().add(lugar9);
+
+
+
+                moderadorServicio.registarModerador(mod);
                 lugarServicio.registrarLugar(lugar);
                 lugarServicio.registrarLugar(lugar2);
+                lugarServicio.registrarLugar(lugar3);
+                lugarServicio.registrarLugar(lugar4);
+                lugarServicio.registrarLugar(lugar5);
+                lugarServicio.registrarLugar(lugar6);
+                lugarServicio.registrarLugar(lugar7);
+                lugarServicio.registrarLugar(lugar8);
+                lugarServicio.registrarLugar(lugar9);
+
 
                 DateTimeFormatter formatter =
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S", Locale.US);
@@ -145,19 +215,20 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 LocalDateTime localDateTime2 = LocalDateTime.parse(text2, formatter);
                 LocalTime local2 = localDateTime2.toLocalTime();
                 Horario h = new Horario("Lunes", local, local2, false, lugar);
-                Horario h2 = new Horario("Domingo", local, local2, false, lugar);
+                Horario h2 = new Horario("Martes", local, local2, false, lugar);
+                Horario h3 = new Horario("Miercoles", local, local2, false, lugar);
+                Horario h4 = new Horario("Jueves", local, local2, false, lugar);
+                Horario h5 = new Horario("Viernes", local, local2, false, lugar);
+                Horario h6 = new Horario("Sabado", local, local2, false, lugar);
+                Horario h7 = new Horario("Domingo", local, local2, false, lugar);
+
                 horarioServicio.registrarHorario(h);
                 horarioServicio.registrarHorario(h2);
-
-                //new es
-                Administrador admin = new Administrador("admin","admin","admin@gmail.com","admin");
-                administradorServicio.registrarAdministrador(admin);
-                Moderador mod = new Moderador("mod","mod","mod@gmail.com","mod");
-                mod.setAdministrador(admin);
-                moderadorServicio.registarModerador(mod);
-
-
-
+                horarioServicio.registrarHorario(h3);
+                horarioServicio.registrarHorario(h4);
+                horarioServicio.registrarHorario(h5);
+                horarioServicio.registrarHorario(h6);
+                horarioServicio.registrarHorario(h7);
 
                 Calificacion calificacion = new Calificacion(1,"Brutal","Soy bipolar", usuario,lugar);
                 Calificacion calificacion2 = new Calificacion(4,"Nada mal","Buenos precios", usuario,lugar2);
