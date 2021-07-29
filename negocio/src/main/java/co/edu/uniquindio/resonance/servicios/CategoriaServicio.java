@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.Categoria;
+import co.edu.uniquindio.resonance.entidades.Lugar;
 
 import java.util.List;
 
@@ -11,5 +12,6 @@ public interface CategoriaServicio {
     Categoria actualizarCategoria(Categoria categoria) throws Exception;
     List<Categoria> listarCategorias();
     Categoria obtenerCategoria(int codigo);
+    List<Lugar> obtenerLugares(int codigo);
 
 }

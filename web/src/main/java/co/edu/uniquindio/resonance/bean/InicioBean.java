@@ -40,8 +40,8 @@ public class InicioBean implements Serializable {
         PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(markers)  + ");");
 
     }
-    public void filtrar(){
-        
+    public void filtrar(Categoria categoria){
+        this.lugares = categoriaServicio.obtenerLugares(categoria.getCodigo());
     }
 
     public String irAlDetalle(Integer id){
