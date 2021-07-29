@@ -25,6 +25,10 @@ public interface UsuarioServicio {
     Reserva registrarReserva(Reserva reserva);
     void eliminarReserva(Integer id);
     List<Reserva> obtenerReservas(String nickname);
+    Denuncia registrarDenuncia(Denuncia denuncia);
+
+
+
 
 
 }
