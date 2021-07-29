@@ -144,6 +144,49 @@
                 </h:form>
             </p:tab>
 
+            <p:tab title="Denuncias">
+
+                <h:form id="formD">
+
+                    <h2><h:outputText value="No hay denuncias" rendered="#{moderadorBean.denunciasSinAprobar.isEmpty()}" /></h2>
+                    <p:dataView var="denuncia" value="#{moderadorBean.denunciasSinAprobar}"  rendered="#{!moderadorBean.denunciasSinAprobar.isEmpty()}" rows="12" paginator="true"  listIcon="pi pi-bars"  >
+
+
+
+
+                        <p:dataViewListItem >
+                            <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail" >
+                                <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar" />
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value="Lugar denunciado:" />
+                                        <h:outputText value="#{denuncia.lugar.nombre}" style="font-weight: bold" />
+                                        <h:outputText value="Denunciado por:" />
+                                        <h:outputText value="#{denuncia.usuario.nickname}" />
+                                        <h:outputText value="Motivo:" />
+                                        <h:outputText value="#{denuncia.motivo}" />
+                                        <h:outputText value="Descripción:" />
+                                        <h:outputText value="#{denuncia.descripcion}" />
+                                    </h:panelGrid>
+                                </p:outputPanel>
+
+                                <p:outputPanel>
+                                    <h:panelGrid>
+                                        <p:commandButton value="Ver detalle" action="#{moderadorBean.irAlDetalle(denuncia.lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                        <p:commandButton value="Aprobar" action="#{moderadorBean.aprobarDenuncia(denuncia)}"  update="@form" styleClass="ui-button-raised ui-button-success mt-2" icon="pi pi-check" iconPos="right" />
+                                        <p:commandButton value="Rechazar" action="#{moderadorBean.rechazarDenuncia(denuncia)}"  update="@form"  styleClass="ui-button-raised ui-button-danger mt-2" icon="pi pi-times" iconPos="right" />
+
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </p:dataViewListItem>
+
+                    </p:dataView>
+
+
+                </h:form>
+            </p:tab>
+
             <p:tab title="Perfil" >
 
                         <h:form id="form4">
