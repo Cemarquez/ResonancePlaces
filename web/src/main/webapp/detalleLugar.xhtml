@@ -76,6 +76,8 @@
                                            <h:form id="favorito_lugar">
                                                <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}"/>
 
+                                               <p:commandButton icon="pi pi-heart" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" update="@form" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador') and (detalleLugarBean.lugar.estado==true) and (detalleLugarBean.lugar.rechazado==false)}"/>
+
                                            </h:form>
 
 
@@ -89,7 +91,7 @@
 
                                    </div>
 
-                                       <p:commandButton styleClass="btn-reserva"  style="height: 40px; width: 200px; margin-left: 30%" value="Reservar" onclick="PF('reserva').show()" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador') and (detalleLugarBean.lugar.categoria.nombre=='Hotel') }"/>
+                                       <p:commandButton styleClass="btn-reserva"  style="height: 40px; width: 200px; margin-left: 30%" value="Reservar" onclick="PF('reserva').show()" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador') and (detalleLugarBean.lugar.categoria.nombre=='Hotel') and (detalleLugarBean.lugar.estado==true) and (detalleLugarBean.lugar.rechazado==false)}"/>
 
                                         <p:dialog header="Reserva de lugar" widgetVar="reserva"  modal="true" width="350">
                                             <h:form id="formDate">
@@ -136,7 +138,7 @@
               </p>
             </p:panel>
 
-            <p:panel header="Crear nuevo comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}">
+            <p:panel header="Crear nuevo comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador') and (detalleLugarBean.lugar.estado==true) and (detalleLugarBean.lugar.rechazado==false)}">
                 <h:form id="crear-comentarios">
                     <h:panelGrid columns="3" cellpadding="5">
                         <p:outputLabel value="Titulo: " for="titulo_comentario"/>
@@ -168,6 +170,7 @@
                             <i class="pi pi-angle-right"></i>
                             <p:inputTextarea id="respuesta_comentario" value="#{detalleLugarBean.respuesta}" required="true" placeholder="Escribe una respuesta" requiredMessage="Debe ingresar su respuesta" styleClass="form-input-comentario" style="height: 48px;"/>
                             <p:commandButton action="#{detalleLugarBean.crearRespuesta(calificacion.codigo)}" style="height: 48px"  value="Enviar respuesta" update="lista-comentarios" />
+                            <p:growl for="olvidaste-bean" showDetail="true"  />
                         </h:panelGrid>
                         </h:form>
 
@@ -179,7 +182,7 @@
                     </p:dataList>
                 </p:panel>
 
-            <p:panel header="Informacion contacto" styleClass="mt-3" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}">
+            <p:panel header="Informacion contacto" styleClass="mt-3" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador') and (detalleLugarBean.lugar.estado==true) and (detalleLugarBean.lugar.rechazado==false)}">
 
 
                 <h:form>
@@ -206,6 +209,7 @@
                      <div class="p-field p-col-12">
                          <br></br>
                          <p:commandButton action="#{detalleLugarBean.enviarMensaje}" update="@form"  style="height: 30px"  value="Enviar" />
+                         <p:growl for="olvidaste-bean" showDetail="true"  />
                      </div>
 
 
