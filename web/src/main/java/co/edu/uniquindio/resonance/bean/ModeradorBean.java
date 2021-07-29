@@ -1,8 +1,10 @@
 package co.edu.uniquindio.resonance.bean;
 
+import co.edu.uniquindio.resonance.entidades.Denuncia;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.servicios.DenunciaServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import co.edu.uniquindio.resonance.servicios.ModeradorServicio;
 import lombok.Getter;
@@ -25,6 +27,9 @@ public class ModeradorBean {
     @Autowired
     private ModeradorServicio moderadorServicio;
 
+    @Autowired
+    private DenunciaServicio denunciaServicio;
+
     @Value(value = "#{seguridadBean.moderador}")
     @Getter @Setter
     private Moderador moderadorLogin;
@@ -41,6 +46,10 @@ public class ModeradorBean {
     @Setter
     private List<Lugar> lugaresRechazados;
 
+    @Getter @Setter
+    private List<Denuncia> denunciasSinAprobar;
+
+
     @PostConstruct
     public void inicializar()
     {
@@ -48,7 +57,7 @@ public class ModeradorBean {
       lugaresSinAprobar =   moderadorServicio.obtenerLugaresSinAprobar();
       lugaresAprobados = moderadorServicio.obtenerLugaresAprobados(getModeradorLogin().getNickname());
       lugaresRechazados = moderadorServicio.obtenerLugaresRechazados(getModeradorLogin().getNickname());
-
+      denunciasSinAprobar = denunciaServicio.obtenerDenunciasSinAprobar();
 
     }
 
@@ -89,6 +98,22 @@ public class ModeradorBean {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void aprobarDenuncia(Denuncia denuncia){
+
+        denuncia.setModerador(moderadorLogin);
+        moderadorServicio.aprobarDenuncia(denuncia);
+        denunciasSinAprobar = denunciaServicio.obtenerDenunciasSinAprobar();
+
+    }
+
+    public void rechazarDenuncia(Denuncia denuncia){
+        denuncia.setModerador(moderadorLogin);
+        moderadorServicio.rechazarDenuncia(denuncia);
+        denunciasSinAprobar = denunciaServicio.obtenerDenunciasSinAprobar();
+
     }
 
 

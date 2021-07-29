@@ -2,6 +2,7 @@ package co.edu.uniquindio.resonance.bean;
 
 import co.edu.uniquindio.resonance.entidades.*;
 import co.edu.uniquindio.resonance.servicios.CalificacionServicio;
+import co.edu.uniquindio.resonance.servicios.DenunciaServicio;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import co.edu.uniquindio.resonance.servicios.UsuarioServicio;
 import lombok.Getter;
@@ -35,6 +36,8 @@ public class DetalleLugarBean  implements Serializable {
 
     @Autowired
     private CalificacionServicio calificacionServicio;
+
+
 
     @Autowired
     private UsuarioServicio usuarioServicio;
@@ -87,6 +90,10 @@ public class DetalleLugarBean  implements Serializable {
     private String asuntoContacto;
     @Getter @Setter
     private String emailContacto;
+    @Getter @Setter
+    private String motivoDenuncia;
+    @Getter @Setter
+    private String descripcionDenuncia;
 
     @PostConstruct
     public void inicializar() {
@@ -254,5 +261,25 @@ public class DetalleLugarBean  implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 
         }
+
+
+        public void enviarDenuncia(){
+            Denuncia denuncia = new Denuncia();
+            denuncia.setLugar(lugar);
+            denuncia.setUsuario(usuarioLogin);
+            denuncia.setMotivo(motivoDenuncia);
+            denuncia.setDescripcion(descripcionDenuncia);
+
+            usuarioServicio.registrarDenuncia(denuncia);
+
+
+
+
+        }
+
+
+
+
+
 
 }

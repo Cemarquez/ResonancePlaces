@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
 import co.edu.uniquindio.resonance.entidades.*;
+import co.edu.uniquindio.resonance.repositorios.DenunciaRepo;
 import co.edu.uniquindio.resonance.repositorios.ReservaRepo;
 import co.edu.uniquindio.resonance.repositorios.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Autowired
     private ReservaRepo reservaRepo;
+
+
+    @Autowired
+    private DenunciaRepo denunciaRepo;
 
     private final UsuarioRepo usuarioRepo;
     public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
@@ -194,6 +199,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public List<Reserva> obtenerReservas(String nickname) {
         return reservaRepo.obtenerReservas(nickname);
     }
+
+    @Override
+    public Denuncia registrarDenuncia(Denuncia denuncia) {
+        return denunciaRepo.save(denuncia);
+    }
+
 
     @Override
     public List<Lugar> obtenerFavoritos(String nickname) {

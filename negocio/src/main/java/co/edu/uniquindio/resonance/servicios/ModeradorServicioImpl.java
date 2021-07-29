@@ -1,9 +1,7 @@
 package co.edu.uniquindio.resonance.servicios;
 
-import co.edu.uniquindio.resonance.entidades.Administrador;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Moderador;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
+import co.edu.uniquindio.resonance.repositorios.DenunciaRepo;
 import co.edu.uniquindio.resonance.repositorios.LugarRepo;
 import co.edu.uniquindio.resonance.repositorios.ModeradorRepo;
 import org.dom4j.rule.Mode;
@@ -21,6 +19,8 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     private ModeradorRepo moderadorRepo;
     @Autowired
     private LugarRepo lugarRepo;
+    @Autowired
+    private DenunciaRepo denunciaRepo;
 
     @Override
     public Moderador registarModerador(Moderador moderador) throws Exception {
@@ -135,6 +135,55 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         moderadorRepo.obtenerLugaresRechazados(nicknameModerador).add(lugar);
         moderadorRepo.save(mod);
 
+    }
+
+    @Override
+    public void aprobarDenuncia(Denuncia denuncia) {
+
+        denuncia.setAprobado(true);
+        Lugar lugar = denuncia.getLugar();
+
+        lugar.setRechazado(true);
+        lugar.setEstado(true);
+        lugar.setModerador(denuncia.getModerador());
+
+        lugarRepo.save(lugar);
+
+        List <Denuncia> denunciasSinAprobar = denunciaRepo.obtenerDenunciasSinAprobar();
+        for (int i=0; i<denunciasSinAprobar.size();i++ ){
+            if (denunciasSinAprobar.get(i).getLugar()== denuncia.getLugar()){
+                denuncia.setAprobado(true);
+                denuncia.setModerador(denuncia.getModerador());
+
+
+            }
+
+
+
+
+        }
+
+        denunciaRepo.save(denuncia);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    @Override
+    public void rechazarDenuncia(Denuncia denuncia) {
+        denuncia.setAprobado(false);
+
+        denunciaRepo.save(denuncia);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package co.edu.uniquindio.resonance.servicios;
 
-import co.edu.uniquindio.resonance.entidades.Administrador;
-import co.edu.uniquindio.resonance.entidades.Lugar;
-import co.edu.uniquindio.resonance.entidades.Moderador;
-import co.edu.uniquindio.resonance.entidades.Usuario;
+import co.edu.uniquindio.resonance.entidades.*;
 
 import java.util.List;
 
@@ -23,6 +20,9 @@ public interface ModeradorServicio {
     void aprobarLugar (int codigoLugar, String nicknameModerador);
 
     void rechazarLugar(int codigoLugar,String nicknameModerador);
+
+    void aprobarDenuncia(Denuncia denuncia);
+    void rechazarDenuncia(Denuncia denuncia);
 
 
     }
