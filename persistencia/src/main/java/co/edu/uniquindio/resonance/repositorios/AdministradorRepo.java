@@ -3,6 +3,7 @@ package co.edu.uniquindio.resonance.repositorios;
 import co.edu.uniquindio.resonance.entidades.Administrador;
 import co.edu.uniquindio.resonance.entidades.Moderador;
 import co.edu.uniquindio.resonance.entidades.Reporte;
+import co.edu.uniquindio.resonance.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -48,6 +49,19 @@ public interface AdministradorRepo extends JpaRepository<Administrador, String> 
     @Query("select new co.edu.uniquindio.resonance.repositorios.Reporte4DTO(l.nombre, count(c.codigo)) from Lugar l JOIN Calificacion c ON l.codigo = c.lugar.codigo group by l.nombre ORDER BY  count (c.codigo) DESC" )
     List<Reporte4DTO> generarReporte4();
 
+    /**
+     * Query que permite obtener un administrador  acorde a un email determinado
+     * @param email
+     * @return
+     */
+    Administrador findByEmail(String email);
+
+    /**
+     * Query que permite obtener un administrador acorde a un nickname determinado
+     * @param nickname
+     * @return
+     */
+    Administrador findByNickname(String nickname);
 
 
 

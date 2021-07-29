@@ -144,6 +144,45 @@
                 </h:form>
             </p:tab>
 
+            <p:tab title="Perfil" >
+
+                        <h:form id="form4">
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <p:outputLabel for="nombre_moderador" value="Nombre:" />
+                                <p:inputText id="nombre_moderador" value="#{moderadorBean.moderadorLogin.nombre}" required="true" placeholder="#{moderadorBean.moderadorLogin.nombre}" requiredMessage="Debe introducir su nombre." validatorMessage="Verifique el nombre ingresado." styleClass="formularioUsuario" >
+                                    <f:validateLength minimum="3" maximum="70" />
+                                </p:inputText> <p:message for="nombre_moderador"/>
+
+                                <p:outputLabel for="email_moderador" value="Email:" />
+                                <p:inputText id="email_moderador" value="#{moderadorBean.moderadorLogin.email}" required="true" placeholder="#{moderadorBean.moderadorLogin.email}" requiredMessage="Debe introducir un email valido." validatorMessage="Verifique el email ingresado." styleClass="formularioUsuario"/>
+                                <p:message for="email_moderador"/>
+
+                                <p:outputLabel for="nickname_moderador" value="Nickname:" />
+                                <p:inputText id="nickname_moderador" value="#{moderadorBean.moderadorLogin.nickname}" placeholder="#{moderadorBean.moderadorLogin.nickname}" readonly= "true" required="true" requiredMessage="Debe introducir un nickname de moderador." validatorMessage="Verifique el nickname ingresado." styleClass="formularioUsuario">
+                                    <f:validateLength minimum="5" maximum="70" />
+                                </p:inputText>
+                                <p:message for="nickname_moderador"/>
+
+
+                                <p:outputLabel for="password_moderador" value="Contraseña:"/>
+                                <p:password id="password_moderador" value="#{moderadorBean.moderadorLogin.contrasena}" feedback="true"
+                                            promptLabel="#{moderadorBean.moderadorLogin.contrasena}" weakLabel="Débil" styleClass="formularioUsuario"
+                                            goodLabel="Buena" strongLabel="Fuerte" required="true" placeholder="Ingrese su contraseña" requiredMessage="Debe introducir una contraseña." validatorMessage="Verifique la contraseña ingresada." toggleMask="true" redisplay="true"/>
+                                <p:message for="password_moderador"/>
+
+                                <p:outputLabel  value=""/>
+                                <p:commandButton  action="#{moderadorBean.actualizarModerador}" value="Actualizar Información"
+                                                  update="@form" />
+                                <p:growl showDetail="true" />
+                            </h:panelGrid>
+                            <br/>
+
+
+
+
+                        </h:form>
+            </p:tab>
+
     </p:tabView>
 
 

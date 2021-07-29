@@ -20,7 +20,7 @@
     </ui:define>
     <ui:define name="title">Resonance Places | Detalle lugar</ui:define>
     <ui:define name="content">
-        <div class="container mt-4" style="background: white; border-radius: 5px">
+        <div class="container mt-4" style="border-radius: 5px">
             <div class="row">
                 <div class="col-7 mt-4" style="width: 50%" >
                     <div class="box box-stretched" >
@@ -142,7 +142,7 @@
                     </p:dataList>
                 </p:panel>
 
-            <p:panel header="Informacion contacto" styleClass="mt-3">
+            <p:panel header="Informacion contacto" styleClass="mt-3" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}">
 
 
                 <h:form>
@@ -158,7 +158,7 @@
                          </div>
                          <div class="p-field p-col-12 p-md-6">
                              <label for="correo">Correo</label>
-                             <p:inputText id="correo" type="text" />
+                             <p:inputText id="correo" value="#{detalleLugarBean.emailContacto}" type="text" />
                          </div>
                          <div class="p-field p-col-12">
                              <label for="mensaje">Mensaje</label>
@@ -168,7 +168,7 @@
 
                      <div class="p-field p-col-12">
                          <br></br>
-                         <p:commandButton action="#{detalleLugarBean.enviarMensaje}"   style="height: 30px"  value="Enviar" />
+                         <p:commandButton action="#{detalleLugarBean.enviarMensaje}" update="@form"  style="height: 30px"  value="Enviar" />
                      </div>
 
 

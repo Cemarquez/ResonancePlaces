@@ -19,6 +19,7 @@ public interface AdministradorServicio  {
     void crearModerador(Moderador moderador, String adminNickname);
     List<Moderador> listarModeradores(String adminNickname);
     void eliminarModerador(String adminNickname, Moderador moderador);
+    Administrador recuperarContrasenia(String admin) throws Exception;
     List<Reporte1DTO>generarReporte1();
     List<Reporte2DTO>generarReporte2();
     List<Reporte3DTO>generarReporte3();
