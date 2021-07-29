@@ -79,6 +79,11 @@ public class DetalleLugarBean  implements Serializable {
     @Getter @Setter
     private List<Date> rangoFechasReserva;
 
+    @Getter @Setter
+    private  String mensajeContacto;
+    @Getter @Setter
+    private String asuntoContacto;
+
     @PostConstruct
     public void inicializar() {
         if (lugarParam != null && !lugarParam.isEmpty()) {
@@ -208,6 +213,19 @@ public class DetalleLugarBean  implements Serializable {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Reserva exitosa!");
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+
+        }
+
+
+        public void enviarMensaje(){
+
+
+        EmailBean.sendEmailContacto(lugar.getUsuario().getEmail(),usuarioLogin.getNickname(),mensajeContacto,asuntoContacto,lugar.getNombre());
+
+
+
+
+
 
         }
 
