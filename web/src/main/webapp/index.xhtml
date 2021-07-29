@@ -32,13 +32,17 @@
             <div class="container mt-4 mb-4" >
 
                 <p:panel header="Lugares más polulares" style="font-size: large">
+
+
                 <h:form>
                     <h2 class="text-comentario-h2 mt-5"> Categorias </h2>
                     <p:dataView id="categorias" var="categoria" value="#{inicioBean.categorias}"  rows="10"  layout="grid" style="width: 800px">
                         <p:dataViewGridItem columns="10" >
                             <p:panel id="pnl"  style="text-align:center; border: none">
                                 <h:panelGrid columns="1" style="width:100%; border: none">
-                                    <p:graphicImage url="/uploads/#{categoria.nombre.toLowerCase()}.png"  width="32" height="32" onclick="#{inicioBean.filtrar}"/>
+                                    <h:commandLink action="#{inicioBean.filtrar(categoria)}">
+                                        <p:graphicImage url="/uploads/#{categoria.nombre.toLowerCase()}.png"  width="32" height="32" />
+                                    </h:commandLink>
                                     <p:outputLabel value="#{categoria.nombre}" />
                                 </h:panelGrid>
                             </p:panel>
