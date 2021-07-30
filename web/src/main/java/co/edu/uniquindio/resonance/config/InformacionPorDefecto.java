@@ -68,7 +68,9 @@ public class InformacionPorDefecto implements CommandLineRunner {
             Categoria categoria8 = new Categoria("Museo","Categoría resevada a los museos");
             Categoria categoria9 = new Categoria("Super mercado","Categoría resevada a los super mercados");
             Categoria categoria10 = new Categoria("Lugares de interes","Categoría resevada a los lugares varios");
+            Categoria categoria11 = new Categoria("Todos","Categoría resevada a todas las categorias");
 
+            categoriaServicio.registrarCategoria(categoria11);
             categoriaServicio.registrarCategoria(categoria);
             categoriaServicio.registrarCategoria(categoria1);
             categoriaServicio.registrarCategoria(categoria2);
@@ -80,6 +82,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
             categoriaServicio.registrarCategoria(categoria8);
             categoriaServicio.registrarCategoria(categoria9);
             categoriaServicio.registrarCategoria(categoria10);
+
 
             if (lugarServicio.listarLugares().size()==0){
                 Usuario usuario = new Usuario("user", "user", "cemarquezz29@gmail.com", "user");

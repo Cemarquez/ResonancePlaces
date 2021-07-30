@@ -22,7 +22,7 @@ public interface CategoriaRepo extends JpaRepository<Categoria, Integer> {
      * @param codigo
      * @return
      */
-    @Query("select l from Categoria c, IN(c.lugar) l where c.codigo = ?1")
+    @Query("select l from Categoria c, IN(c.lugar) l where c.codigo = ?1 and l.estado = true and l.rechazado =false")
     List<Lugar> obtenerLugares(int codigo);
 
     /**

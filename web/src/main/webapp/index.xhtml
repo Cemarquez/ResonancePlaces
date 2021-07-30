@@ -36,11 +36,11 @@
 
                 <h:form>
                     <h2 class="text-comentario-h2 mt-5"> Categorias </h2>
-                    <p:dataView id="categorias" var="categoria" value="#{inicioBean.categorias}"  rows="10"  layout="grid" style="width: 800px">
-                        <p:dataViewGridItem columns="10" >
+                    <p:dataView id="categorias" var="categoria" value="#{inicioBean.categorias}"  rows="12"  layout="grid" style="width: 900px">
+                        <p:dataViewGridItem columns="11" >
                             <p:panel id="pnl"  style="text-align:center; border: none">
                                 <h:panelGrid columns="1" style="width:100%; border: none">
-                                    <h:commandLink action="#{inicioBean.filtrar(categoria)}">
+                                    <h:commandLink actionListener="#{inicioBean.filtrar(categoria)}">
                                         <p:graphicImage url="/uploads/#{categoria.nombre.toLowerCase()}.png"  width="32" height="32" />
                                     </h:commandLink>
                                     <p:outputLabel value="#{categoria.nombre}" />

@@ -151,15 +151,11 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
         List <Denuncia> denunciasSinAprobar = denunciaRepo.obtenerDenunciasSinAprobar();
         for (int i=0; i<denunciasSinAprobar.size();i++ ){
-            if (denunciasSinAprobar.get(i).getLugar()== denuncia.getLugar()){
-                denuncia.setAprobado(true);
-                denuncia.setModerador(denuncia.getModerador());
-
-
+            if (denunciasSinAprobar.get(i).getLugar().getCodigo() == denuncia.getLugar().getCodigo()){
+                denunciasSinAprobar.get(i).setAprobado(true);
+                denunciasSinAprobar.get(i).setModerador(denuncia.getModerador());
+                denunciaRepo.save(denunciasSinAprobar.get(i));
             }
-
-
-
 
         }
 
