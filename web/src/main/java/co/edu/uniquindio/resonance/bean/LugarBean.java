@@ -137,9 +137,7 @@ public class LugarBean {
                         lugar.setFoto(imagenes);
                         lugarServicio.registrarLugar(lugar);
                         registrarHorarios();
-                        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                                "Registro exitoso");
-                        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                        return "/usuario/perfil?faces-redirect=true";
                     } else {
                         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                                 "Es necesario subir imagenes del sitio");
