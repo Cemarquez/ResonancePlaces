@@ -19,7 +19,7 @@
 
         <p:panel header="Perfil" style="font-size: large">
 
-    <p:tabView id="tabs-perfil">
+    <p:tabView id="tabs-perfil" dynamic="true" cache="false">
         <p:tab title="Editar Perfil">
             <h:form>
 
@@ -68,7 +68,7 @@
 
             </h:form>
         </p:tab>
-        <p:tab title="Lugares autorizados"  rendered="#{perfilBean.lugaresAutorizados.size() >0}">
+        <p:tab title="Lugares autorizados" >
             <h:form id="form">
                 <p:dataView var="lugar" value="#{perfilBean.lugaresAutorizados}" rows="12" paginator="true" listIcon="pi pi-bars" >
 
@@ -102,7 +102,7 @@
             </h:form>
         </p:tab>
 
-        <p:tab title="Lugares prendientes"  rendered="#{perfilBean.lugaresNoAutorizados.size() >0}">
+        <p:tab title="Lugares prendientes">
             <h:form id="form2">
                 <p:dataView var="lugar" value="#{perfilBean.lugaresNoAutorizados}" rows="12" paginator="true" listIcon="pi pi-bars" >
 
@@ -135,7 +135,7 @@
             </h:form>
         </p:tab>
 
-        <p:tab title="Lugares rechazados" rendered="#{perfilBean.lugaresRechazados.size() >0}">
+        <p:tab title="Lugares rechazados" >
             <h:form id="form4">
                 <p:dataView var="lugar" value="#{perfilBean.lugaresRechazados}" rows="12" paginator="true"  listIcon="pi pi-bars" >
 
@@ -168,9 +168,9 @@
             </h:form>
         </p:tab>
 
-        <p:tab title="Comentarios sin reponder" rendered="#{perfilBean.isPendientes()}" id="tabComen">
+        <p:tab title="Comentarios sin reponder" id="tabComen">
 
-                <p:dataList id="lista-comentarios" value="#{perfilBean.calificacionesSinRespuesta}" var="calificacion" emptyMessage="No hay comentarios" type="definition" itemType="disc" styleClass="noBorders" >
+                <p:dataList id="lista-comentarios" value="#{perfilBean.calificacionesSinRespuesta}" var="calificacion" emptyMessage="No hay comentarios" type="definition" itemType="disc" styleClass="noBorders">
                     <div class="mt-4">
                         <p:rating readonly="true" value="#{calificacion.valor}" />
                         <h2 class="text-comentario-h2"> #{calificacion.titulo} </h2>

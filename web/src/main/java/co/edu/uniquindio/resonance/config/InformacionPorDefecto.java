@@ -85,7 +85,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
 
             if (lugarServicio.listarLugares().size()==0){
-                Usuario usuario = new Usuario("user", "user", "cemarquezz29@gmail.com", "user");
+                Usuario usuario = new Usuario("user", "user", "cemarquezzzzz29@gmail.com", "user");
                 usuarioServicio.registrarUsuario(usuario);
                 Usuario usuario1 = new Usuario("Osaka", "Esteban", "esteban123@gmail.com", "123456");
                 usuarioServicio.registrarUsuario(usuario1);
@@ -121,8 +121,9 @@ public class InformacionPorDefecto implements CommandLineRunner {
                 lugar2.getFoto().add("porDefecto.jpg");
                 lugar2.setCiudad(ciudad1);
                 lugar2.setUsuario(usuario1);
+                lugar2.setModerador(mod);
                 lugar2.setEstado(true);
-                lugar2.setRechazado(true);
+                lugar2.setRechazado(false);
                 mod.getLugaresRechazados().add(lugar2);
 
                 Lugar lugar3 = new Lugar(categoria2,"Maid cafe", "Cafeteria uwu");

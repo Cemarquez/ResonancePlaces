@@ -17,6 +17,8 @@ import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 @ViewScoped
@@ -111,15 +113,26 @@ public class perfilBean implements Serializable {
         Calificacion c = calificacionServicio.obtenerCalificacion(id);
         c.setRespuesta(respuesta);
 
+
         try {
             calificacionServicio.actualizarCalificacion(c);
-            EmailBean.sendEmailRespuesta(c.getUsuario().getEmail(), c.getLugar().getUsuario().getNickname(), c.getMensaje(), c.getTitulo(), c.getLugar().getNombre(), c.getRespuesta());
-            this.calificacionesSinRespuesta = usuarioServicio.obtenerComentariosSinRespuesta(usuario.getNickname());
-            this.respuesta=null;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        ExecutorService executor = Executors.newFixedThreadPool(10);
+            executor.execute(new Runnable() {
+                public void run() {
+
+                    EmailBean.sendEmailRespuesta(c.getUsuario().getEmail(), c.getLugar().getUsuario().getNickname(), c.getMensaje(), c.getTitulo(), c.getLugar().getNombre(), c.getRespuesta());
+
+                }
+            });
+            executor.shutdown();
+            this.calificacionesSinRespuesta = usuarioServicio.obtenerComentariosSinRespuesta(usuario.getNickname());
+            this.respuesta=null;
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                    "Respuesta enviada!");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
     }
 
     public void borrarReserva(Integer id){
@@ -128,5 +141,6 @@ public class perfilBean implements Serializable {
                 "Reserva eliminada!");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
+
     }
 }
