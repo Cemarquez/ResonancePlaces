@@ -18,6 +18,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Component
 @ViewScoped
 public class ModeradorBean {
@@ -106,6 +109,14 @@ public class ModeradorBean {
         denuncia.setModerador(moderadorLogin);
         moderadorServicio.aprobarDenuncia(denuncia);
         denunciasSinAprobar = denunciaServicio.obtenerDenunciasSinAprobar();
+        ExecutorService executor = Executors.newFixedThreadPool(10);
+        executor.execute(new Runnable() {
+            public void run() {
+                EmailBean.sendEmailDenuncia(denuncia.getLugar().getUsuario().getEmail(), denuncia.getDescripcion(), denuncia.getMotivo(), denuncia.getLugar().getNombre());
+            }
+        });
+
+        executor.shutdown();
 
     }
 

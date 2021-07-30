@@ -81,7 +81,7 @@ public class Lugar {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "estado")
+    @Column(name = "estado", columnDefinition = "boolean default false")
     private boolean estado;
 
     @Column(name = "rechazado")

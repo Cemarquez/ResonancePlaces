@@ -41,7 +41,13 @@ public class InicioBean implements Serializable {
 
     }
     public void filtrar(Categoria categoria){
-        this.lugares = categoriaServicio.obtenerLugares(categoria.getCodigo());
+        if (categoria.getNombre().equals("Todos")){
+            this.lugares = lugarServicio.listarLugaresAutorizados();
+        }else{
+            this.lugares = categoriaServicio.obtenerLugares(categoria.getCodigo());
+        }
+        List<MarketDTO> markers = this.lugares.stream().map(l -> new MarketDTO(l.getCodigo(), l.getLatitud(), l.getLongitud(), l.getNombre())).collect(Collectors.toList());
+        PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(markers)  + ");");
     }
 
     public String irAlDetalle(Integer id){

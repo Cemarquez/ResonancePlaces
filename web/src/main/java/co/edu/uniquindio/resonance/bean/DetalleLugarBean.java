@@ -272,6 +272,11 @@ public class DetalleLugarBean  implements Serializable {
 
             usuarioServicio.registrarDenuncia(denuncia);
 
+            motivoDenuncia = "";
+            descripcionDenuncia ="";
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                    "Denuncia enviada!");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 
 
 
