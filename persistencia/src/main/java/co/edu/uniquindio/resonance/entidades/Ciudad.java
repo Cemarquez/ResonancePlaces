@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Ciudad {
      */
     @OneToMany(mappedBy = "ciudad")
     @ToString.Exclude
+    @JsonIgnore
     private List<Lugar> lugares;
 
     public Ciudad(String nombre) {

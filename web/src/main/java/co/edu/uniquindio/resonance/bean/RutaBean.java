@@ -31,7 +31,11 @@ public class RutaBean implements Serializable {
     @PostConstruct
     public void inicializar(){
        // lugar = lugarServicio.obtenerLugar(Integer.parseInt(parametro));
-        lugar = lugarServicio.obtenerLugar(18);
+        try {
+            lugar = lugarServicio.obtenerLugar(18);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         MarketDTO marker = new MarketDTO(lugar.getCodigo(), lugar.getLatitud(), lugar.getLongitud(), lugar.getNombre());
         PrimeFaces.current().executeScript("crearRuta(" + new Gson().toJson(marker)  + ");");
     }

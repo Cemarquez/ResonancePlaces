@@ -31,6 +31,8 @@ function crearRuta (lugar) {
                     end // northeast coordinates
                 ];
 
+                let center = [(start[0] + end[0])/2, (start[1] + end[1])/2  ]
+                map.setCenter(center)
                 map.fitBounds(bounds, {padding: (100)})
                 let bnds = map.getBounds();
                 map.setMaxBounds(bnds);

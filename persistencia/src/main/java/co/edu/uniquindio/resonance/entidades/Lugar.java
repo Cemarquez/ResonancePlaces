@@ -1,5 +1,7 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.dom4j.rule.Mode;
 import org.hibernate.type.descriptor.java.StringTypeDescriptor;
@@ -32,25 +34,22 @@ public class Lugar {
     /**
      * Relacion que corresponde a la categoria en la que pertenece el lugar
      */
+
     @ManyToOne
     @JoinColumn(name="codigo_categoria", nullable = false)
+
     private Categoria categoria;
 
     /**
      * Relacion que corresponde a la ubicacion geografica del lugar
      */
 
-    /*
-    @ManyToOne
-    @JoinColumn(name="codigo_ubicacion")
-    private Ubicacion ubicacion;
-
-     */
     /**
      * Relación que corresponde al usuario que registró el lugar
      */
     @ManyToOne
     @JoinColumn(name="nickname_usuario")
+
     private Usuario usuario;
 
     /**
@@ -59,6 +58,7 @@ public class Lugar {
 
     @OneToMany(mappedBy = "lugar")
     @ToString.Exclude
+    @JsonIgnore
     private List<Telefono> telefono;
 
     /**
@@ -67,7 +67,8 @@ public class Lugar {
     @ElementCollection(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     @Column(name="url_foto")
-        private List<String> foto;
+    @JsonIgnore
+    private List<String> foto;
 
     @Column(name ="latitud")
     private double latitud;
@@ -91,10 +92,12 @@ public class Lugar {
      */
     @OneToMany(mappedBy = "lugar")
     @ToString.Exclude
+    @JsonIgnore
     private List<Horario> horarios;
 
     @OneToMany(mappedBy = "lugar")
     @ToString.Exclude
+    @JsonIgnore
     private List<Reserva> reservas;
 
     /**
@@ -102,6 +105,7 @@ public class Lugar {
      */
     @OneToMany(mappedBy = "lugar")
     @ToString.Exclude
+    @JsonIgnore
     private List<Calificacion> calificaciones;
 
 
@@ -110,6 +114,7 @@ public class Lugar {
      */
     @ManyToOne
     @JoinColumn(name = "nickname_moderador")
+    @JsonIgnore
     private Moderador moderador;
 
     /**
@@ -128,6 +133,7 @@ public class Lugar {
     }
 
     @Transactional
+    @JsonIgnore
     public String getImagenPrincipal(){
         if(getFoto().size()>0){
             return foto.get(0);

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -49,6 +50,7 @@ public class Moderador {
      */
     @OneToMany( mappedBy = "moderador",fetch = FetchType.EAGER)
     @ToString.Exclude
+    @JsonIgnore
     private List<Lugar> lugares;
 
     /**
@@ -56,6 +58,7 @@ public class Moderador {
      */
     @OneToMany(mappedBy = "moderador",fetch = FetchType.EAGER)
     @ToString.Exclude
+    @JsonIgnore
     private  List<Lugar> lugaresRechazados;
 
     public Moderador(String nickname, String nombre, String email, String contrasena) {

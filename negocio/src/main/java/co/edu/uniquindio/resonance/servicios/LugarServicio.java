@@ -11,7 +11,7 @@ public interface LugarServicio {
     Lugar actualizarLugar(Lugar lugar) throws Exception;
     List<Lugar> listarLugares();
     List<Lugar> buscarLugares(String parametro);
-    Lugar obtenerLugar(Integer codigo);
+    Lugar obtenerLugar(Integer codigo) throws Exception;
     List<Horario>listarHorarios(Integer codigo);
     List<Calificacion>listarCalificaciones(Integer codigo);
     Calificacion crearCalificacion(Calificacion c);

@@ -91,9 +91,13 @@ public class LugarServicioImpl implements LugarServicio{
     }
 
     @Override
-    public Lugar obtenerLugar(Integer codigo){
+    public Lugar obtenerLugar(Integer codigo) throws Exception{
+        Lugar lugar = lugarRepo.findById(codigo).get();
+        if(lugar==null)
+            throw new Exception("No existe un lugar con ese codigo");
 
-        return lugarRepo.findById(codigo).get();
+
+        return lugar;
 
 
     }
