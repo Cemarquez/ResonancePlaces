@@ -22,4 +22,9 @@ public class DenunciaServicioImpl implements DenunciaServicio{
 
         return denunciaRepo.obtenerDenunciasSinAprobar();
     }
+
+    @Override
+    public Denuncia obtenerDenunciaID(Integer id) {
+        return denunciaRepo.obtenerDenuncia(id);
+    }
 }

@@ -7,11 +7,6 @@ import java.util.List;
 public interface DenunciaServicio {
 
     List<Denuncia> obtenerDenunciasSinAprobar();
-
-
-
-
-
-
+    Denuncia obtenerDenunciaID(Integer id);
 
 }

@@ -141,6 +141,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     public void aprobarDenuncia(Denuncia denuncia) {
 
         denuncia.setAprobado(true);
+
         Lugar lugar = denuncia.getLugar();
 
         lugar.setRechazado(true);
@@ -178,7 +179,6 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     @Override
     public void rechazarDenuncia(Denuncia denuncia) {
         denuncia.setAprobado(false);
-
         denunciaRepo.save(denuncia);
     }
 

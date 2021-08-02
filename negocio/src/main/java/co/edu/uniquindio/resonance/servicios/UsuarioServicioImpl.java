@@ -189,15 +189,23 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void eliminarReserva(Integer id) {
-        Reserva reserva = reservaRepo.findById(id).get();
+    public void eliminarReserva(Integer id) throws Exception {
 
+        Reserva reserva = reservaRepo.findById(id).get();
+        if(reserva == null)
+        {
+            throw new Exception("La reserva no existe");
+        }
         reservaRepo.delete(reserva);
     }
 
     @Override
-    public List<Reserva> obtenerReservas(String nickname) {
-        return reservaRepo.obtenerReservas(nickname);
+    public List<Reserva> obtenerReservas(String nickname) throws Exception{
+        List<Reserva> reservas =reservaRepo.obtenerReservas(nickname);
+        if(reservas.isEmpty())
+            throw new Exception("No hay reservas para este usuario");
+
+        return reservas;
     }
 
     @Override
