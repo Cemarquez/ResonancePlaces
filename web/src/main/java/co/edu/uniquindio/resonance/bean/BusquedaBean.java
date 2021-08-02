@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ViewScoped
-public class BusquedaBean {
+public class BusquedaBean implements Serializable {
 
     @Getter @Setter
     private String busqueda;

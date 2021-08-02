@@ -1,5 +1,5 @@
 function crearMapa (lugares) {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiY2VtYXJxdWV6MjkiLCJhIjoiY2tuNHpkYzRpMDB3YjJ1bXlla3R4aDk1dSJ9.hD4UgfbMsz3ezhv9fDPO6Q';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2VtYXJxdWV6MjkiLCJhIjoiY2tyNDJxY2c4MnJzajJvbW5obmR5ZzJzeiJ9.u5GTJHs4XDj1XMlg976kKg';
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11'
@@ -21,3 +21,5 @@ function ubicarLugares(lugares, map){
     map.fitBounds(bounds, {padding: 100})
 
 }
+
+
