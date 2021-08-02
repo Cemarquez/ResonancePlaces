@@ -23,12 +23,9 @@ public interface UsuarioServicio {
     List<Lugar> obtenerLugaresRechazados(String nickname);
     List<Calificacion> obtenerComentariosSinRespuesta(String nickname);
     Reserva registrarReserva(Reserva reserva);
-    void eliminarReserva(Integer id);
-    List<Reserva> obtenerReservas(String nickname);
+    void eliminarReserva(Integer id) throws  Exception;
+    List<Reserva> obtenerReservas(String nickname) throws  Exception;
     Denuncia registrarDenuncia(Denuncia denuncia);
-
-
-
 
 
 }

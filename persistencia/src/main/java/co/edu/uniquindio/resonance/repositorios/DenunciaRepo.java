@@ -14,6 +14,6 @@ public interface DenunciaRepo extends JpaRepository<Denuncia, Integer> {
     @Query("select d from Denuncia d where d.aprobado=false")
     List<Denuncia> obtenerDenunciasSinAprobar();
 
-
-
+    @Query("select d from Denuncia d where d.codigo =?1")
+    Denuncia obtenerDenuncia(Integer id);
 }

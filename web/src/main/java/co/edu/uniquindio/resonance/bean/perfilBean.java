@@ -64,7 +64,11 @@ public class perfilBean implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
+        try {
+            this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.calificacionesSinRespuesta = usuarioServicio.obtenerComentariosSinRespuesta(usuario.getNickname());
         this.favoritos = usuario.getFavoritos();
         this.lugaresAutorizados = usuarioServicio.obtenerLugaresAutorizados(usuario.getNickname());
@@ -137,11 +141,16 @@ public class perfilBean implements Serializable {
     }
 
     public void borrarReserva(Integer id){
-        usuarioServicio.eliminarReserva(id);
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
-                "Reserva eliminada!");
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
+        try {
+            usuarioServicio.eliminarReserva(id);
+            this.reservas = usuarioServicio.obtenerReservas(usuario.getNickname());
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
+                    "Reserva eliminada!");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 }
