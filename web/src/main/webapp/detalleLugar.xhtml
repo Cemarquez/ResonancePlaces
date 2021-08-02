@@ -20,6 +20,9 @@
     </ui:define>
     <ui:define name="title">Resonance Places | Detalle lugar</ui:define>
     <ui:define name="content">
+
+
+
         <div class="container mt-4" style="border-radius: 5px">
             <div class="row">
                 <div class="col-7 mt-4" style="width: 50%" >
@@ -87,6 +90,29 @@
 
                                        <h1 class="text-detalle-h1"> #{detalleLugarBean.lugar.nombre}</h1>
                                        <h2 class="text-detalle-h2"> #{detalleLugarBean.lugar.ciudad.nombre}</h2>
+
+
+
+                                           <h:form id="ruta"  style="margin-left: 5px; margin-bottom: 12px;margin-right: 5px">
+                                               <p:commandButton icon="pi pi-directions" styleClass="rounded-button ui-button-warning"  action="#{detalleLugarBean.irRuta}" update="@form"/>
+                                               <p:commandButton icon="pi pi-share-alt"  styleClass="rounded-button ui-button-secondary"  style="margin-left: 5px" onclick="PF('compartir').show()" update="@form"/>
+
+                                           </h:form>
+                                       <p:dialog header="Compartir " width="400"  widgetVar="compartir" modal="true" showEffect="fade">
+
+                                           <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a><script async="true" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+                                           <div id="fb-root"></div>
+                                           <script async="true" defer="true" crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v11.0" nonce="QDpa21bh"></script>
+                                           <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
+                                               <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
+
+                                       </p:dialog>
+
+
+
+
 
                                    </div>
 

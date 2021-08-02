@@ -283,6 +283,14 @@ public class DetalleLugarBean  implements Serializable {
         }
 
 
+    public String irRuta(){
+
+        int id = lugar.getCodigo();
+
+        return "/ruta?faces-redirect=true&amp;lugar="+id;
+    }
+
+
 
 
 

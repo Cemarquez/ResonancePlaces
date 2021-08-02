@@ -25,14 +25,15 @@ public class RutaBean implements Serializable {
     @Getter @Setter
     private Lugar lugar;
 
-    @Value("#{param['busqueda']}")
+    @Value("#{param['lugar']}")
     private String parametro;
 
     @PostConstruct
     public void inicializar(){
-       // lugar = lugarServicio.obtenerLugar(Integer.parseInt(parametro));
+
         try {
-            lugar = lugarServicio.obtenerLugar(18);
+            lugar = lugarServicio.obtenerLugar(Integer.parseInt(parametro));
+           // lugar = lugarServicio.obtenerLugar(18);
         } catch (Exception e) {
             e.printStackTrace();
         }
