@@ -1,5 +1,7 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,11 +27,9 @@ public class Categoria {
     @EqualsAndHashCode.Include
     private int codigo;
 
-    @NotBlank
     @Column(name = "nombre_categoria", length = 50 , nullable = false)
     private String nombre;
 
-    @NotBlank
     @Column(name = "descripcion_categoria", nullable = false)
     private String descripcion;
 
@@ -38,6 +38,7 @@ public class Categoria {
      */
     @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
+    @JsonIgnore
     private List<Lugar> lugar;
 
     public Categoria(@NotBlank String nombre, @NotBlank String descripcion) {

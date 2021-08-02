@@ -45,7 +45,7 @@
                                            <p:rating readonly="true" value="#{detalleLugarBean.obtenerCalificacion()}" />
 
                                            <h:form id="denunciar_lugar">
-                                               <p:commandButton icon="pi pi-flag" styleClass="#{detalleLugarBean.styleBoton}" action="#{detalleLugarBean.marcarFavotiro}" onclick="PF('denuncia').show()" update="@form" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}"/>
+                                               <p:commandButton icon="pi pi-flag" styleClass="#{detalleLugarBean.styleBoton}" onclick="PF('denuncia').show()" update="@form" rendered="#{seguridadBean.autenticado and !(seguridadBean.rol == 'moderador')}"/>
                                            </h:form>
                                        </div>
 

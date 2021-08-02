@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.dom4j.rule.Mode;
 
@@ -44,6 +45,7 @@ public class Administrador {
      */
     @OneToMany (mappedBy = "administrador", fetch = FetchType.EAGER)
     @ToString.Exclude
+    @JsonIgnore
     private List<Moderador> moderadores;
 
     /**

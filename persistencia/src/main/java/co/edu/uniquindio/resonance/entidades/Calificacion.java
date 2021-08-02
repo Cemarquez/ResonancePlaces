@@ -43,7 +43,6 @@ public class Calificacion {
      * Relacion entre calificacion y usuario, muchas calificaciones tienen un usuario
      */
     @ManyToOne
-    @ToString.Exclude
     @JoinColumn(name = "nickname_usuario", nullable = false)
     private Usuario usuario;
 

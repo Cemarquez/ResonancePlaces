@@ -1,5 +1,6 @@
 package co.edu.uniquindio.resonance.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,12 +39,16 @@ public class Usuario {
     /**
      * Relacion entre usuario y favoritos, un usuario tiene muchos favoritos
      */
-    @ToString.Exclude
+
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Favorito> favoritos ;
 
-    @ToString.Exclude
+
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Reserva> reservas;
 
     /**
@@ -51,6 +56,7 @@ public class Usuario {
      */
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<Calificacion> calificaciones  ;
 
     /**
@@ -58,6 +64,7 @@ public class Usuario {
      */
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private  List<Lugar> lugares ;
 
     /**

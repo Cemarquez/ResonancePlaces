@@ -74,8 +74,9 @@ public class perfilBean implements Serializable {
     }
 
     public void eliminarLugar(Integer id){
-        Lugar lugar = lugarServicio.obtenerLugar(id);
+
         try {
+            Lugar lugar = lugarServicio.obtenerLugar(id);
             lugarServicio.eliminarLugar(lugar);
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta",
                     "Lugar eliminado exitosamente!");
