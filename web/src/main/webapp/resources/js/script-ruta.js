@@ -4,8 +4,7 @@ function crearRuta (lugar) {
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [lugar.longitud, lugar.latitud],
-        zoom: 13,
+        zoom: 10
     });
 
 
@@ -18,24 +17,20 @@ function crearRuta (lugar) {
             navigator.geolocation.getCurrentPosition(position => {
                 map.flyTo({
                     center: [position.coords.longitude ,position.coords.latitude],
-                    zoom: 14
                 })
 
                 var start = [position.coords.longitude, position.coords.latitude];
                 var end = [lugar.longitud, lugar.latitud];
                 directions.setOrigin(start);
-                directions.setDestination(end)
-
+                directions.setDestination(end);
+                let center = [(start[0] + end[0])/2, (start[1] + end[1])/2  ];
                 var bounds = [
                     start, // southwest coordinates
-                    end // northeast coordinates
+                    end
                 ];
+                map.fitBounds(bounds, {padding: 100});
+                map.setCenter(center);
 
-                let center = [(start[0] + end[0])/2, (start[1] + end[1])/2  ]
-                map.setCenter(center)
-                map.fitBounds(bounds, {padding: (100)})
-                let bnds = map.getBounds();
-                map.setMaxBounds(bnds);
             });
         }
 
