@@ -21,6 +21,11 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.fb-xfbml-parse-ignore{
+    background-image: url("https://image.flaticon.com/icons/png/512/733/733547.png") !important;
+
+}
+
 
 .form-signin {
     width: 380px;
