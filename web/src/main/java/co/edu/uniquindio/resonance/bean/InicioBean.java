@@ -32,8 +32,12 @@ public class InicioBean implements Serializable {
     @Getter @Setter
     private List<Categoria> categorias;
 
+    @Getter @Setter
+    private String title;
+
     @PostConstruct
     public void inicializar() {
+        this.title = "Lugares cerca";
         this.lugares = lugarServicio.listarLugaresAutorizados();
         this.categorias = categoriaServicio.listarCategorias();
         List<MarketDTO> markers = this.lugares.stream().map(l -> new MarketDTO(l.getCodigo(), l.getLatitud(), l.getLongitud(), l.getNombre())).collect(Collectors.toList());
