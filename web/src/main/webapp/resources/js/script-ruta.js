@@ -10,13 +10,16 @@ function crearRuta (lugar) {
 
     map.on("load", function (e){
         let directions =new MapboxDirections({
-            accessToken: mapboxgl.accessToken
+            accessToken: mapboxgl.accessToken,
+            language: 'es',
+            unit: 'metric'
         });
 
         if("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(position => {
                 map.flyTo({
                     center: [position.coords.longitude ,position.coords.latitude],
+                    zoom: 14
                 })
 
                 var start = [position.coords.longitude, position.coords.latitude];
@@ -30,7 +33,6 @@ function crearRuta (lugar) {
                 ];
                 map.fitBounds(bounds, {padding: 100});
                 map.setCenter(center);
-
             });
         }
 
@@ -43,9 +45,5 @@ function crearRuta (lugar) {
     });
 
 
-
-}
-
-function onClick(e){
 
 }
