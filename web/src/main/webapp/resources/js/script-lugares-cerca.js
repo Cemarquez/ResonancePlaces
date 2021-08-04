@@ -12,50 +12,35 @@ function crearMapa (lugares) {
 }
 
 function ubicarLugares(lugares, map){
-    let bounds = new mapboxgl.LngLatBounds()
+    let bounds = new mapboxgl.LngLatBounds();
 
-    let directions =new MapboxDirections({
-        accessToken: mapboxgl.accessToken
-    });
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(position => {
-    for (let l of lugares) {
+            var start = [position.coords.longitude, position.coords.latitude];
+            for (let l of lugares) {
 
-                var start = [position.coords.longitude, position.coords.latitude];
-                var end = [lugar.longitud, lugar.latitud];
-                directions.setOrigin(start);
-                directions.setDestination(end)
+                let marker = new mapboxgl.Marker().setLngLat([l.longitud, l.latitud]).setPopup(new mapboxgl.Popup().setHTML("<strong> " + l.nombre  + "</strong> " + "<br/> <a href='http://localhost:8080/detalleLugar.xhtml?lugar="+ l.id +"'> Ir a detalle </a>" )).addTo(map);
+                let posFinal = marker.getLngLat();
+                let markerInicial = new mapboxgl.Marker().setLngLat(start).setPopup(new mapboxgl.Popup().setHTML());
+                let posInicial = markerInicial.getLngLat();
+                var distance = (posInicial.distanceTo(posFinal)).toFixed(0);
 
-                directions.on("route", e => {
-                    let routes = e.route
+                setDistance(distance, l.contadorId);
 
-                    let distance = routes.map(r => r.distance);
-                    console.log(distance);
-                    setDistance(distance, l.contadorId);
-                });
-
-                new mapboxgl.Marker().setLngLat([l.longitud, l.latitud]).setPopup(new mapboxgl.Popup().setHTML("<strong> " + l.nombre + "</strong> " + "<br/> <a href='http://localhost:8080/detalleLugar.xhtml?lugar=" + l.id + "'> Ir a detalle </a>")).addTo(map);
                 bounds.extend([l.longitud, l.latitud]);
 
-
-
-
-
-        }
+            }
+            map.fitBounds(bounds, {padding: 100})
         });
+
     }
 
-
-
-
-
-    map.fitBounds(bounds, {padding: 100})
 
 
 }
 
 function setDistance(disancia, id){
-    document.getElementById("lista:" + id + ":distancia").value = disancia;
+    document.getElementById("form:lista:" + id + ":distancia").value = disancia;
 }
 
 
