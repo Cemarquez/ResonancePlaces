@@ -92,12 +92,17 @@ public class LugaresCercaBean implements Serializable {
             lugaresClon.addAll(lugaresDTO);
         }
 
-        lugaresDTO.clear();
-        for(LugarDTO l : lugaresClon){
-            if(l.getDistancia()<=filtrarDistancia){
-                lugaresDTO.add(l);
+        if(filtrarDistancia==0){
+            lugaresDTO.addAll(lugaresClon);
+        }else{
+            lugaresDTO.clear();
+            for(LugarDTO l : lugaresClon){
+                if(l.getDistancia()<=filtrarDistancia){
+                    lugaresDTO.add(l);
+                }
             }
         }
+
 
         PrimeFaces.current().executeScript("ubicarLugaresActualizados(" + new Gson().toJson(lugaresDTO)  + ");");
 
