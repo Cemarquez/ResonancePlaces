@@ -1,6 +1,7 @@
 package co.edu.uniquindio.resonance.bean;
 
 import co.edu.uniquindio.resonance.dto.LugarDTO;
+import co.edu.uniquindio.resonance.dto.MarketDTO;
 import co.edu.uniquindio.resonance.entidades.Lugar;
 import co.edu.uniquindio.resonance.servicios.LugarServicio;
 import com.google.gson.Gson;
@@ -17,6 +18,7 @@ import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @ViewScoped
@@ -97,9 +99,7 @@ public class LugaresCercaBean implements Serializable {
             }
         }
 
-
-
-
+        PrimeFaces.current().executeScript("ubicarLugaresActualizados(" + new Gson().toJson(lugaresDTO)  + ");");
 
 
     }

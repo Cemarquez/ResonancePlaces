@@ -33,7 +33,6 @@ public class RutaBean implements Serializable {
 
         try {
             lugar = lugarServicio.obtenerLugar(Integer.parseInt(parametro));
-           // lugar = lugarServicio.obtenerLugar(18);
         } catch (Exception e) {
             e.printStackTrace();
         }

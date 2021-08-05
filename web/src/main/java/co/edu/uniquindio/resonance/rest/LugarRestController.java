@@ -35,7 +35,7 @@ public class LugarRestController {
     public ResponseEntity<?> crear(@RequestBody Lugar lugar) throws Exception {
         try {
             lugarServicio.registrarLugar(lugar);
-            return ResponseEntity.status(201).body(new Mensaje("Usuario creado correctamente"));
+            return ResponseEntity.status(201).body(new Mensaje("Lugar creado correctamente"));
         }catch (Exception e){
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }
@@ -46,7 +46,7 @@ public class LugarRestController {
 
         try {
             lugarServicio.eliminarLugar(lugarServicio.obtenerLugar(codigo));
-            return ResponseEntity.status(200).body(new Mensaje("Usuario eliminado correctamente"));
+            return ResponseEntity.status(200).body(new Mensaje("Lugar eliminado correctamente"));
         }catch (Exception e){
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }
@@ -56,7 +56,7 @@ public class LugarRestController {
     public ResponseEntity<?> actualizar(@RequestBody  Lugar lugar) {
         try {
             lugarServicio.actualizarLugar(lugar);
-            return ResponseEntity.status(200).body(new Mensaje("Usuario actualizado correctamente"));
+            return ResponseEntity.status(200).body(new Mensaje("Lugar actualizado correctamente"));
         }catch (Exception e){
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }
@@ -68,12 +68,12 @@ public class LugarRestController {
         return lugarServicio.listarLugares();
     }
 
-    /*
-    @GetMapping("/{parametro}")
+
+    @GetMapping("/busqueda/{parametro}")
     public List<Lugar> buscar(@PathVariable(name = "parametro") String parametro) {
         return lugarServicio.buscarLugares(parametro);
     }
-         */
+
 
     @GetMapping("/{codigo}")
     public ResponseEntity<?> obtener( @PathVariable(name = "codigo") Integer codigo ){
