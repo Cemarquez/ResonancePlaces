@@ -4,3 +4,8 @@ Este proyecto representa el código que desarrollamos para dar solución al proy
 <p align="center">
   <img src="https://github.com/Cemarquez/ResonancePlaces/blob/master/logo_resonance.jpg"/>
 </p>
+
+
+<p align="center">
+  <img src="https://github.com/Cemarquez/ResonancePlaces/blob/master/Modelo.png"/>
+</p>
