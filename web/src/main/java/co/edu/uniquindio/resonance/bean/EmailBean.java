@@ -24,9 +24,10 @@ import javax.mail.internet.MimeMultipart;
 
 @SuppressWarnings("serial")
 public class EmailBean implements Serializable {
-
-    private static String usuario = "resonance.snc@gmail.com";
-    private static String contrasenia =  "bceresonance.2629";
+    
+    //Llenar usuario y contraseña antes de ejecutar, también se deberá activar la opción de aplicaciones poco seguras de google.
+    private static String usuario = "";
+    private static String contrasenia =  "";
     private static String mensaje;
     private static String remitente;
     private static String asunto;
