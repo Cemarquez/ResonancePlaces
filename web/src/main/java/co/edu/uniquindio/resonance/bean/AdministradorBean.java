@@ -8,8 +8,6 @@ import co.edu.uniquindio.resonance.repositorios.Reporte2DTO;
 import co.edu.uniquindio.resonance.repositorios.Reporte3DTO;
 import co.edu.uniquindio.resonance.repositorios.Reporte4DTO;
 import co.edu.uniquindio.resonance.servicios.AdministradorServicio;
-import co.edu.uniquindio.resonance.servicios.ModeradorServicio;
-import co.edu.uniquindio.resonance.servicios.ReporteServicio;
 import lombok.Getter;
 import lombok.Setter;
 

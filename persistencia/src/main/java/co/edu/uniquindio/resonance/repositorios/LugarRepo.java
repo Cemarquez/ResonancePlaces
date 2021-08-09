@@ -17,11 +17,6 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>{
 
 
 
-
-
-    @Query("select l from  Lugar l  join  l.telefono t where t.numero = :numTelefono")
-    Lugar obtenerLugarSegunTelefono(String numTelefono );
-
     //@Query("select new co.edu.uniquindio.resonance.repositorios.Consulta7DTO(l.ciudad, count(l.ciudad) ) from Lugar l where l.estado = false group by l.ciudad ")
     @Query("select l.ciudad.nombre, count(l.ciudad) from Lugar l where l.estado = false group by l.ciudad")
     List<Object[]> devolverCantidadPorCiudad();

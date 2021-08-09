@@ -154,17 +154,6 @@ public class LugarTest {
         }
     }
 
-    @Test
-    @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql", "classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql","classpath:lugares.sql" ,"classpath:telefonos.sql"})
-    public void  obtenerLugarSegunTelefonoTest(){
-
-        Lugar lugar = lugarRepo.obtenerLugarSegunTelefono("3106458892");
-
-        String t =  lugar.getNombre();
-
-        System.out.println("Lugar encontrado: " + t );
-
-    }
 
     @Test
     @Sql({"classpath:categorias.sql", "classpath:ubicaciones.sql", "classpath:usuarios.sql","classpath:administradores.sql","classpath:moderadores.sql", "classpath:ciudades.sql", "classpath:lugares.sql", "classpath:horarios.sql"})

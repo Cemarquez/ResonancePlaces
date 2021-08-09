@@ -52,14 +52,6 @@ public class Lugar {
 
     private Usuario usuario;
 
-    /**
-     * Relación que corresponde a la lista de telefonos registrados en un lugar
-     */
-
-    @OneToMany(mappedBy = "lugar")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Telefono> telefono;
 
     /**
      * Relacion que corresponde a la lista de fotos que fueron asignadas a un lugar
